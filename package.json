@@ -11,17 +11,17 @@
     "test-all": "yarn lint && yarn type-check && yarn test"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.6.7",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
-    "framer-motion": "^4",
+    "@chakra-ui/react": "1.6.7",
+    "@emotion/react": "11.4.1",
+    "@emotion/styled": "11.3.0",
+    "framer-motion": "4.1.17",
     "next": "11.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "4.2.0"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "^11.1.2",
+    "@next/eslint-plugin-next": "11.1.2",
     "@testing-library/react": "12.1.0",
     "@types/jest": "27.0.1",
     "@types/node": "16.9.4",
