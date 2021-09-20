@@ -1,8 +1,5 @@
 {
-  "extends": [
-    "config:base",
-    ":semanticCommits"
-  ],
+  "extends": ["config:base", ":semanticCommits"],
   "ignorePresets": [":prHourlyLimit2"],
   "recreateClosed": true
 }
