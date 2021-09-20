@@ -2,7 +2,11 @@
 
 import { NextApiRequest, NextApiResponse } from 'next'
 
-const handler = (req: NextApiRequest, res: NextApiResponse): void => {
+type Data = {
+  name: string
+}
+
+const handler = (req: NextApiRequest, res: NextApiResponse<Data>): void => {
   res.status(200).json({ name: 'John Doe' })
 }
 
