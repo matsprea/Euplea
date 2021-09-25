@@ -12,7 +12,7 @@ export const getLeafletIcon = (
 
   const leafletIcon = L.icon({
     iconUrl: `data:image/svg+xml;utf8,${renderedIcon}`,
-    iconSize: [64, 64],
+    iconSize: [32, 32],
     iconAnchor: [32, 64],
   })
 

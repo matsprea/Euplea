@@ -2,8 +2,7 @@ import { LatLngExpression } from 'leaflet'
 import { LayersControl, MapContainer, TileLayer } from 'react-leaflet'
 import { UserCurrentLocation } from './UserCurrentLocation'
 import { Agros } from './Agros'
-
-// import { Sparql } from './Sparql'
+import { Sparql } from './Sparql'
 
 type MapProps = {
   initLocation: LatLngExpression
@@ -18,11 +17,11 @@ export const Map = ({ initLocation }: MapProps): JSX.Element => (
   >
     <UserCurrentLocation />
     <LayersControl position="topright">
-      <LayersControl.Overlay checked name="Agriturismo">
+      <LayersControl.Overlay name="Agriturismo">
         <Agros />
       </LayersControl.Overlay>
       <LayersControl.Overlay checked name="Gioconda">
-        {/* <Sparql /> */}
+        <Sparql />
       </LayersControl.Overlay>
     </LayersControl>
     <TileLayer
