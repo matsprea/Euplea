@@ -16,11 +16,11 @@ class MyDocument extends Document {
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <meta
             name="apple-mobile-web-app-title"
-            content="Euplea - Viaggi nella bellazza dell'arte"
+            content="Euplea - Viaggi nella bellezza dell'arte"
           />
           <meta
             name="application-name"
-            content="Euplea - Viaggi nella bellazza dell'arte"
+            content="Euplea - Viaggi nella bellezza dell'arte"
           />
           <meta name="description" content=" " />
           <meta name="keywords" content=" " />

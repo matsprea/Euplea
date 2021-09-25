@@ -9,7 +9,7 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <>
       <Head>
-        <title>Euplea - Viaggi nella bellazza dell&apos;arte</title>
+        <title>Euplea - Viaggi nella bellezza dell&apos;arte</title>
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
