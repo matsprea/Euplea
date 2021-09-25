@@ -2,8 +2,12 @@ import dynamic from 'next/dynamic'
 // import Sidebar from '../components/Sidebar'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Flex, Center, Box, Heading } from '@chakra-ui/react'
+import { MapSkeleton } from '../components/MapSkeleton'
 
-const DynamicMap = dynamic(() => import('../components/Map'), { ssr: false })
+const DynamicMap = dynamic(() => import('../components/Map'), {
+  ssr: false,
+  loading: () => <MapSkeleton />,
+})
 
 const queryClient = new QueryClient({
   defaultOptions: {

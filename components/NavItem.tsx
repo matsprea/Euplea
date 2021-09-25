@@ -14,10 +14,10 @@ import NavHoverBox from '../components/NavHoverBox'
 
 interface NavItemProps extends FlexProps {
   icon: IconType
-
   description: ReactText
   active: boolean
   navSize: any
+  href?: string
 }
 
 export default function NavItem({
@@ -26,6 +26,7 @@ export default function NavItem({
   description,
   active,
   navSize,
+  href,
 }: NavItemProps): JSX.Element {
   return (
     <Flex
@@ -41,6 +42,7 @@ export default function NavItem({
           borderRadius={8}
           _hover={{ textDecor: 'none', backgroundColor: '#AEC8CA' }}
           w={navSize == 'large' && '100%'}
+          href={href}
         >
           <MenuButton w="100%">
             <Flex>
