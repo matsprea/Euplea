@@ -1,0 +1,22 @@
+{
+    "name": "Euplea - Viaggi nella bellazza dell'arte",
+    "short_name": "Euplea",
+    "display": "standalone",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/",
+    "splash_pages": null,
+    "theme_color": "#4fd1c5",
+    "background_color": "#4fd1c5",
+    "icons": [{
+            "src": "/icons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

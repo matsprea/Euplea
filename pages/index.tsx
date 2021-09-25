@@ -2,6 +2,9 @@ import Sidebar from '../components/Sidebar'
 import { Flex, Text, IconButton } from '@chakra-ui/react'
 import { FiMenu } from 'react-icons/fi'
 
+//https://chakra-templates.dev/navigation/sidebar
+//https://codesandbox.io/s/chakra-ui-responsive-sidebar-forked-b1tch
+
 const Home = (): JSX.Element => {
   return (
     <Flex w="100%">

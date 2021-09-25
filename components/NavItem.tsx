@@ -1,4 +1,4 @@
-import React from 'react'
+import { ReactText } from 'react'
 import {
   Flex,
   Text,
@@ -7,8 +7,18 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  FlexProps,
 } from '@chakra-ui/react'
+import { IconType } from 'react-icons'
 import NavHoverBox from '../components/NavHoverBox'
+
+interface NavItemProps extends FlexProps {
+  icon: IconType
+
+  description: ReactText
+  active: boolean
+  navSize: any
+}
 
 export default function NavItem({
   icon,
@@ -16,7 +26,7 @@ export default function NavItem({
   description,
   active,
   navSize,
-}): JSX.Element {
+}: NavItemProps): JSX.Element {
   return (
     <Flex
       mt={30}
