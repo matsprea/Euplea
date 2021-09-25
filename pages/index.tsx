@@ -1,33 +1,44 @@
+import dynamic from 'next/dynamic'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { Flex, Center, Box, Heading } from '@chakra-ui/react'
+import { MapSkeleton } from '../components/MapSkeleton'
 import { Sidebar } from '../components/Sidebar'
-import { Flex, Text, IconButton } from '@chakra-ui/react'
-import { FiMenu } from 'react-icons/fi'
 
-//https://chakra-templates.dev/navigation/sidebar
-//https://codesandbox.io/s/chakra-ui-responsive-sidebar-forked-b1tch
+const DynamicMap = dynamic(() => import('../components/Map'), {
+  ssr: false,
+  loading: () => <MapSkeleton />,
+})
 
-const Home = (): JSX.Element => {
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+})
+
+const defaultInitLocation = { lat: 45.464664, lng: 9.18854 }
+
+const MapPage = (): JSX.Element => {
   return (
-    <Flex w="100%">
-      <Sidebar />
-      <Flex
-        pos="absolute"
-        top="50%"
-        left="50%"
-        transform="translate(-50%, -50%)"
-      >
-        <Text>
-          Click the
-          <IconButton
-            aria-label="Menu"
-            background="none"
-            _hover={{ background: 'none' }}
-            icon={<FiMenu />}
-          />
-          to resize the vertical navigation bar.
-        </Text>
+    <QueryClientProvider client={queryClient}>
+      <Flex>
+        <Sidebar />
+        <Flex className="App " w="100%" direction="column">
+          <Flex h="100px" w="100%">
+            <Center h="100px" w="100%">
+              <Heading as="h1">Euplea</Heading>
+              {/* <Cassetto /> */}
+            </Center>
+          </Flex>
+
+          <Box w="100%">
+            <DynamicMap initLocation={defaultInitLocation} />
+          </Box>
+        </Flex>
       </Flex>
-    </Flex>
+    </QueryClientProvider>
   )
 }
 
-export default Home
+export default MapPage

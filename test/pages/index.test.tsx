@@ -1,11 +1,14 @@
 import React from 'react'
-import { render } from '../testUtils'
+import { render, act } from '../testUtils'
 import Home from '../../pages/index'
 
 describe('Home page', () => {
-  it('matches snapshot', () => {
-    const { asFragment } = render(<Home />, {})
-    expect(asFragment()).toMatchSnapshot()
+  it('matches snapshot', async () => {
+    await act(async () => {
+      const { asFragment } = await render(<Home />, {})
+
+      expect(asFragment()).toMatchSnapshot()
+    })
   })
 
   // it('clicking button triggers alert', () => {

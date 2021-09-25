@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Flex, IconButton } from '@chakra-ui/react'
+import { Flex, IconButton, Button, Spacer, Box, Center } from '@chakra-ui/react'
 import {
   FiMenu,
   FiMap,
@@ -17,9 +17,8 @@ export const Sidebar = (): JSX.Element => {
   return (
     <Flex
       pos="sticky"
-      left="5"
-      h="95vh"
-      // marginTop="2.5vh"
+      left="0"
+      h="100vh"
       boxShadow="0 4px 12px 0 rgba(0, 0, 0, 0.05)"
       borderRadius={navSize == 'small' ? '15px' : '30px'}
       w={navSize == 'small' ? '75px' : '200px'}
@@ -36,9 +35,10 @@ export const Sidebar = (): JSX.Element => {
       >
         <IconButton
           aria-label="menu"
-          background="none"
+          // background="none"
+          variant="outline"
           mt={5}
-          _hover={{ background: 'none' }}
+          // _hover={{ background: 'none' }}
           icon={<FiMenu />}
           onClick={() => {
             if (navSize == 'small') changeNavSize('large')
@@ -96,6 +96,14 @@ export const Sidebar = (): JSX.Element => {
           active={false}
         />
       </Flex>
+      <Spacer />
+      <Box>
+        <Center>
+          <Button m="4" hidden={navSize == 'small'}>
+            Cerca
+          </Button>
+        </Center>
+      </Box>
     </Flex>
   )
 }

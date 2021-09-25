@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { ChakraProvider } from '@chakra-ui/react'
 import '../styles/globals.css'
 import 'leaflet/dist/leaflet.css'
+import theme from '../theme'
 
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
@@ -14,7 +15,7 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
         />
       </Head>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Component {...pageProps} />
       </ChakraProvider>
     </>
