@@ -6,10 +6,10 @@ orbs:
 
 workflows:
   sample:
+    resource_class: small
     jobs:
       - node/test:
           version: '16.10'
-          resource_class: small
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: yarn
           #
