@@ -9,6 +9,7 @@ workflows:
     jobs:
       - node/test:
           version: '16.10'
+          resource_class: small
           # If you are using yarn, change the line below from "npm" to "yarn"
           pkg-manager: yarn
           #
