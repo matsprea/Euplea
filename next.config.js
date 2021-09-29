@@ -12,6 +12,11 @@ const nextConfig = withPWA({
   },
   reactStrictMode: true,
   target: process.env.BUILD_TARGET,
+  i18n: {
+    locales: ['en', 'it'],
+    defaultLocale: 'it',
+    localeDetection: true,
+  },
 })
 
 module.exports = nextConfig
