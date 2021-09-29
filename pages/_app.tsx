@@ -1,15 +1,16 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ChakraProvider } from '@chakra-ui/react'
+import { appWithTranslation } from 'next-i18next'
 import '../styles/globals.css'
 import 'leaflet/dist/leaflet.css'
 import theme from '../theme'
 
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
+ 
   return (
     <>
       <Head>
-        <title>Euplea - Viaggi nella bellezza dell&apos;arte</title>
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
@@ -34,4 +35,4 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
 //   return { ...appProps }
 // }
 
-export default MyApp
+export default appWithTranslation(MyApp)
