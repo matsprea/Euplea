@@ -1,23 +1,16 @@
 import dynamic from 'next/dynamic'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { GetStaticProps } from 'next'
 import { Flex, Center, Box, Heading } from '@chakra-ui/react'
-import { MapSkeleton } from '../components/MapSkeleton'
-import { Sidebar } from '../components/Sidebar'
-import { useTranslation } from 'next-i18next'
+import { useTranslation, SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { Header } from '../components/Header'
+
+import { Header } from 'components/Header'
+import { MapSkeleton } from 'components/MapSkeleton'
+import { Sidebar } from 'components/Sidebar'
 
 const DynamicMap = dynamic(() => import('../components/Map'), {
   ssr: false,
   loading: () => <MapSkeleton />,
-})
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
 })
 
 const defaultInitLocation = { lat: 45.464664, lng: 9.18854 }
@@ -26,7 +19,7 @@ const MapPage = (): JSX.Element => {
   const { t } = useTranslation()
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <Header title={t('header')} />
 
       <Flex>
@@ -44,11 +37,13 @@ const MapPage = (): JSX.Element => {
           </Box>
         </Flex>
       </Flex>
-    </QueryClientProvider>
+    </>
   )
 }
 
-export const getStaticProps = async ({ locale }) => ({
+export const getStaticProps: GetStaticProps<SSRConfig> = async ({
+  locale,
+}) => ({
   props: {
     ...(await serverSideTranslations(locale, ['common'])),
   },
