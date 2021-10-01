@@ -1,3 +1,13 @@
 {
-  "header" : "Euplea - Viaggi nella bellezza dell'arte"
+  "header" : "Euplea - Viaggi nella bellezza dell'arte",
+  "Search" : "Cerca",
+  "Create a new itinerary" : "Crea un nuovo itinerario",
+  "Cancel" : "Annulla",
+  "Day_one" : "Giorno",
+  "Day_other" : "Giorni",
+  "Topic": "Argomento",
+  "This is required" : "Questo è obbligatorio",
+  "Minimum length should be" : "La lunghezza minima è {{length}}",
+  "Please enter a topic" : "Scegli un argomento",
+  "Description" : "Descrizione"
 }

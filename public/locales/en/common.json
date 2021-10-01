@@ -1,3 +1,13 @@
 {
-  "header" : "Euplea - Art travels"
+  "header" : "Euplea - Art travels",
+  "Search" : "Search",
+  "Create a new itinerary" : "Create a new itinerary",
+  "Cancel" : "Cancel",
+  "Day_one" : "Day",
+  "Day_other" : "Days",
+  "Topic": "Topic",
+  "This is required": "This is required",
+  "Minimum length should be" : "Minimum length should be {{length}}",
+  "Please enter a topic" : "Please enter a topic",
+  "Description" : "Description"
 }

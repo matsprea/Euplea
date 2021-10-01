@@ -13,7 +13,7 @@ export const Map = ({ initLocation }: MapProps): JSX.Element => (
     center={initLocation}
     zoom={8}
     scrollWheelZoom={true}
-    style={{ height: 'calc(100vh - 100px)', width: '100%' }}
+    style={{ height: 'calc(100vh - 60px)', width: '100%' }}
   >
     <UserCurrentLocation />
     <LayersControl position="topright">

@@ -1,12 +1,13 @@
 import dynamic from 'next/dynamic'
 import { GetStaticProps } from 'next'
-import { Flex, Center, Box, Heading } from '@chakra-ui/react'
+import { Flex, Center, Box, Heading, Spacer } from '@chakra-ui/react'
 import { useTranslation, SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { Header } from 'components/Header'
 import { MapSkeleton } from 'components/MapSkeleton'
-import { Sidebar } from 'components/Sidebar'
+// import { Sidebar } from 'components/Sidebar2'
+import { SearchDrawer } from 'components/SearchDrawer'
 
 const DynamicMap = dynamic(() => import('../components/Map'), {
   ssr: false,
@@ -22,20 +23,19 @@ const MapPage = (): JSX.Element => {
     <>
       <Header title={t('header')} />
 
-      <Flex>
-        <Sidebar />
-        <Flex className="App " w="100%" direction="column">
-          <Flex h="100px" w="100%">
-            <Center h="100px" w="100%">
-              <Heading as="h1">Euplea</Heading>
-              {/* <Cassetto /> */}
-            </Center>
-          </Flex>
-
-          <Box w="100%">
-            <DynamicMap initLocation={defaultInitLocation} />
+      <Flex className="App " w="100%" direction="column">
+        <Flex>
+          <Box p="2">
+            <Heading as="h1">Euplea</Heading>
           </Box>
+          <Spacer />
+          <Center p="2">
+            <SearchDrawer />
+          </Center>
         </Flex>
+        <Box w="100%">
+          <DynamicMap initLocation={defaultInitLocation} />
+        </Box>
       </Flex>
     </>
   )
