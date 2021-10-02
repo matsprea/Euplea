@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import {
   Box,
   Button,
@@ -29,33 +30,18 @@ import { FaSearchLocation, FaSearch } from 'react-icons/fa'
 import { useTranslation } from 'next-i18next'
 import { useForm } from 'react-hook-form'
 
-const enum Style {
-  Luxury = 'Luxury',
-  Medium = 'Medium',
-  Budget = 'Budget',
-}
+import { SearchData, Style } from '../../types';
 
-type FormData = {
-  topic: string
-  days: number
-  style: Style
-}
+type SearchDrawerProps = {
+  searchData: SearchData
+} 
 
-const defaultValues: FormData = {
-  topic: undefined,
-  days: 2,
-  style: undefined,
-}
-
-const onSubmit = (values: FormData) => {
-  // eslint-disable-next-line no-console
-  console.log("values ", values)
-}
-
-export const SearchDrawer = (): JSX.Element => {
+export const SearchDrawer = ({ searchData }: SearchDrawerProps): JSX.Element => {
+  const { t } = useTranslation()
+  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const { t } = useTranslation()
+  const defaultValues = { ...searchData }
 
   const {
     handleSubmit,
@@ -63,7 +49,7 @@ export const SearchDrawer = (): JSX.Element => {
     formState: { errors },
     setValue,
     watch,
-  } = useForm<FormData>({ defaultValues })
+  } = useForm<SearchData>({ defaultValues })
 
   const selectDaysValue = watch('days')
   const handleDaysChange = (days: number) => setValue('days', days)
@@ -77,6 +63,13 @@ export const SearchDrawer = (): JSX.Element => {
       required: `${t('This is required')}`,
     })
   }, [register])
+
+  const onSubmit = (values: SearchData) => {
+    const { topic, days, style } = values
+
+    router.push(`/map/${style}/${days}/${topic}`)
+    onClose()
+  }
 
   return (
     <>

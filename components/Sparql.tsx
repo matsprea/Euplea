@@ -1,56 +1,82 @@
 import { LayerGroup, Marker, Tooltip } from 'react-leaflet'
 import { newEngine, IQueryResultBindings } from '@comunica/actor-init-sparql'
 import { useFetcher } from './useFetcher'
-import { BiHotel } from 'react-icons/bi'
+import { TiPointOfInterest } from 'react-icons/ti'
 import { getLeafletIcon } from './getLeafletIcon'
+import { SearchData } from '../types'
 
 const myEngine = newEngine()
 
-const query = `
-PREFIX poiapit:	<https://w3id.org/italia/onto/POI/>
-PREFIX clvapit:	<https://w3id.org/italia/onto/CLV/>
-PREFIX accoapit: <https://w3id.org/italia/onto/ACCO/>
-SELECT DISTINCT ?label  ?comment ?asd ?lat ?long ?Geometry
+const query = (topic) => `
+PREFIX arco-cd: <https://w3id.org/arco/ontology/context-description/>
+PREFIX arco-arco: <https://w3id.org/arco/ontology/arco/> 
+PREFIX arco-location: <https://w3id.org/arco/ontology/location/>
+PREFIX clvapit: <https://w3id.org/italia/onto/CLV/>
+PREFIX a-loc: <https://w3id.org/arco/ontology/location/>
+
+
+SELECT distinct sample(?name) as ?name, count(?cultpro) as ?count, sample(?lat) as ?lat, sample(?long ) as ?long 
+FROM <https://w3id.org/arco/ontology>
+FROM <https://w3id.org/arco/data>
 WHERE {
-?Accomodation a accoapit:Accomodation ;
-rdfs:label ?label ;
-rdfs:comment ?comment ;
-poiapit:POIofficialName ?asd .
-?Accomodation clvapit:hasGeometry ?Geometry .
-?Geometry a clvapit:Geometry ;
-clvapit:lat ?lat ;
-clvapit:long ?long .
-  
-}
-   limit 1000  offset 0  
+ ?cultpro rdf:type/rdfs:subClassOf* arco-arco:CulturalProperty ;
+ clvapit:hasGeometry ?geometry ;
+ a-loc:hasCulturalInstituteOrSite ?culturalInstituteOrSite;
+ arco-cd:hasSubject ?sub .
+
+?geometry a-loc:hasCoordinates ?coordinates .
+
+?coordinates a-loc:lat ?lat ;
+a-loc:long ?long .
+
+ ?sub rdfs:label ?label
+ FILTER(REGEX(STR(?label), "${topic}", "i")) .
+ ?culturalInstituteOrSite cis:hasSite ?site ;
+ rdfs:label ?name .
+OPTIONAL { ?site owl:deprecated ?deprecated } .
+   FILTER ( !bound(?deprecated) )  
+ 
+} 
+GROUP BY ?site
+order by DESC(?count) 
+limit 10
+
 `
 
-const myQuery = myEngine.query(query, {
-  sources: [{ type: 'sparql', value: 'https://gioconda.supsi.ch:8890/sparql' }],
+const myQuery = (topic) => myEngine.query(query( topic) , {
+  sources: [{ type: 'sparql', value: 'https://dati.beniculturali.it/sparql' }],
 })
 
-const testData2 = async () =>
-  myQuery.then((result: any) => {
+const testData = (topic) => async () =>
+  myQuery(topic).then((result: any) => {
     const r: IQueryResultBindings = result
     return r.bindings()
   })
 
-export const Sparql = (): JSX.Element => {
-  const { data } = useFetcher(testData2)
+  type SparqlProps =  {
+ 
+    searchData: SearchData
+  }
+
+export const Sparql = ({ searchData }: SparqlProps): JSX.Element => {
+ const  topic   = searchData?.topic;
+
+console.log('searchData ', searchData)
+  const  data  = (topic && useFetcher(testData(topic)))?.data 
 
   return (
     <LayerGroup>
       {data &&
         data.map((item: any) => (
           <Marker
-            key={item.get('?Geometry').value}
+            key={`${item.get('?lat').value}-${item.get('?long').value}`}
             position={{
               lat: item.get('?lat').value,
               lng: item.get('?long').value,
             }}
-            icon={getLeafletIcon(BiHotel, { color: 'red' })}
+            icon={getLeafletIcon(TiPointOfInterest, { color: 'teal' })}
           >
-            <Tooltip>{item.get('?label').value}</Tooltip>
+            <Tooltip>{item.get('?name').value}</Tooltip>
           </Marker>
         ))}
     </LayerGroup>
