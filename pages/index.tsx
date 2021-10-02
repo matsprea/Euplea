@@ -4,6 +4,8 @@ import { Flex, Center, Box, Heading, Spacer } from '@chakra-ui/react'
 import { useTranslation, SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
+import { SearchData, Style } from '../types'
+
 import { Header } from 'components/Header'
 import { MapSkeleton } from 'components/MapSkeleton'
 import { SearchDrawer } from 'components/SearchDrawer'
@@ -14,6 +16,7 @@ const DynamicMap = dynamic(() => import('components/Map'), {
 })
 
 const defaultInitLocation = { lat: 45.464664, lng: 9.18854 }
+const searchData: SearchData = { topic: '', days: 2, style: Style.Medium }
 
 const MapPage = (): JSX.Element => {
   const { t } = useTranslation()
@@ -29,11 +32,14 @@ const MapPage = (): JSX.Element => {
           </Box>
           <Spacer />
           <Center p="2">
-            <SearchDrawer />
+            <SearchDrawer searchData={searchData} />
           </Center>
         </Flex>
         <Box w="100%">
-          <DynamicMap initLocation={defaultInitLocation} />
+          <DynamicMap
+            initLocation={defaultInitLocation}
+            searchData={searchData}
+          />
         </Box>
       </Flex>
     </>

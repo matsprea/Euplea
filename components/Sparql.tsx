@@ -60,8 +60,8 @@ const testData = (topic) => async () =>
 
 export const Sparql = ({ searchData }: SparqlProps): JSX.Element => {
  const  topic   = searchData?.topic;
-
-console.log('searchData ', searchData)
+ 
+  console.log('searchData ', searchData)
   const  data  = (topic && useFetcher(testData(topic)))?.data 
 
   return (
