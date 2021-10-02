@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
- import {
+import {
   Box,
   Button,
   Drawer,
@@ -13,41 +13,43 @@ import React, { useEffect } from 'react'
   FormErrorMessage,
   FormLabel,
   Input,
-  Select,
+  Radio,
+  RadioGroup,
   Slider,
   SliderFilledTrack,
   SliderThumb,
   SliderTrack,
   Stack,
-  Textarea,
+  Spacer,
   useDisclosure,
 } from '@chakra-ui/react'
 
-import { FaSearchLocation } from 'react-icons/fa'
+import { GiCancel } from 'react-icons/gi'
+import { FaSearchLocation, FaSearch } from 'react-icons/fa'
 import { useTranslation } from 'next-i18next'
 import { useForm } from 'react-hook-form'
+
+const enum Style {
+  Luxury = 'Luxury',
+  Medium = 'Medium',
+  Budget = 'Budget',
+}
 
 type FormData = {
   topic: string
   days: number
-  owner: string
-  desc: string
+  style: Style
 }
 
 const defaultValues: FormData = {
-  topic: '',
+  topic: undefined,
   days: 2,
-  owner: '',
-  desc: '',
+  style: undefined,
 }
 
-const onSubmit = (values) => {
-  return new Promise<void>((resolve) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2))
-      resolve()
-    }, 30)
-  })
+const onSubmit = (values: FormData) => {
+  // eslint-disable-next-line no-console
+  console.log("values ", values)
 }
 
 export const SearchDrawer = (): JSX.Element => {
@@ -64,19 +66,21 @@ export const SearchDrawer = (): JSX.Element => {
   } = useForm<FormData>({ defaultValues })
 
   const selectDaysValue = watch('days')
-  const handleDaysChange = (days) => setValue('days', days)
+  const handleDaysChange = (days: number) => setValue('days', days)
+
+  const selectStyleValue = watch('style')
+  const handleStyleChange = (style: Style) => setValue('style', style)
 
   useEffect(() => {
     register('days')
+    register('style', {
+      required: `${t('This is required')}`,
+    })
   }, [register])
 
   return (
     <>
-      <Button
-        leftIcon={<FaSearchLocation />}
-        colorScheme="teal"
-        onClick={onOpen}
-      >
+      <Button leftIcon={<FaSearchLocation />} onClick={onOpen}>
         {t('Search')}
       </Button>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
@@ -111,9 +115,7 @@ export const SearchDrawer = (): JSX.Element => {
                 </FormControl>
 
                 <FormControl isInvalid={!!errors.days}>
-                  <FormLabel htmlFor="days">
-                    {t('Day', { count: selectDaysValue })}
-                  </FormLabel>
+                  <FormLabel htmlFor="days">{t('Days')}</FormLabel>
 
                   <Slider
                     id="days"
@@ -134,27 +136,23 @@ export const SearchDrawer = (): JSX.Element => {
                   </Slider>
                 </FormControl>
 
-                <FormControl isInvalid={!!errors.owner}>
-                  <FormLabel htmlFor="owner">Select Owner</FormLabel>
-                  <Select
-                    id="owner"
-                    {...register('owner', {
-                      required: `${t('This is required')}`,
-                    })}
-                  >
-                    <option value="segun">Segun Adebayo</option>
-                    <option value="kola">Kola Tioluwani</option>
-                  </Select>
-                  <FormErrorMessage>
-                    {errors.owner && errors.owner.message}
-                  </FormErrorMessage>
-                </FormControl>
+                <FormControl isInvalid={!!errors.style}>
+                  <FormLabel htmlFor="style">{t('Style')}</FormLabel>
 
-                <FormControl isInvalid={!!errors.desc}>
-                  <FormLabel htmlFor="desc">Description</FormLabel>
-                  <Textarea id="desc" {...register('desc')} />
+                  <RadioGroup
+                    id="style"
+                    defaultValue={selectStyleValue}
+                    onChange={handleStyleChange}
+                  >
+                    <Stack>
+                      <Radio value={Style.Luxury}>{t('Luxury')}</Radio>
+                      <Radio value={Style.Medium}>{t('Medium')}</Radio>
+                      <Radio value={Style.Budget}>{t('Budget')}</Radio>
+                    </Stack>
+                  </RadioGroup>
+
                   <FormErrorMessage>
-                    {errors.desc && errors.desc.message}
+                    {errors.style && errors.style.message}
                   </FormErrorMessage>
                 </FormControl>
               </Stack>
@@ -162,11 +160,12 @@ export const SearchDrawer = (): JSX.Element => {
           </DrawerBody>
 
           <DrawerFooter borderTopWidth="1px">
-            <Button variant="outline" mr={3} onClick={onClose}>
-              {t('Cancel')}
-            </Button>
-            <Button type="submit" form="my-form">
+            <Button type="submit" form="my-form" mr={3} leftIcon={<FaSearch />}>
               {t('Search')}
+            </Button>
+            <Spacer />
+            <Button variant="outline" onClick={onClose} leftIcon={<GiCancel />}>
+              {t('Cancel')}
             </Button>
           </DrawerFooter>
         </DrawerContent>

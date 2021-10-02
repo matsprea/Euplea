@@ -3,11 +3,14 @@
   "Search" : "Cerca",
   "Create a new itinerary" : "Crea un nuovo itinerario",
   "Cancel" : "Annulla",
-  "Day_one" : "Giorno",
-  "Day_other" : "Giorni",
+  "Days" : "Giorni",
   "Topic": "Argomento",
   "This is required" : "Questo è obbligatorio",
   "Minimum length should be" : "La lunghezza minima è {{length}}",
   "Please enter a topic" : "Scegli un argomento",
-  "Description" : "Descrizione"
+  "Description" : "Descrizione",
+  "Style" : "Stile",
+  "Luxury" : "Lusso",
+  "Medium" : "Medio",
+  "Budget" : "Economico"
 }
