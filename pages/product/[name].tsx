@@ -16,3 +16,10 @@ const Product = () => {
 }
 
 export default Product
+
+export const getStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  }
+}
