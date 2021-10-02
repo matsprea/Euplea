@@ -1,4 +1,7 @@
+import { GetStaticProps, GetStaticPaths } from 'next'
 import { useRouter } from 'next/router'
+import { SSRConfig } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 const Product = () => {
   const router = useRouter()
@@ -17,7 +20,15 @@ const Product = () => {
 
 export default Product
 
-export const getStaticPaths = async () => {
+export const getStaticProps: GetStaticProps<SSRConfig> = async ({
+  locale,
+}) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+})
+
+export const getStaticPaths: GetStaticPaths = async () => {
   return {
     paths: [],
     fallback: 'blocking',
