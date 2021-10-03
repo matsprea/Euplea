@@ -31,6 +31,9 @@ export const SparqlMapCulturalSite = ({
     const latValues = data.map((b) => Number(b.get('?lat').value))
      const longValues = data.map((b) => Number(b.get('?long').value))
 
+     console.log('latValues', latValues)
+     console.log('longValues', longValues)
+
      map.fitBounds(
        [
          [Math.max(...latValues), Math.max(...longValues)],

@@ -36,6 +36,11 @@ type SearchDrawerProps = {
   searchData: SearchData
 } 
 
+const buildQueryString = (any): string =>
+  Object.entries(any)
+    .map(([key, value]) => `${key}=${value}`)
+    .join('&')
+
 export const SearchDrawer = ({ searchData }: SearchDrawerProps): JSX.Element => {
   const { t } = useTranslation()
   const router = useRouter()
@@ -65,9 +70,7 @@ export const SearchDrawer = ({ searchData }: SearchDrawerProps): JSX.Element => 
   }, [register])
 
   const onSubmit = (values: SearchData) => {
-    const { topic, days, style } = values
-
-    router.push(`/map/${style}/${days}/${topic}`)
+    router.push(`/map/?${buildQueryString(values)}`)
     onClose()
   }
 
