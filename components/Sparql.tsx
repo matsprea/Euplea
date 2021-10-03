@@ -1,9 +1,10 @@
-import { LayerGroup, Marker, Tooltip } from 'react-leaflet'
+import { LayerGroup, Marker, Tooltip, Circle } from 'react-leaflet'
 import { newEngine, IQueryResultBindings } from '@comunica/actor-init-sparql'
 import { useFetcher } from './useFetcher'
 import { TiPointOfInterest } from 'react-icons/ti'
 import { getLeafletIcon } from './getLeafletIcon'
 import { SearchData } from '../types'
+import {  useCallback } from 'react'
 
 const myEngine = newEngine()
 
@@ -13,9 +14,9 @@ PREFIX arco-arco: <https://w3id.org/arco/ontology/arco/>
 PREFIX arco-location: <https://w3id.org/arco/ontology/location/>
 PREFIX clvapit: <https://w3id.org/italia/onto/CLV/>
 PREFIX a-loc: <https://w3id.org/arco/ontology/location/>
+PREFIX cis:	<http://dati.beniculturali.it/cis/>
 
-
-SELECT distinct sample(?name) as ?name, count(?cultpro) as ?count, sample(?lat) as ?lat, sample(?long ) as ?long 
+SELECT DISTINCT (sample(?name) as ?name)  (count(?cultpro) as ?count)  (sample(?lat) as ?lat)  (sample(?long ) as ?long )
 FROM <https://w3id.org/arco/ontology>
 FROM <https://w3id.org/arco/data>
 WHERE {
@@ -43,41 +44,59 @@ limit 10
 
 `
 
-const myQuery = (topic) => myEngine.query(query( topic) , {
-  sources: [{ type: 'sparql', value: 'https://dati.beniculturali.it/sparql' }],
-})
+const myQuery = (topic) =>
+  myEngine.query(query(topic), {
+    sources: [
+      { type: 'sparql', value: 'https://dati.beniculturali.it/sparql' },
+    ],
+  })
 
-const testData = (topic) => async () =>
+const testData = (topic) => () =>
   myQuery(topic).then((result: any) => {
     const r: IQueryResultBindings = result
     return r.bindings()
   })
 
-  type SparqlProps =  {
- 
-    searchData: SearchData
-  }
+type SparqlProps = {
+  searchData: SearchData
+}
 
 export const Sparql = ({ searchData }: SparqlProps): JSX.Element => {
- const  topic   = searchData?.topic;
- 
-  console.log('searchData ', searchData)
-  const  data  = (topic && useFetcher(testData(topic)))?.data 
+  // const topic = searchData?.topic
+
+  const testDataP = useCallback(() => {
+    return testData(searchData.topic)
+  }, [searchData])
+
+  const { loading, data } = useFetcher(testDataP())
+
+  console.log('isLoading', loading)
+  console.log('data', data)
 
   return (
     <LayerGroup>
       {data &&
         data.map((item: any) => (
-          <Marker
-            key={`${item.get('?lat').value}-${item.get('?long').value}`}
-            position={{
+          <Circle
+            key={`${item.get('?name').value}-Key`}
+            center={{
               lat: item.get('?lat').value,
               lng: item.get('?long').value,
             }}
-            icon={getLeafletIcon(TiPointOfInterest, { color: 'teal' })}
+            radius={10}
+            fillColor="red"
+            color="red"
           >
-            <Tooltip>{item.get('?name').value}</Tooltip>
-          </Marker>
+            <Marker
+              position={{
+                lat: item.get('?lat').value,
+                lng: item.get('?long').value,
+              }}
+              icon={getLeafletIcon(TiPointOfInterest, { color: 'red' })}
+            >
+              <Tooltip>{item.get('?name').value}</Tooltip>
+            </Marker>
+          </Circle>
         ))}
     </LayerGroup>
   )

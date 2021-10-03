@@ -16,7 +16,7 @@ const DynamicMap = dynamic(() => import('components/Map'), {
 })
 
 const defaultInitLocation = { lat: 45.464664, lng: 9.18854 }
-const searchData: SearchData = { topic: '', days: 2, style: Style.Medium }
+const searchData: SearchData = { topic: 'notte', days: 2, style: Style.Medium }
 
 const MapPage = (): JSX.Element => {
   const { t } = useTranslation()

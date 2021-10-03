@@ -1,17 +1,20 @@
 import { useState, useEffect } from 'react'
+import { Bindings } from '@comunica/types'
 
-export const useFetcher = (action: () => any): any => {
+export const useFetcher = (
+  action: () => Promise<Bindings[]>
+): { data: Bindings[]; loading: boolean; error: unknown } => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [data, setData] = useState<unknown>(null)
+  const [data, setData] = useState<Bindings[]>(null)
 
   useEffect(() => {
-    async function loadData() {
+    const loadData = async () => {
       try {
         setLoading(true)
-        const actionData = await action()
-        setData(actionData)
-      } catch (e: any) {
+        const actionResult = await action()
+        setData(actionResult)
+      } catch (e: unknown) {
         setError(e)
       } finally {
         setLoading(false)
