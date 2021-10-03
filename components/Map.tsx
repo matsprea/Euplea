@@ -1,13 +1,14 @@
 import { LatLngExpression } from 'leaflet'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { UserCurrentLocation } from './UserCurrentLocation'
-import { SparqlMapCulturalSite } from './SparqlMapCulturalSite'
 import { SearchData } from '../types'
+import { Sparql } from 'components/Sparql'
 
 type MapProps = {
   initLocation: LatLngExpression
   searchData: SearchData
 }
+
 
 export const Map = ({ initLocation, searchData }: MapProps): JSX.Element => {
 
@@ -19,7 +20,8 @@ export const Map = ({ initLocation, searchData }: MapProps): JSX.Element => {
       style={{ height: 'calc(100vh - 60px)', width: '100%' }}
     >
       <UserCurrentLocation />
-      <SparqlMapCulturalSite searchData={searchData}   />
+      <Sparql searchData={searchData} />
+      {/* <SparqlMapCulturalSite searchData={searchData}   /> */}
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

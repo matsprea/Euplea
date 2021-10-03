@@ -1,25 +1,19 @@
 import { useState, useEffect } from 'react'
 
-export const useFetcher = <T>(
-  action: () => Promise<T>
+export const useFetcher = <T, K>(
+  action: (parms: K) => Promise<T>,
+  parms: K
 ): { data: T; loading: boolean; error: unknown } => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [data, setData] = useState<T>(null)
-
-  console.log('data ', data)
-
-  console.log('error ', error)
-
-  console.log('loading ', loading)
-
+ 
   useEffect(() => {
-    async function loadData () {
+    const loadData = async () => {
       try {
         setLoading(true)
-        const actionResult = await action()
+        const actionResult = await action(parms)
         setData(actionResult)
-        setLoading(false)
       } catch (e: unknown) {
         setError(e)
       } finally {
@@ -28,7 +22,7 @@ export const useFetcher = <T>(
     }
 
     loadData()
-  }, [action])
+  }, [ parms])
 
   return { data, loading, error }
 }
