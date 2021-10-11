@@ -1,7 +1,7 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 import { Bindings } from '@comunica/types'
 import { newEngine, IQueryResultBindings } from '@comunica/actor-init-sparql'
-import { useSparQLResult, SearchData } from '../types'
-import { useFetcher } from './useFetcher'
+import { useSparQLResult, SearchData } from '../../../types'
 
 const myEngine = newEngine()
 
@@ -54,8 +54,21 @@ const mySparQLQuery = async (query) =>
       return r.bindings()
     })
 
-export const useSparQL = (searchData: SearchData): useSparQLResult => {
-  const myQuery = query(searchData)
+type Error =
+  | {
+      error: string
+    }
+  | any
 
-  return useFetcher<Bindings[], string>(mySparQLQuery, myQuery)
+const handler = (req: NextApiRequest, res: NextApiResponse<Error>): void => {
+    const { topic }  = req.query
+
+  if (!topic) res.status(400).json({ error: 'Missing Topic' })
+  
+  mySparQLQuery(query({ topic })).then((data) => {
+    return res.status(200).json(data)
+  })
+
 }
+
+export default handler
