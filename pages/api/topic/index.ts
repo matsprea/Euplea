@@ -2,6 +2,15 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { Bindings } from '@comunica/types'
 import { newEngine, IQueryResultBindings } from '@comunica/actor-init-sparql'
 import { useSparQLResult, SearchData } from '../../../types'
+import { CosmosClient } from '@azure/cosmos'
+
+const endpoint = process.env.COSMOS_ENDPOINT
+const key = process.env.COSMOS_KEY
+const client = new CosmosClient({ endpoint, key })
+
+const EupleaDb = client.database('Euplea')
+
+const EupleaDbCache = EupleaDb.container('Cache')
 
 const myEngine = newEngine()
 
@@ -54,6 +63,19 @@ const mySparQLQuery = async (query) =>
       return r.bindings()
     })
 
+const getCache = async (key) => {
+  const { resource } = await EupleaDbCache.item(key, key).read()
+  return resource
+}
+
+const PutCache = async (key, value) => {
+  const { resource } = await EupleaDbCache.items.create({
+    id: key,
+    value: value,
+  })
+  return resource
+}
+
 type Error =
   | {
       error: string
@@ -61,14 +83,19 @@ type Error =
   | any
 
 const handler = (req: NextApiRequest, res: NextApiResponse<Error>): void => {
-    const { topic }  = req.query
+  const { topic } = req.query
 
   if (!topic) res.status(400).json({ error: 'Missing Topic' })
-  
-  mySparQLQuery(query({ topic })).then((data) => {
-    return res.status(200).json(data)
-  })
 
+  getCache(topic)
+    .then(
+      (data) =>
+        data ??
+        mySparQLQuery(query({ topic }))
+          .then((data) => PutCache(topic, data))
+          .then((data) => res.status(200).json(data))
+    )
+    .then((data) => res.status(200).json(data))
 }
 
 export default handler

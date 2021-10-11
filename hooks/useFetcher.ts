@@ -7,7 +7,7 @@ export const useFetcher = <T, K>(
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [data, setData] = useState<T>(null)
- 
+
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -22,7 +22,7 @@ export const useFetcher = <T, K>(
     }
 
     loadData()
-  }, [ parms])
+  }, [parms])
 
   return { data, loading, error }
 }

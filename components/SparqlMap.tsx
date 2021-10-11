@@ -14,16 +14,16 @@ export const SparqlMap = ({
   icon,
   color = 'black',
 }: SparqlMapProps): JSX.Element => {
- 
+ console.log('data', data)
   return (
     <FeatureGroup>
       {data &&
         data.map((item: any) => (
           <Circle
-            key={`${item.get('?name').value}-Key`}
+            key={`${item['?name'].value}-Key`}
             center={{
-              lat: item.get('?lat').value,
-              lng: item.get('?long').value,
+              lat: item['?lat'].value,
+              lng: item['?long'].value,
             }}
             radius={10}
             fillColor={color}
@@ -31,12 +31,12 @@ export const SparqlMap = ({
           >
             <Marker
               position={{
-                lat: item.get('?lat').value,
-                lng: item.get('?long').value,
+                lat: item['?lat'].value,
+                lng: item['?long'].value,
               }}
               icon={getLeafletIcon(icon, { color })}
             >
-              <Tooltip>{item.get('?name').value}</Tooltip>
+              <Tooltip>{item['?name'].value}</Tooltip>
             </Marker>
           </Circle>
         ))}

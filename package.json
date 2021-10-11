@@ -11,6 +11,7 @@
     "test-all": "yarn lint && yarn type-check && yarn test"
   },
   "dependencies": {
+    "@azure/cosmos": "^3.14.1",
     "@chakra-ui/react": "1.6.9",
     "@comunica/actor-init-sparql": "1.22.2",
     "@emotion/react": "11.4.1",

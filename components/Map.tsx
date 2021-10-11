@@ -9,7 +9,6 @@ type MapProps = {
   searchData: SearchData
 }
 
-
 export const Map = ({ initLocation, searchData }: MapProps): JSX.Element => {
 
   return (
