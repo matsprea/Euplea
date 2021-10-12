@@ -1,13 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { mySparQLQuery } from 'utils/sparql'
+import { mySparQLQuery, prefix, sources } from 'utils/sparql'
 import { getWithCache } from 'utils/cosmoDBCache'
-
-const prefix = `PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
-PREFIX arco: <https://w3id.org/arco/ontology/arco/> 
-PREFIX clvapit: <https://w3id.org/italia/onto/CLV/>
-PREFIX a-loc: <https://w3id.org/arco/ontology/location/>
-PREFIX cis:	<http://dati.beniculturali.it/cis/>
-`
 
 const query = (subject) => `${prefix}
 SELECT ?culturalInstituteOrSite (COUNT(?cultpro) AS ?count) 
@@ -31,11 +24,7 @@ WHERE {
 GROUP BY ?culturalInstituteOrSite
 ORDER BY DESC(?count) 
 `
-
-const sources = [
-  { type: 'sparql', value: 'https://dati.beniculturali.it/sparql' },
-]
-
+ 
 const containerId = 'culturalSite'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {

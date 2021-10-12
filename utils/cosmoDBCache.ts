@@ -1,4 +1,5 @@
 import { CosmosClient } from '@azure/cosmos'
+import { createHmac } from 'utils/createHmac'
 
 const endpoint = process.env.COSMOS_ENDPOINT
 const key = process.env.COSMOS_KEY
@@ -18,24 +19,22 @@ const getResourceFromItem = ({ resource }) => resource
 
 export const getFromCache = async (containerId: string, key: string) =>
   getContainer(containerId).then((container) =>
-    container.item(key, key).read().then(getResourceFromItem)
+    container
+      .item(createHmac(key), createHmac(key))
+      .read()
+      .then(getResourceFromItem)
   )
 
 export const putInCache = async (containerId: string, key: string, value) =>
   getContainer(containerId).then((container) =>
     container.items
       .create({
-        id: key,
+        id: createHmac(key),
         value: value,
       })
       .then(getResourceFromItem)
   )
-
-const getValue = (resource) => {
-  const { value } = resource
-  return value
-}
-
+ 
 export const getWithCache = async (
   containerId: string,
   key: string,
