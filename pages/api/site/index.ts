@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { mySparQLQuery, prefix, sources } from 'utils/sparql'
 import { getWithCache } from 'utils/cosmoDBCache'
+import nominatim from 'nominatim-client'
 
 const query = (culturalSite) => `${prefix}
 SELECT ?site (SAMPLE(?siteSeeAlso) AS ?siteSeeAlso) (SAMPLE(?siteName) AS ?siteName) (SAMPLE(?sitePreview) AS ?sitePreview) (SAMPLE(?siteFullAddress) AS ?siteFullAddress) (SAMPLE(?siteCityName) AS ?siteCityName) (SAMPLE(?siteLat ) AS ?siteLat) (SAMPLE(?siteLong ) AS ?siteLong)
@@ -15,7 +16,7 @@ WHERE {
  FILTER ( ?culturalInstituteOrSite = <${culturalSite}> ) .
 
  OPTIONAL { ?site owl:deprecated ?deprecatedSite } .
- FILTER ( !bound(?deprecatedSite ) ) .
+ FILTER ( !BOUND(?deprecatedSite ) ) .
  
  OPTIONAL { ?site rdfs:seeAlso ?siteSeeAlso } .
  OPTIONAL { ?site pico:preview ?sitePreview  } .
@@ -78,13 +79,64 @@ const getSites = (culturalSite: string) =>
 const getSeeAlsoSites = async (siteList: any[]) => {
   const notSeeAlsoList = siteList.filter((site) => !('?siteSeeAlso' in site))
 
-  const result = await Promise.all(
+  const seeAlsoList = await Promise.all(
     siteList
       .filter((site) => '?siteSeeAlso' in site)
       .map((site) => getSites(site['?siteSeeAlso'].value))
   )
 
-  return [...notSeeAlsoList, ...result.flat()]
+  return [...notSeeAlsoList, ...seeAlsoList.flat()]
+}
+
+const geocodingClient = nominatim.createClient({
+  useragent: 'Euplea',
+  referer: 'https://euplea.vercel.app/',
+})
+
+const geocodeSite = (site) => {
+  const q = `${site['?siteFullAddress'].value}, ${site['?siteCityName'].value}`
+  const query = {
+    q,
+    limit: 1,
+  }
+
+  const geocodingQuery = geocodingClient.search(query).then((result) => ({
+    ...site,
+    '?siteLat': {
+      termType: 'Literal',
+      value: result[0].lat,
+      language: '',
+      datatype: {
+        termType: 'NamedNode',
+        value: 'http://www.w3.org/2001/XMLSchema#string',
+      },
+    },
+    '?siteLong': {
+      termType: 'Literal',
+      value: result[0].lon,
+      language: '',
+      datatype: {
+        termType: 'NamedNode',
+        value: 'http://www.w3.org/2001/XMLSchema#string',
+      },
+    },
+  }))
+
+  return getWithCache(containerId, q, geocodingQuery).then(({ value }) => value)
+}
+
+const getGeocodedSites = async (siteList: any[]) => {
+  const sitesWithLatLong = siteList.filter(
+    (site) => '?siteLat' in site && '?siteLong' in site
+  )
+
+  const sitesGeocoded = await Promise.all(
+    siteList
+      .filter((site) => !('?siteLat' in site && '?siteLong' in site))
+      .map(geocodeSite)
+  )
+
+  return [...sitesWithLatLong, ...sitesGeocoded.flat()]
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -93,13 +145,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!culturalSite || typeof culturalSite !== 'string')
     res.status(400).json({ error: 'Missing culturalSite' })
   else {
-    const sites = await getSites(culturalSite).then(getSeeAlsoSites)
+    const sites = await getSites(culturalSite)
+      .then(getSeeAlsoSites)
+      .then(getGeocodedSites)
 
     const sitesWithLatLong = sites.filter(
       (site) => '?siteLat' in site && '?siteLong' in site
     )
-
-    //TODO: Reverse Geocoding
+ 
     if (sitesWithLatLong.length > 0) res.status(200).json(sitesWithLatLong)
     else
       res.status(404).json({ error: 'No sites with coordinates', data: sites })
