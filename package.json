@@ -55,5 +55,10 @@
     ">0.2%",
     "not dead",
     "not op_mini all"
-  ]
+  ],
+  "babel": {
+    "presets": [
+      "next/babel"
+    ]
+  }
 }
