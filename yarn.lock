@@ -5664,10 +5664,10 @@ form-data@^4.0.0:
     combined-stream "^1.0.8"
     mime-types "^2.1.12"
 
-framer-motion@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-5.0.1.tgz#e63c504b175780ba658d7f944007ec36d9ef61c9"
-  integrity sha512-Bye1pAXTfp7uh9Ih2H4vyInbS7uXclPvy18G+h8y8DauQx1vtkblPyGSlaoDNGlrfmw6SCVsjSYWDF2SzI68YA==
+framer-motion@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-5.1.0.tgz#55ee74143a234d1fbf05364cad1ea37599a39018"
+  integrity sha512-T5eR/2UE2C+1BaUKzB3J6YulwihM480CRsezAJ9oTHcdUZzpYB4s/sWPDGEgSwqWyQobOC1i4FYCZ2MgUszsjQ==
   dependencies:
     framesync "6.0.1"
     hey-listen "^1.0.8"
