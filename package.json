@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@azure/cosmos": "3.14.1",
-    "@chakra-ui/react": "1.6.10",
+    "@chakra-ui/react": "1.6.12",
     "@comunica/actor-init-sparql": "1.22.3",
     "@emotion/react": "11.5.0",
     "@emotion/styled": "11.3.0",
