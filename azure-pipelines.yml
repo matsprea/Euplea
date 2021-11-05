@@ -19,6 +19,8 @@ steps:
     yarn
     yarn build
   displayName: 'yarn and yarn build'
+  env:
+    BUILD_TARGET: 'server'
 
 - task: ArchiveFiles@2
   inputs:
