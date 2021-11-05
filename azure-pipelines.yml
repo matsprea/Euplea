@@ -22,6 +22,12 @@ steps:
   env:
     BUILD_TARGET: 'server'
 
+- task: DeleteFiles@1
+  inputs:
+    SourceFolder: '.'
+    Contents: 'node_modules'
+  displayName: 'remove node_modules'
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '.'
