@@ -16,9 +16,9 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+    yarn
+    yarn build
+  displayName: 'yarn and yarn build'
 
 - task: ArchiveFiles@2
   inputs:
