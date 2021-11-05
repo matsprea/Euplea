@@ -19,7 +19,7 @@
     "axios": "0.24.0",
     "framer-motion": "5.2.1",
     "leaflet": "1.7.1",
-    "next": "12.0.2",
+    "next": "12.0.3",
     "next-i18next": "8.10.0",
     "next-pwa": "5.4.0",
     "nominatim-client": "2.0.2",
@@ -31,7 +31,7 @@
     "react-query": "3.31.0"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "12.0.2",
+    "@next/eslint-plugin-next": "12.0.3",
     "@testing-library/react": "12.1.2",
     "@types/jest": "27.0.2",
     "@types/leaflet": "1.7.5",
