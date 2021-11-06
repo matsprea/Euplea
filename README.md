@@ -54,20 +54,31 @@ Please make your have configured correctly the [ENV variables](#env-variables)
 
 A [Dockerfile](./Dockerfile) has been provided to allow to build and run the project in a container
 
-### Build your own image
+### Package
 
-To build your own `my-euplea-image` image, execute the following command
+[![Create and publish a Docker image](https://github.com/matsprea/Euplea/actions/workflows/release-docker-image.yml/badge.svg)](https://github.com/matsprea/Euplea/actions/workflows/release-docker-image.yml)
+
+Docker image packages are available on [Github Package](https://github.com/matsprea/Euplea/pkgs/container/euplea)
+To use the Docker image, execute the following command:
 
 ```bash
-docker build -t my-euplea-image .
+docker pull ghcr.io/matsprea/euplea
+```
+
+### Build your own image
+
+To build your own `euplea` image, execute the following command:
+
+```bash
+docker build -t euplea .
 ```
 
 ### Run Docker image
 
-To build run your own `my-euplea-image` image and exposing it on port 3000, execute the following command
+To run your `euplea` image and exposing it on port 3000, execute the following command
 
 ```bash
-docker run -e COSMOS_ENDPOINT -e COSMOS_KEY -e SECRET -p 3000:3000 euplea-alpine
+docker run -e COSMOS_ENDPOINT -e COSMOS_KEY -e SECRET -p 3000:3000 euplea
 ```
 
 Please make your have configured correctly the [ENV variables](#env-variables)
