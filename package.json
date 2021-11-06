@@ -60,5 +60,8 @@
     "presets": [
       "next/babel"
     ]
+  },
+  "engines": {
+    "node": "^14 || ^16"
   }
 }
