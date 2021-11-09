@@ -4,7 +4,7 @@
 
 ### Requirement
 
-This project requires Node 14 or 16
+This project supports Node 14, 16 and 17
 
 ### Install dependencies
 
