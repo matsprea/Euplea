@@ -22,7 +22,7 @@
     "next": "12.0.3",
     "next-i18next": "9.0.1",
     "next-pwa": "5.4.0",
-    "nominatim-client": "2.0.2",
+    "nominatim-client": "3.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-hook-form": "7.19.5",
