@@ -7649,10 +7649,10 @@ node-releases@^1.1.76:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.76.tgz#df245b062b0cafbd5282ab6792f7dccc2d97f36e"
   integrity sha512-9/IECtNr8dXNmPWmFXepT0/7o5eolGesHUa3mtr0KlgnCvnZxwh2qensKL42JJY2vQKC3nIBXetFAqR+PW1CmA==
 
-nominatim-client@2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/nominatim-client/-/nominatim-client-2.0.2.tgz#0cb7aef05ca8048545e9b899bbfe1f6700690c69"
-  integrity sha512-1lvxXDZCTu6lqGWnkXymCbj5b5PkRNayAVzFWJNF5TR4nIwtL8H+xTePuLG9Y5OaCHGP7V5sHGo+qeq2IzpZmQ==
+nominatim-client@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/nominatim-client/-/nominatim-client-3.0.0.tgz#027d3602af8f04bb48db9b6f63028896e4b721ba"
+  integrity sha512-3ECXOO0sjog67VQcbq/eOrCWFA6KkRLwzo/CKlvS9IydHD5PTWrk+437KT8sy0/cD+JLDVlMJNIkJclKYpl0yw==
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
