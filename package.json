@@ -25,7 +25,7 @@
     "nominatim-client": "3.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-hook-form": "7.19.5",
+    "react-hook-form": "7.20.0",
     "react-icons": "4.3.1",
     "react-leaflet": "3.2.2",
     "react-query": "3.33.1"
