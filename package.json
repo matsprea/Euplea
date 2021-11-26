@@ -14,7 +14,7 @@
     "@azure/cosmos": "3.14.1",
     "@chakra-ui/react": "1.7.2",
     "@comunica/actor-init-sparql": "1.22.3",
-    "@emotion/react": "11.6.0",
+    "@emotion/react": "11.7.0",
     "@emotion/styled": "11.6.0",
     "axios": "0.24.0",
     "framer-motion": "5.3.3",
