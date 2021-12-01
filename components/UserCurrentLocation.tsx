@@ -6,6 +6,7 @@ import { getLeafletIcon } from './getLeafletIcon'
 
 const userLocationZoom = 13
 
+//https://react-leaflet.js.org/docs/core-architecture/
 export const UserCurrentLocation = (): JSX.Element => {
   const [userLocation, setUserLocation] = useState<LocationEvent>()
   const map = useMap()
