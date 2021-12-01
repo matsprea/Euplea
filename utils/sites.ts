@@ -93,7 +93,7 @@ const getSeeAlsoSites = async (siteList: any[]) => {
 
 const geocodingClient = nominatim.createClient({
   useragent: 'Euplea',
-  referer: 'https://euplea.vercel.app/',
+  referer: 'https://euplea.herokuapp.com/',
 })
 
 const geocodeSite = (site) => {
