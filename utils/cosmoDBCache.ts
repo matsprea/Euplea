@@ -4,10 +4,10 @@ import { createHmac } from 'utils/createHmac'
 const endpoint = process.env.COSMOS_ENDPOINT
 const key = process.env.COSMOS_KEY
 
-const client = new CosmosClient({ endpoint, key })
-const EupleaDb = client.database('Euplea')
+const client = endpoint && new CosmosClient({ endpoint, key })
+const EupleaDb = client?.database('Euplea')
 
-const getContainer = async (containerId) => {
+const getContainer = async (containerId: string) => {
   const { container } = await EupleaDb.containers.createIfNotExists({
     id: containerId,
     partitionKey: '/id',
@@ -26,6 +26,7 @@ export const getFromCache = async (containerId: string, key: string) =>
   )
 
 export const putInCache = async (containerId: string, key: string, value) =>
+  EupleaDb &&
   getContainer(containerId).then((container) =>
     container.items
       .create({
@@ -34,12 +35,13 @@ export const putInCache = async (containerId: string, key: string, value) =>
       })
       .then(getResourceFromItem)
   )
- 
+
 export const getWithCache = async (
   containerId: string,
   key: string,
   operation: Promise<any>
 ) =>
+  EupleaDb &&
   getFromCache(containerId, key).then(
     (data) =>
       data ?? operation.then((data) => putInCache(containerId, key, data))
