@@ -1,7 +1,7 @@
 import { getLeafletIcon } from './getLeafletIcon'
 import { IconType } from 'react-icons'
 import React from 'react'
-import * as L from 'leaflet'
+import { latLng } from 'leaflet'
 import { FeatureGroup, Marker, Tooltip, Circle } from 'react-leaflet'
 
 type SparqlMapProps = {
@@ -24,7 +24,7 @@ export const SparqlMap = ({
     <FeatureGroup>
       {data &&
         data.map((item: any) => {
-          const dot = L.latLng(item['?lat'].value, item['?long'].value)
+          const dot = latLng(item['?lat'].value, item['?long'].value)
           return (
             <Circle
               key={`${item['?name'].value}-Key`}

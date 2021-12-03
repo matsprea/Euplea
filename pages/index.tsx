@@ -15,8 +15,13 @@ const DynamicMap = dynamic(() => import('components/Map'), {
   loading: () => <MapSkeleton />,
 })
 
-const defaultInitLocation = { lat: 45.464664, lng: 9.18854 }
-const searchData: SearchData = { topic: 'notte', days: 2, style: Style.Medium }
+const MAP_CENTER = '42.504306, 12.572639'
+const mapCenter = process.env.MAP_CENTER ?? MAP_CENTER 
+
+const MAP_ZOOM = '6'
+const mapZoom = Number(process.env.MAP_ZOOM ?? MAP_ZOOM)  
+
+const searchData: SearchData = { topic: 'cioccolato', days: 2, style: Style.Medium }
 
 const MapPage = (): JSX.Element => {
   const { t } = useTranslation()
@@ -36,10 +41,7 @@ const MapPage = (): JSX.Element => {
           </Center>
         </Flex>
         <Box w="100%">
-          <DynamicMap
-            initLocation={defaultInitLocation}
-            searchData={searchData}
-          />
+          <DynamicMap initLocation={mapCenter} zoom={mapZoom} searchData={searchData} />
         </Box>
       </Flex>
     </>

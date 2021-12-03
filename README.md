@@ -21,6 +21,8 @@ You may also want to create a  `.env.local` file in the project root to provide 
 ```text
 COSMOS_ENDPOINT='https://your-azure-cosmosdb.documents.azure.com:443/'
 COSMOS_KEY='YourAzureCosmosDBKey=='
+MAP_CENTER='42.504306, 12.572639' # Center of Italy
+MAP_ZOOM='6' # Zoom level
 SECRET='YourSecret'
 ```
 
@@ -78,7 +80,7 @@ docker build -t euplea .
 To run your `euplea` image and exposing it on port 3000, execute the following command
 
 ```bash
-docker run -e COSMOS_ENDPOINT -e COSMOS_KEY -e SECRET -p 3000:3000 euplea
+docker run -e COSMOS_ENDPOINT -e COSMOS_KEY -e SECRET -e MAP_CENTER -e MAP_ZOOM -p 3000:3000 euplea
 ```
 
 Please make your have configured correctly the [ENV variables](#env-variables)

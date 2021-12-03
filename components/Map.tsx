@@ -1,24 +1,27 @@
-import { LatLngExpression } from 'leaflet'
+import { latLng } from 'leaflet'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { UserCurrentLocation } from './UserCurrentLocation'
 import { SearchData } from '../types'
 import { Sparql } from 'components/Sparql'
 
 type MapProps = {
-  initLocation: LatLngExpression
+  initLocation: string
   searchData: SearchData
+  zoom: number
 }
 
-export const Map = ({ initLocation, searchData }: MapProps): JSX.Element => {
+export const Map = ({ initLocation, searchData, zoom }: MapProps): JSX.Element => {
+  
+  const center = latLng(Number(initLocation.split(',')[0]), Number(initLocation.split(',')[1]))
 
   return (
     <MapContainer
-      center={initLocation}
-      zoom={8}
+      center={center}
+      zoom={zoom}
       scrollWheelZoom={true}
       style={{ height: 'calc(100vh - 60px)', width: '100%' }}
     >
-      <UserCurrentLocation />
+      {/* <UserCurrentLocation /> */}
       <Sparql searchData={searchData} />
       {/* <SparqlMapCulturalSite searchData={searchData}   /> */}
       <TileLayer
@@ -29,4 +32,4 @@ export const Map = ({ initLocation, searchData }: MapProps): JSX.Element => {
   )
 }
 
-export default Map 
+export default Map
