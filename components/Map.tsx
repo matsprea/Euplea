@@ -2,6 +2,7 @@ import { latLng } from 'leaflet'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { UserCurrentLocation } from './UserCurrentLocation'
 import { Sparql } from 'components/Sparql'
+import { Itinerary } from 'components/Itinerary'
 
 type MapProps = {
   initLocation: string
@@ -9,15 +10,14 @@ type MapProps = {
   zoom: number
 }
 
-export const Map = ({
-  initLocation,
-  data,
-  zoom,
-}: MapProps): JSX.Element => {
+
+
+export const Map = ({ initLocation, data, zoom }: MapProps): JSX.Element => {
   const center = latLng(
     Number(initLocation.split(',')[0]),
     Number(initLocation.split(',')[1])
-  ) 
+  )
+
 
   return (
     <MapContainer
@@ -28,6 +28,8 @@ export const Map = ({
     >
       <UserCurrentLocation />
       <Sparql searchData={data} />
+      <Itinerary data={data}/>
+
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

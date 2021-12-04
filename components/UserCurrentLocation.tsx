@@ -4,8 +4,6 @@ import { useMap, Circle, Marker, Tooltip } from 'react-leaflet'
 import { GiPositionMarker } from 'react-icons/gi'
 import { getLeafletIcon } from './getLeafletIcon'
 
-// const userLocationZoom = 13
-
 //https://react-leaflet.js.org/docs/core-architecture/
 export const UserCurrentLocation = (): JSX.Element => {
   const [userLocation, setUserLocation] = useState<LocationEvent>()
@@ -14,7 +12,6 @@ export const UserCurrentLocation = (): JSX.Element => {
   useEffect(() => {
     map.locate().on('locationfound', (location: LocationEvent) => {
       setUserLocation(location)
-      // map.setView(location.latlng, userLocationZoom)
     })
   }, [map])
 
