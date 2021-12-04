@@ -1,7 +1,14 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { GetStaticProps } from 'next'
-import { Flex, Center, Box, Heading, Spacer, Skeleton } from '@chakra-ui/react'
+import {
+  Flex,
+  Center,
+  Box,
+  Heading,
+  Spacer,
+  Progress,
+} from '@chakra-ui/react'
 import { useTranslation, SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
@@ -18,10 +25,10 @@ const DynamicMap = dynamic(() => import('components/Map'), {
 })
 
 const MAP_CENTER = '42.504306, 12.572639'
-const mapCenter = process.env.MAP_CENTER ?? MAP_CENTER 
+const mapCenter = process.env.MAP_CENTER ?? MAP_CENTER
 
 const MAP_ZOOM = '6'
-const mapZoom = Number(process.env.MAP_ZOOM ?? MAP_ZOOM)  
+const mapZoom = Number(process.env.MAP_ZOOM ?? MAP_ZOOM)
 
 const MapPage = (): JSX.Element => {
   const { t } = useTranslation()
@@ -51,9 +58,11 @@ const MapPage = (): JSX.Element => {
           </Center>
         </Flex>
         <Box w="100%">
-          <Skeleton isLoaded={!isLoading}>
+          {isLoading ? (
+            <Progress size="sm" isIndeterminate />
+          ) : (
             <DynamicMap initLocation={mapCenter} zoom={mapZoom} data={data} />
-          </Skeleton>
+          )}
         </Box>
       </Flex>
     </>
