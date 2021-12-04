@@ -33,7 +33,7 @@ import { useForm } from 'react-hook-form'
 import { SearchData, Style } from '../../types';
 
 type SearchDrawerProps = {
-  searchData: SearchData
+  searchData?: SearchData
 } 
 
 const buildQueryString = (any): string =>
@@ -70,7 +70,7 @@ export const SearchDrawer = ({ searchData }: SearchDrawerProps): JSX.Element => 
   }, [register])
 
   const onSubmit = (values: SearchData) => {
-    router.push(`/map/?${buildQueryString(values)}`)
+    router.push(`/?${buildQueryString(values)}`)
     onClose()
   }
 

@@ -1,11 +1,13 @@
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 import { GetStaticProps } from 'next'
-import { Flex, Center, Box, Heading, Spacer } from '@chakra-ui/react'
+import { Flex, Center, Box, Heading, Spacer, Skeleton } from '@chakra-ui/react'
 import { useTranslation, SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-import { SearchData, Style } from '../types'
+import { SearchData, Style } from 'types'
 
+import { useTopics } from 'hooks/useTopics'
 import { Header } from 'components/Header'
 import { MapSkeleton } from 'components/MapSkeleton'
 import { SearchDrawer } from 'components/SearchDrawer'
@@ -21,10 +23,18 @@ const mapCenter = process.env.MAP_CENTER ?? MAP_CENTER
 const MAP_ZOOM = '6'
 const mapZoom = Number(process.env.MAP_ZOOM ?? MAP_ZOOM)  
 
-const searchData: SearchData = { topic: 'cioccolato', days: 2, style: Style.Medium }
-
 const MapPage = (): JSX.Element => {
   const { t } = useTranslation()
+  const { query } = useRouter()
+
+  const searchData: SearchData = {
+    style: (query?.style as Style) ?? Style.Medium,
+    days: Number(query?.days ?? 2),
+    topic: (query?.topic as string) ?? '',
+  }
+
+  const { data, status } = useTopics(searchData)
+  const isLoading = status === 'loading'
 
   return (
     <>
@@ -41,7 +51,9 @@ const MapPage = (): JSX.Element => {
           </Center>
         </Flex>
         <Box w="100%">
-          <DynamicMap initLocation={mapCenter} zoom={mapZoom} searchData={searchData} />
+          <Skeleton isLoaded={!isLoading}>
+            <DynamicMap initLocation={mapCenter} zoom={mapZoom} data={data} />
+          </Skeleton>
         </Box>
       </Flex>
     </>

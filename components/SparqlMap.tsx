@@ -15,16 +15,14 @@ export const SparqlMap = ({
   icon,
   color = 'black',
 }: SparqlMapProps): JSX.Element => {
-  // console.log(
-  //   'data',
-  //   data.map((d) => `${d['?lat'].value},${d['?long'].value}`).join(';')
-  // )
-
   return (
     <FeatureGroup>
       {data &&
         data.map((item: any) => {
-          const dot = latLng(item['?lat'].value, item['?long'].value)
+          const dot = latLng(
+            parseFloat(item['?lat'].value),
+            parseFloat(item['?long'].value)
+          )
           return (
             <Circle
               key={`${item['?name'].value}-Key`}

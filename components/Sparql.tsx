@@ -1,36 +1,25 @@
 import { TiPointOfInterest } from 'react-icons/ti'
 import { SparqlMap } from './SparqlMap'
-import { useSparQL } from '../hooks/useSparQL'
-import { SearchData } from 'types'
 import { useMap } from 'react-leaflet'
 
- type SparqlProps = {
-   searchData: SearchData
- }
-
-export const Sparql = ({ searchData }: SparqlProps): JSX.Element => {
-  const { data } = useSparQL(searchData)
+export const Sparql = ({ searchData }): JSX.Element => {
   const map = useMap()
 
-  console.log('data ', data)
-    if (data) {
-      const latValues = data.map((b) => Number(b['?lat'].value))
-      const longValues = data.map((b) => Number(b['?long'].value))
+  if (searchData) {
+    const latValues = searchData.map((b) => parseFloat(b['?lat'].value))
+    const longValues = searchData.map((b) => parseFloat(b['?long'].value))
 
-      // console.log('latValues', latValues)
-      // console.log('longValues', longValues)
+    if (latValues.length > 0 && latValues.length > 0)
+      map.fitBounds(
+        [
+          [Math.max(...latValues) + 0.1, Math.max(...longValues) + 0.1],
+          [Math.min(...latValues) - 0.1, Math.min(...longValues) - 0.1],
+        ],
+        {
+          padding: [16, 16],
+        }
+      )
+  }
 
-      if (latValues.length > 0 && latValues.length > 0)
-        map.fitBounds(
-          [
-            [Math.max(...latValues), Math.max(...longValues)],
-            [Math.min(...latValues), Math.min(...longValues)],
-          ],
-          {
-            padding: [16, 16],
-          }
-        )
-    }
-    
-  return data && <SparqlMap data={data} icon={TiPointOfInterest} />
+  return <SparqlMap data={searchData} icon={TiPointOfInterest} />
 }
