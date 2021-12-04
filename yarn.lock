@@ -8224,7 +8224,7 @@ os-browserify@~0.1.1:
   resolved "https://registry.yarnpkg.com/os-browserify/-/os-browserify-0.1.2.tgz#49ca0293e0b19590a5f5de10c7f265a617d8fe54"
   integrity sha1-ScoCk+CxlZCl9d4Qx/JlphfY/lQ=
 
-osrm.js@^5.5.0:
+osrm.js@5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/osrm.js/-/osrm.js-5.5.0.tgz#cca5b4499dc7e867c1da706b01a94f0e1eaebeaf"
   integrity sha1-zKW0SZ3H6GfB2nBrAalPDh6uvq8=
