@@ -7558,10 +7558,10 @@ negotiate@^1.0.1:
   resolved "https://registry.yarnpkg.com/negotiate/-/negotiate-1.0.1.tgz#35ac8b5672f7b05faa10bf0261342eb1120370fd"
   integrity sha1-NayLVnL3sF+qEL8CYTQusRIDcP0=
 
-next-i18next@9.2.0:
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-9.2.0.tgz#00d9c1f817648b492e017e0b956cd2b818f0c0d2"
-  integrity sha512-cWhrgxYz9IZZQ81Vc4NgogaKSANN827qHRkyVuoscOerJBHNMr7t3vO1szj/M1qnyE7yIV0NHczCS4VyqWbQAg==
+next-i18next@10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-10.0.0.tgz#ffa803cad9d86404e0aa55284e5e3440ba576ec9"
+  integrity sha512-hpaJHtWuoZPFtsgv2Wl2tveiUmlsZmplzKi94UCwJoP6p/i3+ZFZhYSRnY7Nrswitqr5y/Wr1foZqKGQUUvP+w==
   dependencies:
     "@babel/runtime" "^7.13.17"
     "@types/hoist-non-react-statics" "^3.3.1"
