@@ -1,8 +1,7 @@
 import * as OSRM from 'osrm.js'
 import { Polyline } from 'react-leaflet'
 import { useEffect, useState } from 'react'
-import { LocationEvent } from 'leaflet'
-import { useMap } from 'react-leaflet'
+import { useCurrentLocation } from 'context/currentLocation'
 
 const osrm = new OSRM('https://router.project-osrm.org')
 
@@ -21,25 +20,23 @@ const coordinates = (userLocation, data) => [
 ]
 
 export const Itinerary = ({ data }): JSX.Element => {
-  const [userLocation, setUserLocation] = useState<LocationEvent>()
+  const [currenteLocation, ] = useCurrentLocation()
+
   const [itinerary, setItinerary] = useState()
 
-  const map = useMap()
-
+ 
   useEffect(() => {
-    map.locate().on('locationfound', (location: LocationEvent) => {
-      setUserLocation(location)
-    })
-  }, [map])
-
-  useEffect(() => {
-    userLocation &&
+    currenteLocation &&
+      data &&
       data.length >= 1 &&
-      osrm.trip(getConfig(coordinates(userLocation, data)), (err, response) => {
-        const coordinates = response.trips[0].geometry.coordinates
-        setItinerary(coordinates.map(([a, b]) => [b, a]))
-      })
-  }, [userLocation, data])
+      osrm.trip(
+        getConfig(coordinates(currenteLocation, data)),
+        (err, response) => {
+          const coordinates = response.trips[0].geometry.coordinates
+          setItinerary(coordinates.map(([a, b]) => [b, a]))
+        }
+      )
+  }, [currenteLocation, data])
 
   return itinerary ? (
     <Polyline pathOptions={{ color: 'blue' }} positions={itinerary} />

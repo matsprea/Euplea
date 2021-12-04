@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { mySparQLQuery, prefix, sources } from 'utils/sparql'
 import { getWithCache } from 'utils/cosmoDBCache'
 
-const query = (subject) => `${prefix}
+const query = (subject: string, numberOfDays: number) => `${prefix}
 SELECT DISTINCT (SAMPLE(?name) AS ?name) (COUNT(?cultpro) AS ?count) (SAMPLE(?lat) AS ?lat)  (SAMPLE(?long ) AS ?long )
 FROM <https://w3id.org/arco/ontology>
 FROM <https://w3id.org/arco/data>
@@ -27,24 +27,27 @@ OPTIONAL { ?site owl:deprecated ?deprecated } .
 } 
 GROUP BY ?site
 order by DESC(?count) 
-limit 10
+limit ${numberOfDays}
 `
 
 const containerId = 'topic'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { topic } = req.query
+  const { topic, days } = req.query
 
   if (!topic || typeof topic !== 'string')
     res.status(400).json({ error: 'Missing Topic' })
-  else
+  else {
+    const numberOfDays = days ? parseInt(days as string) : 2
+
     await getWithCache(
       containerId,
-      topic,
-      mySparQLQuery(query(topic), sources)
+      `${topic}-${numberOfDays}`,
+      mySparQLQuery(query(topic, numberOfDays), sources)
     ).then((data) => {
       res.status(200).json(data)
     })
+  }
 }
 
 export default handler
