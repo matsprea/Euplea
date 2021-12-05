@@ -1,9 +1,9 @@
 import { mySparQLQuery, prefix, sources } from 'utils/sparql'
 import { getWithCache } from 'utils/cosmoDBCache'
-import nominatim from 'nominatim-client'
+import { geocodeSite } from './siteGeocoding'
 
 const query = (culturalSite) => `${prefix}
-SELECT (SAMPLE(?siteSeeAlso) AS ?siteSeeAlso) (SAMPLE(?siteLabel) AS ?siteLabel) (SAMPLE(?sitePreview) AS ?sitePreview) (SAMPLE(?siteFullAddress) AS ?siteFullAddress) (SAMPLE(?siteCityName) AS ?siteCityName) ?lat ?long 
+SELECT (SAMPLE(?site) AS ?site) (SAMPLE(?siteSeeAlso) AS ?siteSeeAlso) (SAMPLE(?siteLabel) AS ?siteLabel) (SAMPLE(?sitePreview) AS ?sitePreview) (SAMPLE(?siteFullAddress) AS ?siteFullAddress) (SAMPLE(?siteCityName) AS ?siteCityName) ?lat ?long 
 WHERE {
  ?culturalInstituteOrSite a cis:CulturalInstituteOrSite ;
  cis:hasSite ?site ;
@@ -59,8 +59,11 @@ WHERE {
   LIMIT 1
  } .
 
- BIND(COALESCE( ?siteLat0, ?siteLat1, ?siteLat2, ?siteLat3 ) AS ?lat) .
- BIND(COALESCE( ?siteLong0, ?siteLong1, ?siteLong2, ?siteLong3  ) AS  ?long) 
+ BIND(COALESCE( ?siteLat0, ?siteLat1, ?siteLat2, ?siteLat3 ) AS ?siteLat) .
+ BIND(COALESCE( ?siteLong0, ?siteLong1, ?siteLong2, ?siteLong3  ) AS  ?siteLong) .
+ 
+ BIND( ROUND( xsd:float(?siteLat)*1000000)/1000000 AS ?lat) .
+ BIND( ROUND( xsd:float(?siteLong)*1000000)/1000000 AS ?long) .
 }
 GROUP BY ?lat ?long
 `
@@ -76,8 +79,23 @@ const getSparQLSites = (culturalSite: string) =>
 
 const siteWithoutGeocoding = (site) => !siteWithGeocoding(site)
 
- const siteWithGeocoding = (site) =>
-    ('?lat' in site && '?long' in site)
+const siteWithGeocoding = (site) => '?lat' in site && '?long' in site
+
+const removeSiteDuplicationByLatLong = (siteList) => {
+  const sitesDictionary = {}
+  for (const site of siteList) {
+    sitesDictionary[`${site['?lat'].value}_${site['?long'].value}`] = site
+  }
+  return Object.values(sitesDictionary)
+}
+
+const removeSiteDuplicationBySiteLabel = (siteList) => {
+  const sitesDictionary = {}
+  for (const site of siteList) {
+    sitesDictionary[site['?siteLabel'].value] = site
+  }
+  return Object.values(sitesDictionary)
+}
 
 const getSeeAlsoSites = async (siteList: any[]) => {
   const notSeeAlsoList = siteList.filter((site) => !('?siteSeeAlso' in site))
@@ -91,60 +109,20 @@ const getSeeAlsoSites = async (siteList: any[]) => {
   return [...notSeeAlsoList, ...seeAlsoList.flat()]
 }
 
-const geocodingClient = nominatim.createClient({
-  useragent: 'Euplea',
-  referer: 'https://euplea.herokuapp.com/',
-})
-
-const geocodeSite = async (site) => {
-  const q = `${site['?siteFullAddress'].value}, ${site['?siteCityName'].value}`
-  const query = {
-    q,
-    limit: 1,
-  }
-
-  const geocodingQuery = geocodingClient.search(query).then(([result]) =>
-    result
-      ? {
-          ...site,
-          '?lat': {
-            termType: 'Literal',
-            value: result.lat,
-            language: '',
-            datatype: {
-              termType: 'NamedNode',
-              value: 'http://www.w3.org/2001/XMLSchema#string',
-            },
-          },
-          '?long': {
-            termType: 'Literal',
-            value: result.lon,
-            language: '',
-            datatype: {
-              termType: 'NamedNode',
-              value: 'http://www.w3.org/2001/XMLSchema#string',
-            },
-          },
-        }
-      : site
-  )
-
-  const { value } = await getWithCache(containerId, q, geocodingQuery)
-  return value
-}
-
 const getGeocodedSites = async (siteList: any[]) => {
   const sitesWithLatLong = siteList.filter(siteWithGeocoding)
+  const uniqueSiteWithLatLong = removeSiteDuplicationByLatLong(sitesWithLatLong)
 
   const sitesGeocoded = await Promise.all(
     siteList.filter(siteWithoutGeocoding).map(geocodeSite)
   )
-
-  return [...sitesWithLatLong, ...sitesGeocoded.flat()]
+  
+  return [...uniqueSiteWithLatLong, ...sitesGeocoded.flat()]
 }
 
 export const getSites = (culturalSite) =>
   getSparQLSites(culturalSite)
     .then(getSeeAlsoSites)
+    // .then(removeSiteDuplicationBySiteLabel)
     .then(getGeocodedSites)
     .then((sites) => sites.filter(siteWithGeocoding))

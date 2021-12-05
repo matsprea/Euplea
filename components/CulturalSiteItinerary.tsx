@@ -38,7 +38,7 @@ export const CulturalSiteItinerary = ({ culturalSites }): JSX.Element => {
           setItinerary(coordinates.map(([a, b]) => [b, a]))
         }
       )
-  }, [currenteLocation])
+  }, [currenteLocation, sites.length])
 
   return itinerary ? (
     <Polyline pathOptions={{ color: 'blue' }} positions={itinerary} />

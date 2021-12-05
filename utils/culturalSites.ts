@@ -16,10 +16,10 @@ WHERE {
  ?culturalInstituteOrSite cis:hasSite ?site .
 
  OPTIONAL { ?site owl:deprecated ?deprecatedSite } .
- FILTER ( !bound(?deprecatedSite ) ) .
+ FILTER ( !BOUND(?deprecatedSite ) ) .
 
  OPTIONAL { ?culturalInstituteOrSite owl:deprecated ?deprecatedC } .
- FILTER ( !bound(?deprecatedC) )  
+ FILTER ( !BOUND(?deprecatedC) )  
 }
 GROUP BY ?culturalInstituteOrSite
 ORDER BY DESC(?count)

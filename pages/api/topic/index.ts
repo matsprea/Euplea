@@ -25,7 +25,7 @@ WHERE {
   rdfs:label ?name .
  
   OPTIONAL { ?site owl:deprecated ?deprecated } .
- FILTER ( !bound(?deprecated) )  
+  FILTER ( !BOUND(?deprecated) )  
  
 } 
 GROUP BY ?site
