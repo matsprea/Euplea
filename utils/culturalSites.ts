@@ -2,7 +2,7 @@ import { mySparQLQuery, prefix, sources } from 'utils/sparql'
 import { getWithCache } from 'utils/cosmoDBCache'
 import { getSites } from 'utils/sites'
 
-const query = (subject: string, numberOfDays: number) => `${prefix}
+const query = (subject: string) => `${prefix}
 SELECT ?culturalInstituteOrSite (COUNT(?cultpro) AS ?count) 
 WHERE {
  ?cultpro rdf:type/rdfs:subClassOf* arco:CulturalProperty ;
@@ -23,22 +23,21 @@ WHERE {
 }
 GROUP BY ?culturalInstituteOrSite
 ORDER BY DESC(?count)
-limit ${numberOfDays}
 `
 
 const containerId = 'culturalSite'
 
-const getCulturalSites = (subject: string, numberOfDays: number) =>
+const getCulturalSites = (subject: string) =>
   getWithCache(
     containerId,
-    `${subject}_${numberOfDays}`,
-    mySparQLQuery(query(subject, numberOfDays), sources)
+    `${subject}`,
+    mySparQLQuery(query(subject), sources)
   ).then(({ value }) => value)
 
 const culturalSiteWithoutSite = ({ site }) => site.length > 0
 
 export const getCulturalSitesWithSites = (subject: string, numberOfDays: number) =>
-  getCulturalSites(subject, numberOfDays)
+  getCulturalSites(subject)
     .then((culturalSites) =>
       Promise.all(
         culturalSites.map((culturalSite) =>
@@ -51,4 +50,4 @@ export const getCulturalSitesWithSites = (subject: string, numberOfDays: number)
         )
       )
     )
-    .then((culturalSites) => culturalSites.filter(culturalSiteWithoutSite))
+    .then((culturalSites) => culturalSites.filter(culturalSiteWithoutSite).slice(0, numberOfDays))
