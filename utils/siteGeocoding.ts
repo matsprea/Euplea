@@ -12,7 +12,6 @@ const geocodingQuery = (query) =>
   geocodingClient
     .search(query)
     .then(([result]) => result ?? { query, result, date: Date.now() })
-    .catch((error) => ({ query, error: error, date: Date.now() }))
 
 const getQuery = (q) => ({
   ...q,
