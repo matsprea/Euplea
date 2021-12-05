@@ -19,24 +19,26 @@ const coordinates = (userLocation, data) => [
   ...data.map((d) => [Number(d['?long'].value), Number(d['?lat'].value)]),
 ]
 
-export const Itinerary = ({ data }): JSX.Element => {
-  const [currenteLocation, ] = useCurrentLocation()
-
+export const CulturalSiteItinerary = ({ culturalSites }): JSX.Element => {
+  const [currenteLocation] = useCurrentLocation()
   const [itinerary, setItinerary] = useState()
 
- 
+  const sites = culturalSites
+    .map((culturalSite: { site: any }) => culturalSite.site)
+    .flat()
+
   useEffect(() => {
     currenteLocation &&
-      data &&
-      data.length >= 1 &&
+      sites &&
+      sites.length >= 1 &&
       osrm.trip(
-        getConfig(coordinates(currenteLocation, data)),
+        getConfig(coordinates(currenteLocation, sites)),
         (err, response) => {
           const coordinates = response.trips[0].geometry.coordinates
           setItinerary(coordinates.map(([a, b]) => [b, a]))
         }
       )
-  }, [currenteLocation, data])
+  }, [currenteLocation])
 
   return itinerary ? (
     <Polyline pathOptions={{ color: 'blue' }} positions={itinerary} />

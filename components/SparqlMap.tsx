@@ -25,14 +25,14 @@ export const SparqlMap = ({
           )
           return (
             <Circle
-              key={`${item['?name'].value}-Key`}
+              key={`${item['?siteLabel'].value}-Key`}
               center={dot}
               radius={10}
               fillColor={color}
               color={color}
             >
               <Marker position={dot} icon={getLeafletIcon(icon, { color })}>
-                <Tooltip>{item['?name'].value}</Tooltip>
+                <Tooltip>{item['?siteLabel'].value}</Tooltip>
               </Marker>
             </Circle>
           )

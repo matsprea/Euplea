@@ -3,26 +3,29 @@ import { mySparQLQuery, prefix, sources } from 'utils/sparql'
 import { getWithCache } from 'utils/cosmoDBCache'
 
 const query = (subject: string, numberOfDays: number) => `${prefix}
-SELECT DISTINCT (SAMPLE(?name) AS ?name) (COUNT(?cultpro) AS ?count) (SAMPLE(?lat) AS ?lat)  (SAMPLE(?long ) AS ?long )
+SELECT DISTINCT ?site (SAMPLE(?name) AS ?name) (COUNT(?cultpro) AS ?count) (SAMPLE(?lat) AS ?lat)  (SAMPLE(?long ) AS ?long )
 FROM <https://w3id.org/arco/ontology>
 FROM <https://w3id.org/arco/data>
 WHERE {
  ?cultpro rdf:type/rdfs:subClassOf* arco:CulturalProperty ;
- clvapit:hasGeometry ?geometry ;
- a-loc:hasCulturalInstituteOrSite ?culturalInstituteOrSite;
- a-cd:hasSubject ?sub .
+  clvapit:hasGeometry ?geometry ;
+  a-loc:hasCulturalInstituteOrSite ?culturalInstituteOrSite ;
+  a-cd:hasSubject ?sub .
 
-?geometry a-loc:hasCoordinates ?coordinates .
+ ?geometry a-loc:hasCoordinates ?coordinates .
 
-?coordinates a-loc:lat ?lat ;
-a-loc:long ?long .
+ ?coordinates a-loc:lat ?lat ;
+  a-loc:long ?long .
 
- ?sub rdfs:label ?label
+ ?sub rdfs:label ?label .
+ 
  FILTER(REGEX(STR(?label), "${subject}", "i")) .
+ 
  ?culturalInstituteOrSite cis:hasSite ?site ;
- rdfs:label ?name .
-OPTIONAL { ?site owl:deprecated ?deprecated } .
-   FILTER ( !bound(?deprecated) )  
+  rdfs:label ?name .
+ 
+  OPTIONAL { ?site owl:deprecated ?deprecated } .
+ FILTER ( !bound(?deprecated) )  
  
 } 
 GROUP BY ?site

@@ -3,7 +3,7 @@ import { getWithCache } from 'utils/cosmoDBCache'
 import nominatim from 'nominatim-client'
 
 const query = (culturalSite) => `${prefix}
-SELECT (SAMPLE(?siteSeeAlso) AS ?siteSeeAlso) (SAMPLE(?siteLabel) AS ?siteLabel) (SAMPLE(?sitePreview) AS ?sitePreview) (SAMPLE(?siteFullAddress) AS ?siteFullAddress) (SAMPLE(?siteCityName) AS ?siteCityName) ?siteLat  ?siteLong 
+SELECT (SAMPLE(?siteSeeAlso) AS ?siteSeeAlso) (SAMPLE(?siteLabel) AS ?siteLabel) (SAMPLE(?sitePreview) AS ?sitePreview) (SAMPLE(?siteFullAddress) AS ?siteFullAddress) (SAMPLE(?siteCityName) AS ?siteCityName) ?lat ?long 
 WHERE {
  ?culturalInstituteOrSite a cis:CulturalInstituteOrSite ;
  cis:hasSite ?site ;
@@ -59,10 +59,10 @@ WHERE {
   LIMIT 1
  } .
 
- BIND(COALESCE( ?siteLat0, ?siteLat1, ?siteLat2, ?siteLat3 ) AS ?siteLat) .
- BIND(COALESCE( ?siteLong0, ?siteLong1, ?siteLong2, ?siteLong3  ) AS  ?siteLong) 
+ BIND(COALESCE( ?siteLat0, ?siteLat1, ?siteLat2, ?siteLat3 ) AS ?lat) .
+ BIND(COALESCE( ?siteLong0, ?siteLong1, ?siteLong2, ?siteLong3  ) AS  ?long) 
 }
-GROUP BY   ?siteLat ?siteLong
+GROUP BY ?lat ?long
 `
 
 const containerId = 'site'
@@ -77,7 +77,7 @@ const getSparQLSites = (culturalSite: string) =>
 const siteWithoutGeocoding = (site) => !siteWithGeocoding(site)
 
  const siteWithGeocoding = (site) =>
-    ('?siteLat' in site && '?siteLong' in site)
+    ('?lat' in site && '?long' in site)
 
 const getSeeAlsoSites = async (siteList: any[]) => {
   const notSeeAlsoList = siteList.filter((site) => !('?siteSeeAlso' in site))
@@ -96,7 +96,7 @@ const geocodingClient = nominatim.createClient({
   referer: 'https://euplea.herokuapp.com/',
 })
 
-const geocodeSite = (site) => {
+const geocodeSite = async (site) => {
   const q = `${site['?siteFullAddress'].value}, ${site['?siteCityName'].value}`
   const query = {
     q,
@@ -107,7 +107,7 @@ const geocodeSite = (site) => {
     result
       ? {
           ...site,
-          '?siteLat': {
+          '?lat': {
             termType: 'Literal',
             value: result.lat,
             language: '',
@@ -116,7 +116,7 @@ const geocodeSite = (site) => {
               value: 'http://www.w3.org/2001/XMLSchema#string',
             },
           },
-          '?siteLong': {
+          '?long': {
             termType: 'Literal',
             value: result.lon,
             language: '',
@@ -129,8 +129,8 @@ const geocodeSite = (site) => {
       : site
   )
 
-  return getWithCache(containerId, q, geocodingQuery)
-  .then(({ value }) => value)
+  const { value } = await getWithCache(containerId, q, geocodingQuery)
+  return value
 }
 
 const getGeocodedSites = async (siteList: any[]) => {

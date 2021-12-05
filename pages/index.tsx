@@ -1,20 +1,13 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { GetStaticProps } from 'next'
-import {
-  Flex,
-  Center,
-  Box,
-  Heading,
-  Spacer,
-  Progress,
-} from '@chakra-ui/react'
+import { Flex, Center, Box, Heading, Spacer, Progress } from '@chakra-ui/react'
 import { useTranslation, SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { SearchData, Style } from 'types'
 
-import { useTopics } from 'hooks/useTopics'
+import { useCulturalSites } from 'hooks/useCulturalSites'
 import { Header } from 'components/Header'
 import { MapSkeleton } from 'components/MapSkeleton'
 import { SearchDrawer } from 'components/SearchDrawer'
@@ -40,7 +33,7 @@ const MapPage = (): JSX.Element => {
     topic: (query?.topic as string) ?? '',
   }
 
-  const { data, status } = useTopics(searchData)
+  const { data: culturalSites, status } = useCulturalSites(searchData)
   const isLoading = status === 'loading'
 
   return (
@@ -61,7 +54,11 @@ const MapPage = (): JSX.Element => {
           {isLoading ? (
             <Progress size="sm" isIndeterminate />
           ) : (
-            <DynamicMap initLocation={mapCenter} zoom={mapZoom} data={data} />
+            <DynamicMap
+              initLocation={mapCenter}
+              zoom={mapZoom}
+              culturalSites={culturalSites}
+            />
           )}
         </Box>
       </Flex>
