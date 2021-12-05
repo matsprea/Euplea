@@ -30,7 +30,7 @@ const MapPage = (): JSX.Element => {
   const searchData: SearchData = {
     style: (query?.style as Style) ?? Style.Medium,
     days: Number(query?.days ?? 2),
-    topic: (query?.topic as string) ?? '',
+    topic: (query?.topic as string) ?? 'notte',
   }
 
   const { data: culturalSites, status } = useCulturalSites(searchData)
