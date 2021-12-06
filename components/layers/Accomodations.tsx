@@ -1,10 +1,10 @@
-import { GiGreekTemple } from 'react-icons/gi'
+import { FaHotel } from 'react-icons/fa'
 import { PointOfInterests } from './PointOfInterests'
 import { useAccomodationAPI } from 'hooks'
 
 export const Accomodations = (): JSX.Element =>
   PointOfInterests({
-    icon: GiGreekTemple,
-    color: 'yellow',
+    icon: FaHotel,
+    color: 'DeepSkyBlue',
     useAPI: useAccomodationAPI,
   })

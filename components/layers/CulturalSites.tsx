@@ -35,7 +35,7 @@ export const CulturalSites = (): JSX.Element => {
     <PointsOfInterestsFeatureGroup
       data={sites.map(siteToPointOfInterest)}
       icon={GiGreekTemple}
-      color="teal"
+      color="black"
     />
   )
 }
