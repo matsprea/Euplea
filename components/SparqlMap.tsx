@@ -25,7 +25,7 @@ export const SparqlMap = ({
           )
           return (
             <Circle
-              key={`${item['?siteLabel'].value}-Key`}
+              key={`${item['?lat'].value}-${item['?long'].value}-Key`}
               center={dot}
               radius={10}
               fillColor={color}

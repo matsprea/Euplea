@@ -29,9 +29,9 @@ const MapPage = (): JSX.Element => {
   const { query } = useRouter()
 
   const searchData: SearchData = {
-    style: (query?.style as Style) ?? Style.Medium,
+    style: (query?.style as Style),
     days: Number(query?.days ?? 2),
-    topic: (query?.topic as string) ?? 'notte',
+    topic: (query?.topic as string),
   }
 
   const { data: culturalSites, status } = useCulturalSiteAPI(searchData)

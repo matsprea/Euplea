@@ -7,13 +7,15 @@ export const CulturalSites = (): JSX.Element => {
   const map = useMap()
   const { culturalSites } = useCulturalSites()
 
-  const sites = culturalSites.map((culturalSite: { site: any }) => culturalSite.site).flat()
+  if (!culturalSites) return <></>
+
+  const sites = culturalSites
+    .map((culturalSite: { site: any }) => culturalSite.site)
+    .flat()
 
   if (sites) {
     const latValues = sites.map((b) => parseFloat(b['?lat'].value))
-    const longValues = sites.map((b) =>
-      parseFloat(b['?long'].value)
-    )
+    const longValues = sites.map((b) => parseFloat(b['?long'].value))
 
     if (latValues.length > 0 && latValues.length > 0)
       map.fitBounds(

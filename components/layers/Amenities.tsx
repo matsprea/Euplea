@@ -11,13 +11,16 @@ export const Amenities = (): JSX.Element => {
   const { query } = useRouter()
   const style = (query?.style as Style) ?? Style.Medium
 
+    
   const { culturalSites } = useCulturalSites()
 
+  if (!culturalSites) return <></>
+    
   const sites = culturalSites
     .map((culturalSite: { site: any }) => culturalSite.site)
     .flat()
 
  
-  return
-   <SparqlMap data={sites} icon={GiGreekTemple} color="teal" />
+  return null
+  //  <SparqlMap data={sites} icon={GiGreekTemple} color="teal" />
 }
