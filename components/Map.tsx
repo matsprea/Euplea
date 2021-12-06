@@ -1,7 +1,12 @@
 import { latLng } from 'leaflet'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import { UserCurrentLocation } from 'components/UserCurrentLocation'
-import { CulturalSites, Itinerary, Amenities } from 'components/layers'
+import {
+  CulturalSites,
+  Itinerary,
+  Amenities,
+  Accomodations,
+} from 'components/layers'
 import { CurrentLocationProvider } from 'context'
 
 type MapProps = {
@@ -26,6 +31,7 @@ export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
         <UserCurrentLocation />
         <CulturalSites />
         <Amenities />
+        <Accomodations />
         <Itinerary />
 
         <TileLayer

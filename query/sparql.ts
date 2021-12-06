@@ -11,9 +11,9 @@ export const mySparQLQuery = (query, sources) => () =>
       const r: IQueryResultBindings = result
       return r.bindings()
     })
-    .catch((e: any) => {
-      console.error(`Error: mySparQLQuert ${query} ${e}`)
-      return []
+    .catch((error: any) => {
+      console.error(`Error: mySparQLQuert ${query} ${error}`)
+      throw error
     })
 
 export const sourcesBeniCulturali = [

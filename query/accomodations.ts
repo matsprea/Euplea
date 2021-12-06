@@ -9,13 +9,13 @@ import { Style } from 'types'
 const tourismStyle = (style: Style = Style.Medium) => {
   switch (style) {
     case Style.Luxury:
-      return `"hotel"`
+      return `""`
     case Style.Medium:
-      return `"hotel" "chalet" "apartment"`
+      return `"chalet" "apartment"`
     case Style.Budget:
       return `"hostel" "guest_house" "motel" "camp_site" "alpine_hut" "wilderness_hut"`
     default:
-      return `"hotel"`
+      return `""`
   }
 }
 

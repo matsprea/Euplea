@@ -28,13 +28,19 @@ const MapPage = (): JSX.Element => {
   const { t } = useTranslation()
   const { query } = useRouter()
 
+  const style = query?.style as Style
+  const days = Number(query?.days ?? 2)
+  const topic = query?.topic as string
+
   const searchData: SearchData = {
-    style: (query?.style as Style),
-    days: Number(query?.days ?? 2),
-    topic: (query?.topic as string),
+    style,
+    days,
+    topic,
   }
 
-  const { data: culturalSites, status } = useCulturalSiteAPI(searchData)
+  const { data: culturalSites, status } = useCulturalSiteAPI(
+    style && days && topic && searchData
+  )
   const isLoading = status === 'loading'
 
   return (

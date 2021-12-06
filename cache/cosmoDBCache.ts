@@ -85,8 +85,8 @@ export const getWithCache = async (
         updateItem(containerId, createHmac(key))(data, ttlError)
       )
     }
-    if (data !== undefined && data !== null) {
-      return data
+    if (data !== undefined && data !== null ) {
+      return data?.error ?? data
     }
     return operation()
       .then((data) => putInCache(containerId, createHmac(key), data, ttl))

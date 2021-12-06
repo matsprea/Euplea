@@ -1,7 +1,8 @@
 import { GiGreekTemple } from 'react-icons/gi'
-import { SparqlMap } from 'components/SparqlMap'
+import { PointsOfInterestsFeatureGroup } from './PointsOfInterestsFeatureGroup'
 import { useMap } from 'react-leaflet'
 import { useCulturalSites } from 'context'
+import { siteToPointOfInterest } from 'utils'
 
 export const CulturalSites = (): JSX.Element => {
   const map = useMap()
@@ -12,6 +13,7 @@ export const CulturalSites = (): JSX.Element => {
   const sites = culturalSites
     .map((culturalSite: { site: any }) => culturalSite.site)
     .flat()
+    
 
   if (sites) {
     const latValues = sites.map((b) => parseFloat(b['?lat'].value))
@@ -29,5 +31,11 @@ export const CulturalSites = (): JSX.Element => {
       )
   }
 
-  return <SparqlMap data={sites} icon={GiGreekTemple} color="teal" />
+  return (
+    <PointsOfInterestsFeatureGroup
+      data={sites.map(siteToPointOfInterest)}
+      icon={GiGreekTemple}
+      color="teal"
+    />
+  )
 }

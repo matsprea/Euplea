@@ -1,38 +1,36 @@
-import { getLeafletIcon } from './getLeafletIcon'
+import { getLeafletIcon } from '../getLeafletIcon'
 import { IconType } from 'react-icons'
 import React from 'react'
 import { latLng } from 'leaflet'
 import { FeatureGroup, Marker, Tooltip, Circle } from 'react-leaflet'
+import { PointOfInterest} from 'types'
 
-type SparqlMapProps = {
-  data?: any[]
+type PointsOfInterestProps = {
+  data?: PointOfInterest[]
   icon: IconType
   color?: string
 }
 
-export const SparqlMap = ({
+export const PointsOfInterestsFeatureGroup = ({
   data = [],
   icon,
   color = 'black',
-}: SparqlMapProps): JSX.Element => {
+}: PointsOfInterestProps): JSX.Element => {
   return (
     <FeatureGroup>
       {data &&
-        data.map((item: any) => {
-          const dot = latLng(
-            parseFloat(item['?lat'].value),
-            parseFloat(item['?long'].value)
-          )
+        data.map(({ lat, long, label }) => {
+          const dot = latLng(lat, long)
           return (
             <Circle
-              key={`${item['?lat'].value}-${item['?long'].value}-Key`}
+              key={`${lat}-${long}-Key`}
               center={dot}
               radius={10}
               fillColor={color}
               color={color}
             >
               <Marker position={dot} icon={getLeafletIcon(icon, { color })}>
-                <Tooltip>{item['?siteLabel'].value}</Tooltip>
+                <Tooltip>{label}</Tooltip>
               </Marker>
             </Circle>
           )

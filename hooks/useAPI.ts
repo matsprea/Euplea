@@ -1,13 +1,13 @@
-import { SearchData } from '../types'
 import { useQuery } from 'react-query'
 
 const getAPI = async (params) => {
-  const [resource, { topic, days, style }] = params.queryKey
+  const [resource, queryParams] = params.queryKey
 
-  if ((topic && days && style)) {
-    const response = await fetch(
-      `/api/${resource}?topic=${topic}&days=${days}&style=${style}`
-    )
+  if (queryParams) {
+    const query = Object.entries(queryParams)
+      .map(([key, value]) => `${key}=${value}`)
+      .join('&')
+    const response = await fetch(`/api/${resource}?${query}`)
     if (!response.ok) {
       throw new Error(`Problem fetching ${resource} data`)
     }
@@ -15,5 +15,5 @@ const getAPI = async (params) => {
   }
 }
 
-export const useAPI = (resource: string) => (searchData: SearchData) =>
-  useQuery([resource, searchData], getAPI)
+export const useAPI = (resource: string) => (queryParams: any) =>
+  useQuery([resource, queryParams], getAPI)
