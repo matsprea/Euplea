@@ -9,7 +9,7 @@ export const CulturalSites = (): JSX.Element => {
   const { culturalSites } = useCulturalSites()
 
   if (!culturalSites) return <></>
-
+  
   const sites = culturalSites
     .map((culturalSite: { site: any }) => culturalSite.site)
     .flat()

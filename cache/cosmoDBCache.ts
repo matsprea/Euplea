@@ -78,19 +78,23 @@ export const getWithCache = async (
   operation: () => Promise<any>,
   ttl = ttlDefault
 ) =>
-  EupleaDb &&
-  getFromCache(containerId, createHmac(key)).then((data) => {
-    if (data?.value?.date && data.value.date + 1000 * ttlError < Date.now()) {
-      return operation().then((data) =>
-        updateItem(containerId, createHmac(key))(data, ttlError)
-      )
-    }
-    if (data !== undefined && data !== null ) {
-      return data?.error ?? data
-    }
-    return operation()
-      .then((data) => putInCache(containerId, createHmac(key), data, ttl))
-      .catch((error) =>
-        putInCache(containerId, createHmac(key), { error, key }, ttlError)
-      )
-  })
+  EupleaDb
+    ? getFromCache(containerId, createHmac(key)).then((data) => {
+        if (
+          data?.value?.date &&
+          data.value.date + 1000 * ttlError < Date.now()
+        ) {
+          return operation().then((data) =>
+            updateItem(containerId, createHmac(key))(data, ttlError)
+          )
+        }
+        if (data !== undefined && data !== null) {
+          return data?.error ?? data
+        }
+        return operation()
+          .then((data) => putInCache(containerId, createHmac(key), data, ttl))
+          .catch((error) =>
+            putInCache(containerId, createHmac(key), { error, key }, ttlError)
+          )
+      })
+    : operation()

@@ -14,7 +14,7 @@ export const PointOfInterests = ({ color, icon, useAPI }): JSX.Element => {
 
   const { culturalSites } = useCulturalSites()
 
-  if (!culturalSites) return <></>
+  if (!culturalSites || culturalSites.length === 0) return <></>
 
   const coordinates =
     culturalSitesCoordinates(culturalSites).map(coordinatesToLongLat)
