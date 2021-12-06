@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Style } from 'types'
-import { getAmenities } from 'utils/amenities'
+import { getAmenities } from 'query'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { lat , long, style = Style.Medium } = req.query

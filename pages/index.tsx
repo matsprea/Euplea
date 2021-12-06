@@ -8,6 +8,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { SearchData, Style } from 'types'
 
 import { useCulturalSiteAPI } from 'hooks'
+import { CulturalSitesProvider } from 'context'
 import { Header } from 'components/Header'
 import { MapSkeleton } from 'components/MapSkeleton'
 import { SearchDrawer } from 'components/SearchDrawer'
@@ -54,11 +55,9 @@ const MapPage = (): JSX.Element => {
           {isLoading ? (
             <Progress size="sm" isIndeterminate />
           ) : (
-            <DynamicMap
-              initLocation={mapCenter}
-              zoom={mapZoom}
-              culturalSites={culturalSites}
-            />
+            <CulturalSitesProvider culturalSites={culturalSites}>
+              <DynamicMap initLocation={mapCenter} zoom={mapZoom} />
+            </CulturalSitesProvider>
           )}
         </Box>
       </Flex>

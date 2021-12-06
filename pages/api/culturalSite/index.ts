@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { getCulturalSitesWithSites } from 'utils/culturalSites'
+import { getCulturalSitesWithSites } from 'query'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { topic, days } = req.query

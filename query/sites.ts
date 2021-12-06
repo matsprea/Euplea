@@ -2,8 +2,8 @@ import {
   mySparQLQuery,
   prefixBeniCulturali as prefix,
   sourcesBeniCulturali as sources,
-} from 'utils/sparql'
-import { getWithCache } from 'utils/cosmoDBCache'
+} from 'query'
+import { getWithCache } from 'cache'
 import { geocodeSite } from './siteGeocoding'
 
 const query = (culturalSite) => `${prefix}

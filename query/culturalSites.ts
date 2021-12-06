@@ -1,6 +1,6 @@
-import { mySparQLQuery, prefixBeniCulturali as prefix, sourcesBeniCulturali as sources } from 'utils/sparql'
-import { getWithCache } from 'utils/cosmoDBCache'
-import { getSites } from 'utils/sites'
+import { mySparQLQuery, prefixBeniCulturali as prefix, sourcesBeniCulturali as sources } from 'query'
+import { getWithCache } from 'cache'
+import { getSites } from 'query'
 
 const query = (subject: string) => `${prefix}
 SELECT ?culturalInstituteOrSite (COUNT(?cultpro) AS ?count) 

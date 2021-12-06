@@ -1,7 +1,8 @@
 import * as OSRM from 'osrm.js'
 import { Polyline } from 'react-leaflet'
 import { useEffect, useState } from 'react'
-import { useCurrentLocation } from 'context'
+import { useCulturalSites, useCurrentLocation } from 'context'
+import { siteCoordinates } from 'utils'
 
 const osrm = new OSRM('https://router.project-osrm.org')
 
@@ -14,14 +15,15 @@ const getConfig = (coordinates) => ({
   overview: 'full',
 })
 
-const coordinates = (userLocation, data) => [
+const coordinates = (userLocation, sites) => [
   [userLocation.latlng.lng, userLocation.latlng.lat],
-  ...data.map((d) => [Number(d['?long'].value), Number(d['?lat'].value)]),
+  ...siteCoordinates(sites),
 ]
 
-export const Itinerary = ({ culturalSites }): JSX.Element => {
+export const Itinerary = (): JSX.Element => {
   const [currenteLocation] = useCurrentLocation()
   const [itinerary, setItinerary] = useState()
+  const { culturalSites } = useCulturalSites()
 
   const sites = culturalSites
     .map((culturalSite: { site: any }) => culturalSite.site)

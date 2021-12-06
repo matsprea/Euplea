@@ -1,17 +1,15 @@
 import { latLng } from 'leaflet'
 import { MapContainer, TileLayer } from 'react-leaflet'
-import { UserCurrentLocation } from './UserCurrentLocation'
+import { UserCurrentLocation } from 'components/UserCurrentLocation'
 import { CulturalSites, Itinerary, Amenities } from 'components/layers'
 import { CurrentLocationProvider } from 'context'
 
 type MapProps = {
   initLocation: string
-  culturalSites: any
   zoom: number
 }
 
-
-export const Map = ({ initLocation, culturalSites, zoom }: MapProps): JSX.Element => {
+export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
   const center = latLng(
     Number(initLocation.split(',')[0]),
     Number(initLocation.split(',')[1])
@@ -26,9 +24,9 @@ export const Map = ({ initLocation, culturalSites, zoom }: MapProps): JSX.Elemen
         style={{ height: 'calc(100vh - 60px)', width: '100%' }}
       >
         <UserCurrentLocation />
-        <CulturalSites culturalSites={culturalSites} />
-        <Amenities culturalSites={culturalSites} />
-        <Itinerary culturalSites={culturalSites} />
+        <CulturalSites />
+        <Amenities />
+        <Itinerary />
 
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

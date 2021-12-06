@@ -1,5 +1,5 @@
 import nominatim from 'nominatim-client'
-import { getWithCache } from 'utils/cosmoDBCache'
+import { getWithCache } from 'cache'
 
 const containerId = 'siteGeocoding'
 

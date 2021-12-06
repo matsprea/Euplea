@@ -1,5 +1,5 @@
 import { CosmosClient } from '@azure/cosmos'
-import { createHmac } from 'utils/createHmac'
+import { createHmac } from './createHmac'
 
 const endpoint = process.env.COSMOS_ENDPOINT
 const key = process.env.COSMOS_KEY

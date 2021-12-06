@@ -2,8 +2,8 @@ import {
   mySparQLQuery,
   sourcesSophox as sources,
   prefixSophox as prefix,
-} from 'utils/sparql'
-import { getWithCache } from 'utils/cosmoDBCache'
+} from 'query'
+import { getWithCache } from 'cache'
 import { Style } from 'types'
 
 const tourismStyle = (style: Style = Style.Medium) => {
