@@ -1,8 +1,9 @@
 import { useState, createContext, useContext } from 'react'
+import { useCulturalSiteAPI } from 'hooks'
 
 const CulturalSitesContext = createContext([])
 
-function CulturalSitesProvider({ children }) {
+export const CulturalSiteProvider = ({ children }) => {
   const [culturalSites, setCulturalSites] = useState()
 
   const value = [culturalSites, setCulturalSites]
@@ -14,7 +15,7 @@ function CulturalSitesProvider({ children }) {
   )
 }
 
-function useCulturalSites() {
+export const useCulturalSite = () => {
   const context = useContext(CulturalSitesContext)
   if (context === undefined) {
     throw new Error(
@@ -23,5 +24,3 @@ function useCulturalSites() {
   }
   return context
 }
-
-export { CulturalSitesProvider, useCulturalSites }

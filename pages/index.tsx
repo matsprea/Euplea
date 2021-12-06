@@ -7,7 +7,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { SearchData, Style } from 'types'
 
-import { useCulturalSites } from 'hooks/useCulturalSites'
+import { useCulturalSiteAPI } from 'hooks'
 import { Header } from 'components/Header'
 import { MapSkeleton } from 'components/MapSkeleton'
 import { SearchDrawer } from 'components/SearchDrawer'
@@ -33,7 +33,7 @@ const MapPage = (): JSX.Element => {
     topic: (query?.topic as string) ?? 'notte',
   }
 
-  const { data: culturalSites, status } = useCulturalSites(searchData)
+  const { data: culturalSites, status } = useCulturalSiteAPI(searchData)
   const isLoading = status === 'loading'
 
   return (
