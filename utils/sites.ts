@@ -1,4 +1,8 @@
-import { mySparQLQuery, prefix, sources } from 'utils/sparql'
+import {
+  mySparQLQuery,
+  prefixBeniCulturali as prefix,
+  sourcesBeniCulturali as sources,
+} from 'utils/sparql'
 import { getWithCache } from 'utils/cosmoDBCache'
 import { geocodeSite } from './siteGeocoding'
 
@@ -116,7 +120,7 @@ const getGeocodedSites = async (siteList: any[]) => {
   const sitesGeocoded = await Promise.all(
     siteList.filter(siteWithoutGeocoding).map(geocodeSite)
   )
-  
+
   return [...uniqueSiteWithLatLong, ...sitesGeocoded.flat()]
 }
 

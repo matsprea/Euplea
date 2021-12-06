@@ -1,4 +1,4 @@
-import { mySparQLQuery, prefix, sources } from 'utils/sparql'
+import { mySparQLQuery, prefixBeniCulturali as prefix, sourcesBeniCulturali as sources } from 'utils/sparql'
 import { getWithCache } from 'utils/cosmoDBCache'
 import { getSites } from 'utils/sites'
 
