@@ -2,7 +2,7 @@ import { newEngine, IQueryResultBindings } from '@comunica/actor-init-sparql'
 
 const myEngine = newEngine()
 
-export const mySparQLQuery = async (query, sources) =>
+export const mySparQLQuery = (query, sources) => () =>
   myEngine
     .query(query, {
       sources,
@@ -10,6 +10,10 @@ export const mySparQLQuery = async (query, sources) =>
     .then((result: any) => {
       const r: IQueryResultBindings = result
       return r.bindings()
+    })
+    .catch((e: any) => {
+      console.error(`Error: mySparQLQuert ${query} ${e}`)
+      return []
     })
 
 export const sources = [

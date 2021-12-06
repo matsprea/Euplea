@@ -8,7 +8,7 @@ const geocodingClient = nominatim.createClient({
   referer: 'https://euplea.herokuapp.com',
 })
 
-const geocodingQuery = (query) =>
+const geocodingQuery = (query) => () =>
   geocodingClient
     .search(query)
     .then(([result]) => result ?? { query, result, date: Date.now() })
@@ -19,14 +19,18 @@ const getQuery = (q) => ({
 })
 
 const getGeocoding = (q) =>
-  getWithCache(containerId, JSON.stringify(q), geocodingQuery(getQuery(q)))
-  .then(
-    ({ value }) => 'lat' in value && 'lon' in value && value
-  )
+  getWithCache(
+    containerId,
+    JSON.stringify(q),
+    geocodingQuery(getQuery(q))
+  ).then(({ value }) => value?.lat && value?.log && value)
 
 export const geocodeSite = async (site) => {
-  const qAddress = { street: site['?siteFullAddress']?.value, city: site['?siteCityName']?.value} 
-  const qName = { q: site['?siteLabel']?.value}
+  const qAddress = {
+    street: site['?siteFullAddress']?.value,
+    city: site['?siteCityName']?.value,
+  }
+  const qName = { q: site['?siteLabel']?.value }
 
   const value = (await getGeocoding(qAddress)) ?? (await getGeocoding(qName))
 
