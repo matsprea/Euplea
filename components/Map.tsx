@@ -7,7 +7,7 @@ import {
   Amenities,
   Accomodations,
 } from 'components/layers'
-import { CurrentLocationProvider } from '../context'
+import { CurrentLocationProvider } from '../context/CurrentLocation'
 
 type MapProps = {
   initLocation: string
