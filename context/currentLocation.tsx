@@ -2,7 +2,7 @@ import { useState, createContext, useContext } from 'react'
 
 const CurrentLocationContext = createContext([])
 
-function CurrentLocationProvider({ children }) {
+const CurrentLocationProvider = ({ children }) => {
   const [currenteLocation, setCurrenteLocation] = useState()
 
   const value = [currenteLocation, setCurrenteLocation]
@@ -14,7 +14,7 @@ function CurrentLocationProvider({ children }) {
   )
 }
 
-function useCurrentLocation() {
+const useCurrentLocation = () => {
   const context = useContext(CurrentLocationContext)
   if (context === undefined) {
     throw new Error(

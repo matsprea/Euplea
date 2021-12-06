@@ -1,8 +1,8 @@
 import { GiGreekTemple } from 'react-icons/gi'
-import { SparqlMap } from './SparqlMap'
+import { SparqlMap } from '../SparqlMap'
 import { useMap } from 'react-leaflet'
 
-export const CulturalSitesMap = ({ culturalSites }): JSX.Element => {
+export const CulturalSites = ({ culturalSites }): JSX.Element => {
   const map = useMap()
 
   const sites = culturalSites.map((culturalSite: { site: any }) => culturalSite.site).flat()

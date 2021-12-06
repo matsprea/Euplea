@@ -3,7 +3,7 @@ import { LocationEvent } from 'leaflet'
 import { useMap, Circle, Marker, Tooltip } from 'react-leaflet'
 import { GiPositionMarker } from 'react-icons/gi'
 import { getLeafletIcon } from './getLeafletIcon'
-import { useCurrentLocation } from 'context/currentLocation'
+import { useCurrentLocation } from 'context'
 
 //https://react-leaflet.js.org/docs/core-architecture/
 export const UserCurrentLocation = (): JSX.Element => {
