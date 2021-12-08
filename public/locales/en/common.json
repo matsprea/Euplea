@@ -13,5 +13,7 @@
   "Luxury" : "Luxury",
   "Medium" : "Medium",
   "Budget" : "Budget",
-  "Current Position" : "Current Position"
+  "Current Position" : "Current Position",
+  "Amenities" : "Amenities",
+  "Accomodations" : "Accommodation"
 }

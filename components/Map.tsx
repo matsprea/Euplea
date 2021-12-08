@@ -1,5 +1,5 @@
 import { latLng } from 'leaflet'
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapContainer, TileLayer, LayersControl } from 'react-leaflet'
 import {
   CulturalSites,
   Itinerary,
@@ -8,6 +8,7 @@ import {
   CurrentLocation,
 } from 'components/layers'
 import { CurrentLocationProvider } from '../context/CurrentLocation'
+import { useTranslation } from 'next-i18next'
 
 type MapProps = {
   initLocation: string
@@ -15,6 +16,7 @@ type MapProps = {
 }
 
 export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
+  const { t } = useTranslation()
   const center = latLng(
     Number(initLocation.split(',')[0]),
     Number(initLocation.split(',')[1])
@@ -30,9 +32,16 @@ export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
       >
         <CurrentLocation />
         <CulturalSites />
-        <Amenities />
-        <Accomodations />
         <Itinerary />
+
+        <LayersControl position="topleft">
+          <LayersControl.Overlay name={t('Amenities')} checked>
+            <Amenities />
+          </LayersControl.Overlay>
+          <LayersControl.Overlay name={t('Accomodations')} checked>
+            <Accomodations />
+          </LayersControl.Overlay>
+        </LayersControl>
 
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
