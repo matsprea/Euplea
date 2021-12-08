@@ -7,8 +7,6 @@ import {
   Link,
   OrderedList,
   Image,
-  useDisclosure,
-  Collapse,
 } from '@chakra-ui/react'
 import { ImLink } from 'react-icons/im'
 
@@ -19,10 +17,8 @@ import { GiGreekTemple } from 'react-icons/gi'
 export const ItineraryList = ({ culturalSites }) => {
   const { t } = useTranslation()
   const ItineraryList = useRef<any>()
-  const { isOpen, onToggle } = useDisclosure()
 
   const onClick = () => {
-    onToggle()
     ItineraryList.current.scrollIntoView({ behavior: 'smooth' })
   }
 
