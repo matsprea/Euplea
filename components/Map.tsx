@@ -1,11 +1,11 @@
 import { latLng } from 'leaflet'
 import { MapContainer, TileLayer } from 'react-leaflet'
-import { UserCurrentLocation } from 'components/UserCurrentLocation'
 import {
   CulturalSites,
   Itinerary,
   Amenities,
   Accomodations,
+  CurrentLocation,
 } from 'components/layers'
 import { CurrentLocationProvider } from '../context/CurrentLocation'
 
@@ -28,7 +28,7 @@ export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
         scrollWheelZoom={true}
         style={{ height: 'calc(100vh - 60px)', width: '100%' }}
       >
-        <UserCurrentLocation />
+        <CurrentLocation />
         <CulturalSites />
         <Amenities />
         <Accomodations />

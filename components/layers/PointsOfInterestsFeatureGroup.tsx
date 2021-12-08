@@ -1,5 +1,3 @@
-import { getLeafletIcon } from '../getLeafletIcon'
-import { IconType } from 'react-icons'
 import React from 'react'
 import { latLng } from 'leaflet'
 import { FeatureGroup, Marker, Tooltip, Circle } from 'react-leaflet'
@@ -7,7 +5,7 @@ import { PointOfInterest} from 'types'
 
 type PointsOfInterestProps = {
   data?: PointOfInterest[]
-  icon: IconType
+  icon: any
   color?: string
 }
 
@@ -29,7 +27,7 @@ export const PointsOfInterestsFeatureGroup = ({
               fillColor={color}
               color={color}
             >
-              <Marker position={dot} icon={getLeafletIcon(icon, { color })}>
+              <Marker position={dot} icon={icon}>
                 <Tooltip>{label}</Tooltip>
               </Marker>
             </Circle>

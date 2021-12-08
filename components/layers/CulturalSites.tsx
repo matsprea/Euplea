@@ -3,6 +3,14 @@ import { PointsOfInterestsFeatureGroup } from './PointsOfInterestsFeatureGroup'
 import { useMap } from 'react-leaflet'
 import { useCulturalSites } from 'context'
 import { siteToPointOfInterest } from 'utils'
+import { PointOfInterestsIcon } from './PointOfInterestsIcon'
+
+const CulturalSiteIcon = PointOfInterestsIcon(
+  'green-dark',
+  GiGreekTemple,
+  'star',
+  'white'
+)
 
 export const CulturalSites = (): JSX.Element => {
   const map = useMap()
@@ -34,8 +42,8 @@ export const CulturalSites = (): JSX.Element => {
   return (
     <PointsOfInterestsFeatureGroup
       data={sites.map(siteToPointOfInterest)}
-      icon={GiGreekTemple}
-      color="black"
+      icon={CulturalSiteIcon}
+      color="transparent"
     />
   )
 }

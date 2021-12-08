@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { appWithTranslation } from 'next-i18next'
 import 'styles/globals.css'
 import 'leaflet/dist/leaflet.css'
+import 'leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css'
 import theme from 'theme'
 
 const queryClient = new QueryClient({

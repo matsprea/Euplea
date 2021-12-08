@@ -47,6 +47,6 @@ export const Itinerary = (): JSX.Element => {
   }, [currenteLocation, sites.length])
 
   return itinerary ? (
-    <Polyline pathOptions={{ color: 'blue' }} positions={itinerary} />
+    <Polyline pathOptions={{ color: 'teal' }} positions={itinerary} />
   ) : null
 }

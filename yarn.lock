@@ -7395,6 +7395,11 @@ lazy-cache@^1.0.3:
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
   integrity sha1-odePw6UEdMuAhF07O24dpJpEbo4=
 
+leaflet-extra-markers@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/leaflet-extra-markers/-/leaflet-extra-markers-1.2.1.tgz#dcea9e0ab3850c4724afa6eda8dda8fa743739fa"
+  integrity sha512-k3mGGBJg5wr4LY89MyLHcWCol3yNC9qcK1+5os+HjBk09RlxmqsywNSBwmpP1WKnkKCIgofnOFOhdM5GeK0kHQ==
+
 leaflet@1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/leaflet/-/leaflet-1.7.1.tgz#10d684916edfe1bf41d688a3b97127c0322a2a19"
