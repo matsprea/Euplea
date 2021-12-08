@@ -1,6 +1,8 @@
 import * as OSRM from 'osrm.js'
-import { Polyline } from 'react-leaflet'
+import * as L from 'leaflet'
+import { Polyline, useMap } from 'react-leaflet'
 import { useEffect, useState } from 'react'
+import 'leaflet-polylinedecorator'
 import { useCulturalSites, useCurrentLocation } from 'context'
 import {
   siteCoordinates,
@@ -28,6 +30,7 @@ export const Itinerary = (): JSX.Element => {
   const [currenteLocation] = useCurrentLocation()
   const [itinerary, setItinerary] = useState()
   const { culturalSites } = useCulturalSites()
+  const map = useMap()
 
   if (!culturalSites) return <></>
 
@@ -42,10 +45,38 @@ export const Itinerary = (): JSX.Element => {
         (err, response) => {
           const coordinates = response.trips[0].geometry.coordinates
           setItinerary(coordinates.map(([a, b]) => [b, a]))
+
+          L.polylineDecorator(itinerary, {
+            patterns: [
+              {
+                offset: 25,
+                repeat: 50,
+                symbol: L.Symbol.arrowHead({
+                  pixelSize: 15,
+                  pathOptions: { fillOpacity: 1, weight: 0, color: 'teal' },
+                }),
+              },
+            ],
+          }).addTo(map)
         }
       )
-  }, [currenteLocation, sites.length])
+  }, [currenteLocation, JSON.stringify(sites)])
 
+  useEffect(() => {
+    L.polylineDecorator(itinerary, {
+      patterns: [
+        {
+          offset: 25,
+          repeat: 50,
+          symbol: L.Symbol.arrowHead({
+            pixelSize: 15,
+            pathOptions: { fillOpacity: 1, weight: 0, color: '#4299e199' },
+          }),
+        },
+      ],
+    }).addTo(map)
+  }, [itinerary])
+  
   return itinerary ? (
     <Polyline pathOptions={{ color: 'teal' }} positions={itinerary} />
   ) : null

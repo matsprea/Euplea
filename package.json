@@ -20,6 +20,7 @@
     "framer-motion": "5.4.3",
     "leaflet": "1.7.1",
     "leaflet-extra-markers": "1.2.1",
+    "leaflet-polylinedecorator": "1.6.0",
     "next": "12.0.7",
     "next-i18next": "10.0.1",
     "next-pwa": "5.4.4",
