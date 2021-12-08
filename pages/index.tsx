@@ -21,7 +21,6 @@ import { Header } from 'components/Header'
 import { MapSkeleton } from 'components/MapSkeleton'
 import { SearchDrawer } from 'components/SearchDrawer'
 import { useRef, useEffect } from 'react'
-import { theme } from 'theme'
 
 const DynamicMap = dynamic(() => import('components/Map'), {
   ssr: false,
@@ -65,7 +64,7 @@ const MapPage = (): JSX.Element => {
   const isLoading = status === 'loading'
 
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading && !toastIdRef.current) {
       addToast(t('Search Toast', searchData))
     } else {
       toast.closeAll()

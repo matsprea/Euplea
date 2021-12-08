@@ -12,6 +12,7 @@ export const siteCoordinatesToLongLat = (sites: any[]) => [
 ]
 
 export const coordinatesToLongLat = ({ long, lat }) => [long, lat]
+export const coordinatesToLatLong = ({ long, lat }) => [lat, long]
 
 export const coordinatesFromLongLat = ([long, lat]) => ({ long, lat })
 
@@ -39,11 +40,32 @@ export const siteToPointOfInterest = (site): PointOfInterest => ({
 
 export const osmToPointOfInterest = (osm): PointOfInterest => {
   const regex = /^\w+\((\d+\.\d+)\s(\d+\.\d+)\)$/s
-  const [ , long, lat] = regex.exec(osm['?coordinates'].value)
+  const [, long, lat] = regex.exec(osm['?coordinates'].value)
 
   return {
     lat: parseFloat(lat),
     long: parseFloat(long),
     label: osm['?name'].value,
   }
+}
+
+const getMinMax = (latValues: number[], longValues: number[]) => [
+  [Math.max(...latValues), Math.max(...longValues)],
+  [Math.min(...latValues), Math.min(...longValues)],
+]
+
+export const getPointOfInterestMinMax = (
+  pointsOfInterests: PointOfInterest[]
+) => {
+  const latValues = pointsOfInterests.map((p) => p.lat)
+  const longValues = pointsOfInterests.map((p) => p.long)
+
+  return getMinMax(latValues, longValues)
+}
+
+export const getLatLongMinMax = (coordinates: number[][]) => {
+  const latValues = coordinates.map(([lat]) => lat)
+  const longValues = coordinates.map(([, long]) => long)
+
+  return getMinMax(latValues, longValues)
 }

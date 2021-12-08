@@ -37,7 +37,7 @@ export const Itinerary = (): JSX.Element => {
 
   useEffect(() => {
     sites &&
-      sites.length >= 1 &&
+      (sites.length > 2 || currenteLocation) &&
       osrm.trip(
         getTripConfig(coordinates(currenteLocation, sites)),
         (err, response) => {
@@ -45,9 +45,8 @@ export const Itinerary = (): JSX.Element => {
           if (trip) {
             const coordinates = trip.geometry.coordinates
             setItinerary(coordinates.map(([a, b]) => [b, a]))
-          }
-          else {
-            setItinerary(null) 
+          } else {
+            setItinerary(null)
           }
         }
       )
