@@ -33,6 +33,7 @@ const mapCenter = process.env.MAP_CENTER ?? MAP_CENTER
 const MAP_ZOOM = '6'
 const mapZoom = Number(process.env.MAP_ZOOM ?? MAP_ZOOM)
 
+const TOAST_ID = 'search-toast'
 const MapPage = (): JSX.Element => {
   const { t } = useTranslation()
   const { query } = useRouter()
@@ -45,6 +46,7 @@ const MapPage = (): JSX.Element => {
       position: 'top',
       title: t('Searching for'),
       duration: null,
+      id: TOAST_ID,
     })
   }
 
@@ -64,7 +66,7 @@ const MapPage = (): JSX.Element => {
   const isLoading = status === 'loading'
 
   useEffect(() => {
-    if (isLoading && !toastIdRef.current) {
+    if (isLoading && !toast.isActive(TOAST_ID)) {
       addToast(t('Search Toast', searchData))
     } else {
       toast.closeAll()
