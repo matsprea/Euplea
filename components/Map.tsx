@@ -13,10 +13,12 @@ import { useTranslation } from 'next-i18next'
 type MapProps = {
   initLocation: string
   zoom: number
+  height: string
 }
 
-export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
+export const Map = ({ initLocation, zoom, height }: MapProps): JSX.Element => {
   const { t } = useTranslation()
+
   const center = latLng(
     Number(initLocation.split(',')[0]),
     Number(initLocation.split(',')[1])
@@ -28,7 +30,7 @@ export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
         center={center}
         zoom={zoom}
         scrollWheelZoom={true}
-        style={{ height: 'calc(100vh - 60px)', width: '100%' }}
+        style={{ height, width: '100%' }}
       >
         <CurrentLocation />
         <CulturalSites />

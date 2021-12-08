@@ -17,9 +17,7 @@ import { SearchData, Style } from 'types'
 
 import { useCulturalSiteAPI } from 'hooks'
 import { CulturalSitesProvider } from 'context'
-import { Header } from 'components/Header'
-import { MapSkeleton } from 'components/MapSkeleton'
-import { SearchDrawer } from 'components/SearchDrawer'
+import { Header, MapSkeleton, SearchDrawer, ItineraryList } from 'components'
 import { useRef, useEffect } from 'react'
 
 const DynamicMap = dynamic(() => import('components/Map'), {
@@ -64,11 +62,13 @@ const MapPage = (): JSX.Element => {
     style && days && topic && searchData
   )
   const isLoading = status === 'loading'
+  const isCulturalSites = culturalSites?.length > 0
 
   useEffect(() => {
-    if (isLoading && !toast.isActive(TOAST_ID)) {
+    if (isLoading &&  style && days && topic && !toast.isActive(TOAST_ID)) {
       addToast(t('Search Toast', searchData))
-    } else {
+    }
+    if (!isLoading) {
       toast.closeAll()
     }
   }, [isLoading])
@@ -84,7 +84,7 @@ const MapPage = (): JSX.Element => {
           </Box>
           <Spacer />
           <Center p="2">
-            <SearchDrawer searchData={searchData} addToast={addToast} />
+            <SearchDrawer searchData={searchData} isLoading={isLoading} />
           </Center>
         </Flex>
         <Box w="100%">
@@ -92,10 +92,17 @@ const MapPage = (): JSX.Element => {
             <Progress size="sm" isIndeterminate />
           ) : (
             <CulturalSitesProvider culturalSites={culturalSites}>
-              <DynamicMap initLocation={mapCenter} zoom={mapZoom} />
+              <DynamicMap
+                initLocation={mapCenter}
+                zoom={mapZoom}
+                height={`calc(100vh - ${isCulturalSites ? 100 : 60}px)`}
+              />
             </CulturalSitesProvider>
           )}
         </Box>
+        {!isLoading && isCulturalSites && (
+          <ItineraryList culturalSites={culturalSites} />
+        )}
       </Flex>
     </>
   )

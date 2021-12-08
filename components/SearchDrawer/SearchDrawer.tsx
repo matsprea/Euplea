@@ -34,7 +34,7 @@ import { SearchData, Style } from '../../types';
 
 type SearchDrawerProps = {
   searchData?: SearchData
-  addToast: any
+  isLoading: boolean
 } 
 
 const buildQueryString = (any): string =>
@@ -44,6 +44,7 @@ const buildQueryString = (any): string =>
 
 export const SearchDrawer = ({
   searchData,
+  isLoading,
 }: SearchDrawerProps): JSX.Element => {
   const { t } = useTranslation()
   const router = useRouter()
@@ -79,7 +80,11 @@ export const SearchDrawer = ({
 
   return (
     <>
-      <Button leftIcon={<FaSearchLocation />} onClick={onOpen}>
+      <Button
+        isLoading={isLoading}
+        leftIcon={<FaSearchLocation />}
+        onClick={onOpen}
+      >
         {t('Search')}
       </Button>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
