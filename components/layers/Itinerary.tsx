@@ -12,7 +12,7 @@ import {
 
 const osrm = new OSRM('https://router.project-osrm.org')
 
-const getConfig = (coordinates) => ({
+const getTripConfig = (coordinates) => ({
   coordinates,
   annotations: ['distance', 'duration'],
   geometries: 'geojson',
@@ -41,9 +41,9 @@ export const Itinerary = (): JSX.Element => {
       sites &&
       sites.length >= 1 &&
       osrm.trip(
-        getConfig(coordinates(currenteLocation, sites)),
+        getTripConfig(coordinates(currenteLocation, sites)),
         (err, response) => {
-          const coordinates = response.trips[0].geometry.coordinates
+          const coordinates = response?.trips[0].geometry.coordinates ?? []
           setItinerary(coordinates.map(([a, b]) => [b, a]))
         }
       )

@@ -15,5 +15,7 @@
   "Budget" : "Budget",
   "Current Position" : "Current Position",
   "Amenities" : "Amenities",
-  "Accomodations" : "Accommodation"
+  "Accomodations" : "Accommodation",
+  "Searching for" : "Searching for",
+  "Search Toast": "{{topic}} for {{days}} days with style {{style}}"
 }

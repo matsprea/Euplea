@@ -34,6 +34,7 @@ import { SearchData, Style } from '../../types';
 
 type SearchDrawerProps = {
   searchData?: SearchData
+  addToast: any
 } 
 
 const buildQueryString = (any): string =>
@@ -41,7 +42,9 @@ const buildQueryString = (any): string =>
     .map(([key, value]) => `${key}=${value}`)
     .join('&')
 
-export const SearchDrawer = ({ searchData }: SearchDrawerProps): JSX.Element => {
+export const SearchDrawer = ({
+  searchData,
+}: SearchDrawerProps): JSX.Element => {
   const { t } = useTranslation()
   const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()

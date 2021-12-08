@@ -6,7 +6,7 @@ import { appWithTranslation } from 'next-i18next'
 import 'styles/globals.css'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css'
-import theme from 'theme'
+import { theme } from 'theme'
 
 const queryClient = new QueryClient({
   defaultOptions: {

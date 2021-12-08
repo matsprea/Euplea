@@ -15,5 +15,8 @@
   "Budget" : "Economico",
   "Current Position" : "Posizione Corrente",
   "Amenities" : "Servizi",
-  "Accomodations" : "Alloggi"
+  "Accomodations" : "Alloggi",
+  "Searching for" : "Ricerca per",
+  "Search Toast": "{{topic}} per {{days}} giorni con stile {{style}}"
+
 }
