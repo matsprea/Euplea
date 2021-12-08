@@ -1,10 +1,14 @@
 import { PointOfInterest } from 'types'
 
-export const siteCoordinates = (sites) => [
+export const siteCoordinates = (sites: any[]) => [
   ...sites.map((site) => ({
     long: Number(site['?long'].value),
     lat: Number(site['?lat'].value),
   })),
+]
+
+export const siteCoordinatesToLongLat = (sites: any[]) => [
+  ...siteCoordinates(sites).map(coordinatesToLongLat),
 ]
 
 export const coordinatesToLongLat = ({ long, lat }) => [long, lat]

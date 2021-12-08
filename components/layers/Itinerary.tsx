@@ -4,11 +4,7 @@ import { Polyline, useMap } from 'react-leaflet'
 import { useEffect, useState } from 'react'
 import 'leaflet-polylinedecorator'
 import { useCulturalSites, useCurrentLocation } from 'context'
-import {
-  siteCoordinates,
-  coordinatesToLongLat,
-  sitesofCulturalSites,
-} from 'utils'
+import { siteCoordinatesToLongLat, sitesofCulturalSites } from 'utils'
 
 const osrm = new OSRM('https://router.project-osrm.org')
 
@@ -21,10 +17,13 @@ const getTripConfig = (coordinates) => ({
   overview: 'full',
 })
 
-const coordinates = (userLocation, sites) => [
-  [userLocation.latlng.lng, userLocation.latlng.lat],
-  ...siteCoordinates(sites).map(coordinatesToLongLat),
-]
+const coordinates = (userLocation, sites) =>
+  userLocation
+    ? [
+        [userLocation.latlng.lng, userLocation.latlng.lat],
+        ...siteCoordinatesToLongLat(sites),
+      ]
+    : siteCoordinatesToLongLat(sites)
 
 export const Itinerary = (): JSX.Element => {
   const [currenteLocation] = useCurrentLocation()
@@ -37,14 +36,19 @@ export const Itinerary = (): JSX.Element => {
   const sites = sitesofCulturalSites(culturalSites)
 
   useEffect(() => {
-    currenteLocation &&
-      sites &&
+    sites &&
       sites.length >= 1 &&
       osrm.trip(
         getTripConfig(coordinates(currenteLocation, sites)),
         (err, response) => {
-          const coordinates = response?.trips[0].geometry.coordinates ?? []
-          setItinerary(coordinates.map(([a, b]) => [b, a]))
+          const [trip] = response?.trips ?? []
+          if (trip) {
+            const coordinates = trip.geometry.coordinates
+            setItinerary(coordinates.map(([a, b]) => [b, a]))
+          }
+          else {
+            setItinerary(null) 
+          }
         }
       )
   }, [currenteLocation, JSON.stringify(sites)])
