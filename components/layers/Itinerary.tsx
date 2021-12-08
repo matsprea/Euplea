@@ -45,29 +45,18 @@ export const Itinerary = (): JSX.Element => {
         (err, response) => {
           const coordinates = response.trips[0].geometry.coordinates
           setItinerary(coordinates.map(([a, b]) => [b, a]))
-
-          L.polylineDecorator(itinerary, {
-            patterns: [
-              {
-                offset: 25,
-                repeat: 50,
-                symbol: L.Symbol.arrowHead({
-                  pixelSize: 15,
-                  pathOptions: { fillOpacity: 1, weight: 0, color: 'teal' },
-                }),
-              },
-            ],
-          }).addTo(map)
         }
       )
   }, [currenteLocation, JSON.stringify(sites)])
 
   useEffect(() => {
+    //@ts-expect-error leaflet-polylinedecorator override
     L.polylineDecorator(itinerary, {
       patterns: [
         {
           offset: 25,
           repeat: 50,
+          //@ts-expect-error leaflet-polylinedecorator override
           symbol: L.Symbol.arrowHead({
             pixelSize: 15,
             pathOptions: { fillOpacity: 1, weight: 0, color: '#4299e199' },
@@ -76,7 +65,7 @@ export const Itinerary = (): JSX.Element => {
       ],
     }).addTo(map)
   }, [itinerary])
-  
+
   return itinerary ? (
     <Polyline pathOptions={{ color: 'teal' }} positions={itinerary} />
   ) : null

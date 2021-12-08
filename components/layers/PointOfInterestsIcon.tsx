@@ -17,7 +17,7 @@ const renderedIcon = (Icon, iconBaseProps) =>
 export const PointOfInterestsIcon = (
   markerColor,
   icon: IconType,
-  shape = 'square',
+  shape,
   iconColor = 'white'
 ) =>
   L.ExtraMarkers.icon({
