@@ -20,13 +20,13 @@ const getTripConfig = (coordinates) => ({
 const coordinates = (userLocation, sites) =>
   userLocation
     ? [
-        [userLocation.latlng.lng, userLocation.latlng.lat],
+        [userLocation.longitude, userLocation.latitude],
         ...siteCoordinatesToLongLat(sites),
       ]
     : siteCoordinatesToLongLat(sites)
 
 export const Itinerary = (): JSX.Element => {
-  const [currenteLocation] = useCurrentLocation()
+  const currenteLocation = useCurrentLocation()
   const [itinerary, setItinerary] = useState()
   const { culturalSites } = useCulturalSites()
   const map = useMap()
@@ -50,7 +50,7 @@ export const Itinerary = (): JSX.Element => {
           }
         }
       )
-  }, [currenteLocation, JSON.stringify(sites)])
+  }, [JSON.stringify(currenteLocation), JSON.stringify(sites)])
 
   useEffect(() => {
     //@ts-expect-error leaflet-polylinedecorator override

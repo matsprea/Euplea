@@ -1,4 +1,5 @@
 export * from './Header'
-export * from './ItineraryList'
+export * from './ItineraryContainer'
 export * from './MapSkeleton'
 export * from './SearchDrawer'
+export * from './ItinerarySteps'

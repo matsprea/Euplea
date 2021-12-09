@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { LocationEvent } from 'leaflet'
 import { useMap, Circle, Marker, Tooltip } from 'react-leaflet'
 import { MdGpsFixed } from 'react-icons/md'
 import { useCurrentLocation, useCulturalSites } from 'context'
@@ -11,6 +10,7 @@ import {
   getLatLongMinMax,
   siteToPointOfInterest,
 } from 'utils'
+import { LatLngTuple } from 'leaflet'
 
 const CurrentLocationIcon = PointOfInterestsIcon(
   'cyan',
@@ -20,16 +20,15 @@ const CurrentLocationIcon = PointOfInterestsIcon(
 )
 
 export const CurrentLocation = (): JSX.Element => {
-  const [currenteLocation, setCurrenteLocation] = useCurrentLocation()
+  const currenteLocation = useCurrentLocation()
   const { culturalSites } = useCulturalSites()
   const map = useMap()
   const { t } = useTranslation()
 
-  useEffect(() => {
-    map.locate().on('locationfound', (location: LocationEvent) => {
-      setCurrenteLocation(location)
-    })
-  }, [])
+  const currentLocationLatLong: LatLngTuple = [
+    currenteLocation?.latitude,
+    currenteLocation?.longitude,
+  ]
 
   useEffect(() => {
     const latLongSites = sitesofCulturalSites(culturalSites)
@@ -37,10 +36,7 @@ export const CurrentLocation = (): JSX.Element => {
       .map(coordinatesToLatLong)
 
     const latLongCoords = currenteLocation
-      ? [
-          [currenteLocation.latlng.lat, currenteLocation.latlng.lng],
-          ...latLongSites,
-        ]
+      ? [currentLocationLatLong, ...latLongSites]
       : latLongSites
 
     if (latLongCoords && latLongCoords.length > 0) {
@@ -57,15 +53,15 @@ export const CurrentLocation = (): JSX.Element => {
         }
       )
     }
-  }, [culturalSites, currenteLocation])
+  }, [JSON.stringify(culturalSites), JSON.stringify(currenteLocation)])
 
   return currenteLocation ? (
     <Circle
-      center={currenteLocation.latlng}
+      center={currentLocationLatLong}
       radius={currenteLocation.accuracy}
       color="transparent"
     >
-      <Marker position={currenteLocation.latlng} icon={CurrentLocationIcon}>
+      <Marker position={currentLocationLatLong} icon={CurrentLocationIcon}>
         <Tooltip>{t('Current Position')}</Tooltip>
       </Marker>
     </Circle>

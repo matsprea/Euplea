@@ -9,6 +9,7 @@ import {
   Spacer,
   Progress,
   useToast,
+  VStack,
 } from '@chakra-ui/react'
 import { useTranslation, SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -17,7 +18,12 @@ import { SearchData, Style } from 'types'
 
 import { useCulturalSiteAPI } from 'hooks'
 import { CulturalSitesProvider } from 'context'
-import { Header, MapSkeleton, SearchDrawer, ItineraryList } from 'components'
+import {
+  Header,
+  MapSkeleton,
+  SearchDrawer,
+  ItineraryContainer,
+} from 'components'
 import { useRef, useEffect } from 'react'
 
 const DynamicMap = dynamic(() => import('components/Map'), {
@@ -65,7 +71,7 @@ const MapPage = (): JSX.Element => {
   const isCulturalSites = culturalSites?.length > 0
 
   useEffect(() => {
-    if (isLoading &&  style && days && topic && !toast.isActive(TOAST_ID)) {
+    if (isLoading && style && days && topic && !toast.isActive(TOAST_ID)) {
       addToast(t('Search Toast', searchData))
     }
     if (!isLoading) {
@@ -77,13 +83,13 @@ const MapPage = (): JSX.Element => {
     <>
       <Header title={t('header')} />
 
-      <Flex className="App " w="100%" direction="column">
-        <Flex>
-          <Box p="2">
+      <VStack spacing={0} align="stretch">
+        <Flex p="2">
+          <Box>
             <Heading as="h1">Euplea</Heading>
           </Box>
           <Spacer />
-          <Center p="2">
+          <Center>
             <SearchDrawer searchData={searchData} isLoading={isLoading} />
           </Center>
         </Flex>
@@ -95,15 +101,15 @@ const MapPage = (): JSX.Element => {
               <DynamicMap
                 initLocation={mapCenter}
                 zoom={mapZoom}
-                height={`calc(100vh - ${isCulturalSites ? 100 : 60}px)`}
+                height={`calc(100vh - ${isCulturalSites ? 120 : 60}px)`}
               />
             </CulturalSitesProvider>
           )}
         </Box>
         {!isLoading && isCulturalSites && (
-          <ItineraryList culturalSites={culturalSites} />
+          <ItineraryContainer culturalSites={culturalSites} />
         )}
-      </Flex>
+      </VStack>
     </>
   )
 }

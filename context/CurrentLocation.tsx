@@ -1,25 +1,33 @@
-import { useState, createContext, useContext } from 'react'
+import { useState, createContext, useContext, useEffect } from 'react'
 
-const CurrentLocationContext = createContext<any>([])
+const CurrentLocationContext = createContext<GeolocationCoordinates>(null)
 
 export const CurrentLocationProvider = ({ children }): JSX.Element => {
-  const [currenteLocation, setCurrenteLocation] = useState()
+  const [currenteLocation, setCurrenteLocation] =
+    useState<GeolocationCoordinates>()
 
-  const value = [currenteLocation, setCurrenteLocation]
-
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      console.warn('Geolocation is not supported by your browser')
+    } else {
+      navigator.geolocation.getCurrentPosition(({ coords }) => {
+        setCurrenteLocation(coords)
+      })
+    }
+  })
   return (
-    <CurrentLocationContext.Provider value={value}>
+    <CurrentLocationContext.Provider value={currenteLocation}>
       {children}
     </CurrentLocationContext.Provider>
   )
 }
 
-export const useCurrentLocation = (): any[] => {
+export const useCurrentLocation = (): GeolocationCoordinates => {
   const context = useContext(CurrentLocationContext)
-  if (context === undefined) {
-    throw new Error(
-      'useCurrentLocation must be used within a CurrentLocationProvider'
-    )
-  }
+  // if (context === undefined) {
+  //   throw new Error(
+  //     'useCurrentLocation must be used within a CurrentLocationProvider'
+  //   )
+  // }
   return context
 }
