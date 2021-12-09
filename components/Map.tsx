@@ -9,6 +9,7 @@ import {
 } from 'components/layers'
 import { CurrentLocationProvider } from '../context/CurrentLocation'
 import { useTranslation } from 'next-i18next'
+import { useCulturalSites } from 'context'
 
 type MapProps = {
   initLocation: string
@@ -18,6 +19,7 @@ type MapProps = {
 
 export const Map = ({ initLocation, zoom, height }: MapProps): JSX.Element => {
   const { t } = useTranslation()
+  const { culturalSites } = useCulturalSites()
 
   const center = latLng(
     Number(initLocation.split(',')[0]),
@@ -35,16 +37,16 @@ export const Map = ({ initLocation, zoom, height }: MapProps): JSX.Element => {
         <CurrentLocation />
         <CulturalSites />
         <Itinerary />
-
-        <LayersControl position="topleft">
-          <LayersControl.Overlay name={t('Amenities')} checked>
-            <Amenities />
-          </LayersControl.Overlay>
-          <LayersControl.Overlay name={t('Accomodations')} checked>
-            <Accomodations />
-          </LayersControl.Overlay>
-        </LayersControl>
-
+        {culturalSites.length > 0 && (
+          <LayersControl position="topright">
+            <LayersControl.Overlay name={t('Amenities')} checked>
+              <Amenities />
+            </LayersControl.Overlay>
+            <LayersControl.Overlay name={t('Accomodations')} checked>
+              <Accomodations />
+            </LayersControl.Overlay>
+          </LayersControl>
+        )}
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

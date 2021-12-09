@@ -13,8 +13,6 @@ const CulturalSiteIcon = PointOfInterestsIcon(
 
 export const CulturalSites = (): JSX.Element => {
   const { culturalSites } = useCulturalSites()
-  
-  if (!culturalSites) return <></>
 
   const sites = sitesofCulturalSites(culturalSites).map(siteToPointOfInterest)
 
