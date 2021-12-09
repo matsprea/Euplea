@@ -6,7 +6,7 @@ export const middleware = (req: NextRequest) => {
   const url = req.url
 
   if (proto && proto !== 'https')
-    return NextResponse.redirect(`https://${host}${url}`, 308)
+    return NextResponse.redirect(`https://${host}`, 308)
 
   return NextResponse.next()
 }
