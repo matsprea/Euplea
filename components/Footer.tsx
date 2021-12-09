@@ -1,17 +1,13 @@
-import {
-  Divider,
-  Link,
-  Flex,
-  Spacer,
-  Box,
-  Button,
-} from '@chakra-ui/react'
+import { Divider, Link, Flex, Spacer, Box, Button } from '@chakra-ui/react'
 import { FaGithub, FaRegCopyright } from 'react-icons/fa'
 import NextLink from 'next/link'
+import { useTranslation } from 'next-i18next'
 
 export const Footer = (): JSX.Element => {
+  const { t } = useTranslation()
+
   return (
-    <Box w='100%'  >
+    <Box w="100%">
       <Divider />
       <Flex p="2">
         <NextLink passHref href="https://github.com/matsprea/Euplea">
@@ -27,7 +23,7 @@ export const Footer = (): JSX.Element => {
           </Link>
         </NextLink>
         <Spacer />
-        <Box>Made with ❤️</Box>
+        <Box>{t('Made with', { name: 'Matteo' })}</Box>
         <Spacer />
         <NextLink passHref href="/credits">
           <Link>
@@ -37,7 +33,7 @@ export const Footer = (): JSX.Element => {
               color="black"
               as="span"
             >
-              Credits
+              {t('Credits')}
             </Button>
           </Link>
         </NextLink>

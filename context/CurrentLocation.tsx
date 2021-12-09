@@ -14,7 +14,8 @@ export const CurrentLocationProvider = ({ children }): JSX.Element => {
         setCurrenteLocation(coords)
       })
     }
-  })
+  }, [])
+
   return (
     <CurrentLocationContext.Provider value={currenteLocation}>
       {children}

@@ -22,7 +22,7 @@ export const ItineraryContainer = ({ culturalSites }) => {
     <>
       <Box p="2">
         <Button p="2" onClick={showItinerary}>
-          {isOpen ? t('Hide Itinerary') : t('Show Itinerary')}
+          {isOpen ? t('Hide itinerary') : t('Show itinerary')}
         </Button>
       </Box>
       <ItinerarySteps

@@ -31,30 +31,28 @@ export const Itinerary = (): JSX.Element => {
   const { culturalSites } = useCulturalSites()
   const map = useMap()
 
-  if (!culturalSites) return <></>
-
-  const sites = sitesofCulturalSites(culturalSites)
-
   useEffect(() => {
-    sites &&
-      (sites.length > 2 || (currenteLocation && sites.length > 0)) &&
-      osrm.trip(
-        getTripConfig(coordinates(currenteLocation, sites)),
-        (err, response) => {
-          const [trip] = response?.trips ?? []
-          if (trip) {
-            const coordinates = trip.geometry.coordinates
-            setItinerary(coordinates.map(([a, b]) => [b, a]))
-          } else {
-            setItinerary(null)
+    const sites = sitesofCulturalSites(culturalSites)
+
+    sites && (sites.length > 2 || (currenteLocation && sites.length > 0))
+      ? osrm.trip(
+          getTripConfig(coordinates(currenteLocation, sites)),
+          (err, response) => {
+            const [trip] = response?.trips ?? []
+            if (trip) {
+              const coordinates = trip.geometry.coordinates
+              setItinerary(coordinates.map(([a, b]) => [b, a]))
+            } else {
+              setItinerary(null)
+            }
           }
-        }
-      )
-  }, [JSON.stringify(currenteLocation), JSON.stringify(sites)])
+        )
+      : setItinerary(null)
+  }, [JSON.stringify(currenteLocation), JSON.stringify(culturalSites)])
 
   useEffect(() => {
     //@ts-expect-error leaflet-polylinedecorator override
-    L.polylineDecorator(itinerary, {
+    const decorator = L.polylineDecorator(itinerary, {
       patterns: [
         {
           offset: 25,
@@ -66,7 +64,13 @@ export const Itinerary = (): JSX.Element => {
           }),
         },
       ],
-    }).addTo(map)
+    })
+
+    decorator.addTo(map)
+
+    return () => {
+      decorator.remove()
+    }
   }, [itinerary])
 
   return itinerary ? (

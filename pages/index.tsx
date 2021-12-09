@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { GetStaticProps } from 'next'
+import NextLink from 'next/link'
 import {
   Flex,
   Center,
@@ -10,6 +11,7 @@ import {
   Progress,
   useToast,
   VStack,
+  Link,
 } from '@chakra-ui/react'
 import { useTranslation, SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -38,6 +40,7 @@ const MAP_ZOOM = '6'
 const mapZoom = Number(process.env.MAP_ZOOM ?? MAP_ZOOM)
 
 const TOAST_ID = 'search-toast'
+
 const MapPage = (): JSX.Element => {
   const { t } = useTranslation()
   const { query } = useRouter()
@@ -67,12 +70,13 @@ const MapPage = (): JSX.Element => {
   const { data: culturalSites, status } = useCulturalSiteAPI(
     style && days && topic && searchData
   )
+
   const isLoading = status === 'loading'
   const isCulturalSites = culturalSites?.length > 0
 
   useEffect(() => {
     if (isLoading && style && days && topic && !toast.isActive(TOAST_ID)) {
-      addToast(t('Search Toast', searchData))
+      addToast(t('Search Toast', { ...searchData, style: t(style) }))
     }
     if (!isLoading) {
       toast.closeAll()
@@ -83,10 +87,21 @@ const MapPage = (): JSX.Element => {
     <>
       <Header title={t('header')} />
 
-      <VStack spacing={0} align="stretch" height={`calc(100vh - 42px)`} overflowY='auto'>
+      <VStack
+        spacing={0}
+        align="stretch"
+        height={`calc(100vh - 42px)`}
+        overflowY="auto"
+      >
         <Flex p="2">
           <Box>
-            <Heading as="h1">Euplea</Heading>
+            <NextLink href="/" passHref>
+              <Link>
+                <Heading as="h1" color="teal">
+                  Euplea
+                </Heading>
+              </Link>
+            </NextLink>
           </Box>
           <Spacer />
           <Center>

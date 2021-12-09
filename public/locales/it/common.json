@@ -17,6 +17,9 @@
   "Amenities" : "Servizi",
   "Accomodations" : "Alloggi",
   "Searching for" : "Ricerca per",
-  "Search Toast": "{{topic}} per {{days}} giorni con stile {{style}}"
-
+  "Search Toast": "{{topic}} per {{days}} giorni con stile {{style}}",
+  "Show itinerary" : "Mostra itinerario",
+  "Hide itinerary" : "Nascondi itinerario",
+  "Credits" : "Credits",
+  "Made with" : "Fatto con ❤️ da {{name}}"
 }
