@@ -83,7 +83,7 @@ const MapPage = (): JSX.Element => {
     <>
       <Header title={t('header')} />
 
-      <VStack spacing={0} align="stretch">
+      <VStack spacing={0} align="stretch" height={`calc(100vh - 42px)`} overflowY='auto'>
         <Flex p="2">
           <Box>
             <Heading as="h1">Euplea</Heading>
@@ -95,13 +95,16 @@ const MapPage = (): JSX.Element => {
         </Flex>
         <Box w="100%">
           {isLoading ? (
-            <Progress size="sm" isIndeterminate />
+            <>
+              <Progress size="sm" isIndeterminate />
+              {/* <MapSkeleton height /> */}
+            </>
           ) : (
             <CulturalSitesProvider culturalSites={culturalSites}>
               <DynamicMap
                 initLocation={mapCenter}
                 zoom={mapZoom}
-                height={`calc(100vh - ${isCulturalSites ? 120 : 60}px)`}
+                height={`calc(100vh - ${isCulturalSites ? 162 : 102}px)`}
               />
             </CulturalSitesProvider>
           )}

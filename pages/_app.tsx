@@ -7,6 +7,7 @@ import 'styles/globals.css'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css'
 import { theme } from 'theme'
+import { Footer } from 'components'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,6 +28,7 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
           />
         </Head>
         <Component {...pageProps} />
+        <Footer />
       </ChakraProvider>
     </QueryClientProvider>
   )
