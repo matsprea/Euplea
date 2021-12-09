@@ -6,22 +6,14 @@ import {
   OrderedList,
   Avatar,
   Collapse,
-  // Button,
 } from '@chakra-ui/react'
 import { ImLink } from 'react-icons/im'
-
 import { forwardRef } from 'react'
-// import { useTranslation } from 'react-i18next'
 import { GiGreekTemple } from 'react-icons/gi'
-// import { BiArrowFromBottom } from 'react-icons/bi'
-
-// const showMap = () => {
-//   window.scrollTo(0, 0)
-// }
 
 export const ItinerarySteps = forwardRef<any, any>(
   ({ culturalSites, isOpen }, ref) => {
-    // const { t } = useTranslation()
+
     return (
       <Collapse in={isOpen} animateOpacity>
         <Box p="2">
@@ -39,12 +31,10 @@ export const ItinerarySteps = forwardRef<any, any>(
                 <UnorderedList spacing={3}>
                   {culturalSite['site'].map((site, index) => (
                     <ListItem key={index}>
-                      {/* <ListIcon as={GiGreekTemple} /> */}
                       <Avatar
                         bgColor="teal"
                         icon={<GiGreekTemple color="white" fontSize="2rem" />}
                         src={site['?sitePreview']?.value}
-                        // name={site['?siteLabel'].value}
                       />
                       {site['?siteLabel'].value}
                       {site['?siteFullAddress']?.value}
@@ -56,11 +46,6 @@ export const ItinerarySteps = forwardRef<any, any>(
             ))}
           </OrderedList>
         </Box>
-        {/* <Box p="2" pos="fixed" bottom="10" right={5}>
-          <Button leftIcon={<BiArrowFromBottom />} onClick={showMap}>
-            {t('Top')}
-          </Button>
-        </Box> */}
       </Collapse>
     )
   }

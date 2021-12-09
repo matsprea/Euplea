@@ -7,7 +7,6 @@ import {
   Accomodations,
   CurrentLocation,
 } from 'components/layers'
-import { CurrentLocationProvider } from '../context/CurrentLocation'
 import { useTranslation } from 'next-i18next'
 import { useCulturalSites } from 'context'
 
@@ -27,7 +26,6 @@ export const Map = ({ initLocation, zoom, height }: MapProps): JSX.Element => {
   )
 
   return (
-    <CurrentLocationProvider>
       <MapContainer
         center={center}
         zoom={zoom}
@@ -52,7 +50,6 @@ export const Map = ({ initLocation, zoom, height }: MapProps): JSX.Element => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
       </MapContainer>
-    </CurrentLocationProvider>
   )
 }
 

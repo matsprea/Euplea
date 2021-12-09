@@ -45,11 +45,11 @@ export const CurrentLocation = (): JSX.Element => {
 
       map.fitBounds(
         [
-          [maxLat + 0.1, maxLong + 0.1],
-          [minLat - 0.1, minLong - 0.1],
+          [maxLat + 0.01, maxLong + 0.01],
+          [minLat - 0.01, minLong - 0.01],
         ],
         {
-          padding: [16, 16],
+          padding: [6, 6],
         }
       )
     }

@@ -17,9 +17,8 @@ import { useTranslation, SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { SearchData, Style } from 'types'
-
 import { useCulturalSiteAPI } from 'hooks'
-import { CulturalSitesProvider } from 'context'
+import { CulturalSitesProvider, CurrentLocationProvider } from 'context'
 import {
   Header,
   MapSkeleton,
@@ -96,10 +95,8 @@ const MapPage = (): JSX.Element => {
         <Flex p="2">
           <Box>
             <NextLink href="/" passHref>
-              <Link>
-                <Heading as="h1" color="teal">
-                  Euplea
-                </Heading>
+              <Link color="teal">
+                <Heading as="h1">Euplea</Heading>
               </Link>
             </NextLink>
           </Box>
@@ -109,20 +106,22 @@ const MapPage = (): JSX.Element => {
           </Center>
         </Flex>
         <Box w="100%">
-          {isLoading ? (
-            <>
-              <Progress size="sm" isIndeterminate />
-              {/* <MapSkeleton height /> */}
-            </>
-          ) : (
-            <CulturalSitesProvider culturalSites={culturalSites}>
-              <DynamicMap
-                initLocation={mapCenter}
-                zoom={mapZoom}
-                height={`calc(100vh - ${isCulturalSites ? 162 : 102}px)`}
-              />
-            </CulturalSitesProvider>
-          )}
+          <CurrentLocationProvider>
+            {isLoading ? (
+              <>
+                <Progress size="sm" isIndeterminate />
+                {/* <MapSkeleton height /> */}
+              </>
+            ) : (
+              <CulturalSitesProvider culturalSites={culturalSites}>
+                <DynamicMap
+                  initLocation={mapCenter}
+                  zoom={mapZoom}
+                  height={`calc(100vh - ${isCulturalSites ? 162 : 102}px)`}
+                />
+              </CulturalSitesProvider>
+            )}
+          </CurrentLocationProvider>
         </Box>
         {!isLoading && isCulturalSites && (
           <ItineraryContainer culturalSites={culturalSites} />
