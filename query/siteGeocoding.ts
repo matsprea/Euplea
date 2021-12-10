@@ -23,7 +23,7 @@ const getGeocoding = (q) =>
     containerId,
     JSON.stringify(q),
     geocodingQuery(getQuery(q))
-  ).then(({ value }) => value?.lat && value?.log && value)
+  ).then(({ value }) => value)
 
 export const geocodeSite = async (site) => {
   const qAddress = {
@@ -32,9 +32,10 @@ export const geocodeSite = async (site) => {
   }
   const qName = { q: site['?siteLabel']?.value }
 
-  const value = (await getGeocoding(qAddress)) ?? (await getGeocoding(qName))
+  const valueAddress = await getGeocoding(qAddress)
+  const value = valueAddress?.lat ? valueAddress : await getGeocoding(qName)
 
-  const siteResult = value
+  const siteResult = ('lat' in value)
     ? {
         ...site,
         '?lat': {

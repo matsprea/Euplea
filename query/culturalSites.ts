@@ -3,7 +3,7 @@ import { getWithCache } from 'cache'
 import { getSites } from 'query'
 
 const query = (subject: string) => `${prefix}
-SELECT ?culturalInstituteOrSite (COUNT(?cultpro) AS ?count) 
+SELECT ?culturalInstituteOrSite (SAMPLE(?culturalInstituteOrSiteLabel) as ?culturalInstituteOrSiteLabel) (COUNT(?cultpro) AS ?count) 
 WHERE {
  ?cultpro rdf:type/rdfs:subClassOf* arco:CulturalProperty ;
 
@@ -13,7 +13,8 @@ WHERE {
  ?sub rdfs:label ?label
  FILTER(REGEX(STR(?label), "${subject}", "i")) .
 
- ?culturalInstituteOrSite cis:hasSite ?site .
+ ?culturalInstituteOrSite cis:hasSite ?site ;
+ rdfs:label ?culturalInstituteOrSiteLabel .
 
  OPTIONAL { ?site owl:deprecated ?deprecatedSite } .
  FILTER ( !BOUND(?deprecatedSite ) ) .

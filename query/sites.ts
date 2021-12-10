@@ -7,7 +7,7 @@ import { getWithCache } from 'cache'
 import { geocodeSite } from './siteGeocoding'
 
 const query = (culturalSite) => `${prefix}
-SELECT (SAMPLE(?site) AS ?site) (SAMPLE(?siteSeeAlso) AS ?siteSeeAlso) (SAMPLE(?siteLabel) AS ?siteLabel) (SAMPLE(?sitePreview) AS ?sitePreview) (SAMPLE(?siteFullAddress) AS ?siteFullAddress) (SAMPLE(?siteCityName) AS ?siteCityName) ?lat ?long 
+SELECT ?site (SAMPLE(?siteSeeAlso) AS ?siteSeeAlso) (SAMPLE(?siteLabel) AS ?siteLabel) (SAMPLE(?sitePreview) AS ?sitePreview) (SAMPLE(?siteFullAddress) AS ?siteFullAddress) (SAMPLE(?siteCityName) AS ?siteCityName) (SAMPLE(?lat) as ?lat) (SAMPLE(?long) as ?long)  
 WHERE {
  ?culturalInstituteOrSite a cis:CulturalInstituteOrSite ;
  cis:hasSite ?site ;
@@ -69,7 +69,7 @@ WHERE {
  BIND( ROUND( xsd:float(?siteLat)*1000000)/1000000 AS ?lat) .
  BIND( ROUND( xsd:float(?siteLong)*1000000)/1000000 AS ?long) .
 }
-GROUP BY ?lat ?long
+GROUP BY ?site
 `
 
 const containerId = 'site'
@@ -116,10 +116,9 @@ const getSeeAlsoSites = async (siteList: any[]) => {
 const getGeocodedSites = async (siteList: any[]) => {
   const sitesWithLatLong = siteList.filter(siteWithGeocoding)
   const uniqueSiteWithLatLong = removeSiteDuplicationByLatLong(sitesWithLatLong)
+  const sitesWithOutLatLong = siteList.filter(siteWithoutGeocoding)
 
-  const sitesGeocoded = await Promise.all(
-    siteList.filter(siteWithoutGeocoding).map(geocodeSite)
-  )
+  const sitesGeocoded = await Promise.all(sitesWithOutLatLong.map(geocodeSite))
 
   return [...uniqueSiteWithLatLong, ...sitesGeocoded.flat()]
 }
