@@ -1,10 +1,5 @@
 import { latLng } from 'leaflet'
-import {
-  MapContainer,
-  TileLayer,
-  LayersControl,
-  MapConsumer,
-} from 'react-leaflet'
+import { MapContainer, TileLayer, LayersControl } from 'react-leaflet'
 import {
   CulturalSites,
   Itinerary,
@@ -37,14 +32,6 @@ export const Map = ({ initLocation, zoom, height }: MapProps): JSX.Element => {
       scrollWheelZoom={true}
       style={{ height, width: '100%' }}
     >
-      <MapConsumer>
-        {(map) => {
-          // setTimeout(function () {
-          //   map.invalidateSize()
-          // }, 400)
-          return null
-        }}
-      </MapConsumer>
       <CurrentLocation />
       <CulturalSites />
       <Itinerary />
