@@ -17,7 +17,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       sites.map(([long, lat]) =>
         getAccomodations(parseFloat(lat), parseFloat(long), myStyle)
       )
-    ).then((results) => res.status(200).json(results.flat()))
+    )
+      .then((results) => results.flat().filter((v) => !('error' in v)))
+      .then((results) => res.status(200).json(results))
   }
 }
 
