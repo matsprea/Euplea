@@ -86,26 +86,29 @@ const MapPage = (): JSX.Element => {
     <>
       <Header title={t('header')} />
 
+      <Flex p="2" pos="fixed" top="0" w="100%">
+        <Box>
+          <NextLink href="/" passHref>
+            <Link color="teal">
+              <Heading as="h1">Euplea</Heading>
+            </Link>
+          </NextLink>
+        </Box>
+        <Spacer />
+        <Center>
+          <SearchDrawer searchData={searchData} isLoading={isLoading} />
+        </Center>
+      </Flex>
       <VStack
         spacing={0}
         align="stretch"
-        height={`calc(100vh - 42px)`}
+        height={`calc(100vh - ${isCulturalSites ? 100 : 60}px)`}
         overflowY="auto"
+        pos="absolute"
+        top="60px"
+        w="100%"
       >
-        <Flex p="2">
-          <Box>
-            <NextLink href="/" passHref>
-              <Link color="teal">
-                <Heading as="h1">Euplea</Heading>
-              </Link>
-            </NextLink>
-          </Box>
-          <Spacer />
-          <Center>
-            <SearchDrawer searchData={searchData} isLoading={isLoading} />
-          </Center>
-        </Flex>
-        <Box w="100%">
+        <Box w="100%" height={`calc(100vh - ${isCulturalSites ? 162 : 102}px)`}>
           <CurrentLocationProvider>
             {isLoading ? (
               <>

@@ -7,7 +7,7 @@ export const Footer = (): JSX.Element => {
   const { t } = useTranslation()
 
   return (
-    <Box w="100%">
+    <Box w="100%" pos="fixed" bottom="0">
       <Divider />
       <Flex p="2">
         <NextLink passHref href="https://github.com/matsprea/Euplea">
@@ -23,7 +23,9 @@ export const Footer = (): JSX.Element => {
           </Link>
         </NextLink>
         <Spacer />
-        <Box>{t('Made with', { name: 'Matteo' })}</Box>
+        <Box>
+          {/* {t('Made with', { name: 'Matteo' })} */}
+          </Box>
         <Spacer />
         <NextLink passHref href="/credits">
           <Link>
