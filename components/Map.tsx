@@ -13,10 +13,10 @@ import { useCulturalSites } from 'context'
 type MapProps = {
   initLocation: string
   zoom: number
-  height: string
+  
 }
 
-export const Map = ({ initLocation, zoom, height }: MapProps): JSX.Element => {
+export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
   const { t } = useTranslation()
   const { culturalSites } = useCulturalSites()
 
@@ -24,13 +24,13 @@ export const Map = ({ initLocation, zoom, height }: MapProps): JSX.Element => {
     Number(initLocation.split(',')[0]),
     Number(initLocation.split(',')[1])
   )
-
+ 
   return (
     <MapContainer
       center={center}
       zoom={zoom}
       scrollWheelZoom={true}
-      style={{ height, width: '100%' }}
+      style={{ height: '100%', width: '100%' }}
     >
       <CurrentLocation />
       <CulturalSites />
