@@ -25,7 +25,7 @@ import {
   SearchDrawer,
   ItineraryContainer,
 } from 'components'
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 const DynamicMap = dynamic(() => import('components/Map'), {
   ssr: false,
@@ -44,6 +44,7 @@ const MapPage = (): JSX.Element => {
   const { t } = useTranslation()
   const { query } = useRouter()
   const toastIdRef = useRef<any>()
+
   const toast = useToast()
 
   const addToast = (description: string) => {
@@ -73,12 +74,15 @@ const MapPage = (): JSX.Element => {
   const isLoading = status === 'loading'
   const isCulturalSites = culturalSites?.length > 0
 
+  const [height, setHeight] = useState('100vh')
+
   useEffect(() => {
     if (isLoading && style && days && topic && !toast.isActive(TOAST_ID)) {
       addToast(t('Search Toast', { ...searchData, style: t(style) }))
     }
     if (!isLoading) {
       toast.closeAll()
+      isCulturalSites && setHeight(`${window.innerHeight}px`)
     }
   }, [isLoading])
 
@@ -102,13 +106,16 @@ const MapPage = (): JSX.Element => {
       <VStack
         spacing={0}
         align="stretch"
-        height={`calc(100vh - ${isCulturalSites ? 100 : 60}px)`}
+        height={`calc(${height} - ${isCulturalSites ? 100 : 60}px)`}
         overflowY="auto"
         pos="absolute"
         top="60px"
         w="100%"
       >
-        <Box w="100%" height={`calc(100vh - ${isCulturalSites ? 162 : 102}px)`}>
+        <Box
+          w="100%"
+          height={`calc(${height} - ${isCulturalSites ? 160 : 100}px)`}
+        >
           <CurrentLocationProvider>
             {isLoading ? (
               <>
@@ -120,7 +127,9 @@ const MapPage = (): JSX.Element => {
                 <DynamicMap
                   initLocation={mapCenter}
                   zoom={mapZoom}
-                  height={`calc(100vh - ${isCulturalSites ? 162 : 102}px)`}
+                  height={`calc(${window.innerHeight}px - ${
+                    isCulturalSites ? 160 : 100
+                  }px)`}
                 />
               </CulturalSitesProvider>
             )}

@@ -7,7 +7,7 @@ export const Footer = (): JSX.Element => {
   const { t } = useTranslation()
 
   return (
-    <Box w="100%" pos="fixed" bottom="0">
+    <Box w="100%" pos="fixed" bottom="0" zIndex="1000"  bgColor="white">
       <Divider />
       <Flex p="2">
         <NextLink passHref href="https://github.com/matsprea/Euplea">

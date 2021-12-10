@@ -1,5 +1,10 @@
 import { latLng } from 'leaflet'
-import { MapContainer, TileLayer, LayersControl } from 'react-leaflet'
+import {
+  MapContainer,
+  TileLayer,
+  LayersControl,
+  MapConsumer,
+} from 'react-leaflet'
 import {
   CulturalSites,
   Itinerary,
@@ -26,30 +31,38 @@ export const Map = ({ initLocation, zoom, height }: MapProps): JSX.Element => {
   )
 
   return (
-      <MapContainer
-        center={center}
-        zoom={zoom}
-        scrollWheelZoom={true}
-        style={{ height, width: '100%' }}
-      >
-        <CurrentLocation />
-        <CulturalSites />
-        <Itinerary />
-        {culturalSites.length > 0 && (
-          <LayersControl position="topright">
-            <LayersControl.Overlay name={t('Amenities')} checked>
-              <Amenities />
-            </LayersControl.Overlay>
-            <LayersControl.Overlay name={t('Accomodations')} checked>
-              <Accomodations />
-            </LayersControl.Overlay>
-          </LayersControl>
-        )}
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-      </MapContainer>
+    <MapContainer
+      center={center}
+      zoom={zoom}
+      scrollWheelZoom={true}
+      style={{ height, width: '100%' }}
+    >
+      <MapConsumer>
+        {(map) => {
+          // setTimeout(function () {
+          //   map.invalidateSize()
+          // }, 400)
+          return null
+        }}
+      </MapConsumer>
+      <CurrentLocation />
+      <CulturalSites />
+      <Itinerary />
+      {culturalSites.length > 0 && (
+        <LayersControl position="topright">
+          <LayersControl.Overlay name={t('Amenities')} checked>
+            <Amenities />
+          </LayersControl.Overlay>
+          <LayersControl.Overlay name={t('Accomodations')} checked>
+            <Accomodations />
+          </LayersControl.Overlay>
+        </LayersControl>
+      )}
+      <TileLayer
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+    </MapContainer>
   )
 }
 
