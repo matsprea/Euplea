@@ -26,10 +26,16 @@ const getGeocoding = (q) =>
   ).then(({ value }) => value)
 
 export const geocodeSite = async (site) => {
-  const qAddress = {
+  const qAddressStructured = {
     street: site['?siteFullAddress']?.value,
     city: site['?siteCityName']?.value,
+    country: 'Italy',
   }
+
+  const qAddress = {
+    q: `${site['?siteFullAddress']?.value}, ${site['?siteCityName']?.value}}`,
+  }
+
   const qName =
     site['?siteLabel']?.value === 'IRE'
       ? qAddress
@@ -37,10 +43,11 @@ export const geocodeSite = async (site) => {
           q: `${site['?siteLabel']?.value}}`,
         }
 
+  const valueAddressStructured = await getGeocoding(qAddressStructured)
   const valueAddress = await getGeocoding(qAddress)
   const valueName = await getGeocoding(qName)
 
-  const [value] = [valueAddress, valueName]
+  const [value] = [valueAddressStructured, valueAddress, valueName]
     .filter((v) => v && 'lat' in v)
     .sort((a, b) => b.importance - a.importance)
 

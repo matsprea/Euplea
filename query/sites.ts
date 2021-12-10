@@ -95,7 +95,7 @@ const removeSiteDuplicationByLatLong = (siteList) => {
 
 const removeSiteDuplicationBySiteLabel = (siteList) => {
   const sitesDictionary = {}
-  for (const site of siteList) {
+  for (const site of siteList.reverse()) {
     sitesDictionary[site['?siteLabel'].value] = site
   }
   return Object.values(sitesDictionary)
@@ -126,6 +126,6 @@ const getGeocodedSites = async (siteList: any[]) => {
 export const getSites = (culturalSite) =>
   getSparQLSites(culturalSite)
     .then(getSeeAlsoSites)
-    // .then(removeSiteDuplicationBySiteLabel)
     .then(getGeocodedSites)
     .then((sites) => sites.filter(siteWithGeocoding))
+    .then(removeSiteDuplicationBySiteLabel)
