@@ -13,10 +13,9 @@ import { GiGreekTemple } from 'react-icons/gi'
 
 export const ItinerarySteps = forwardRef<any, any>(
   ({ culturalSites, isOpen }, ref) => {
-
     return (
       <Collapse in={isOpen} animateOpacity>
-        <Box p="2">
+        <Box p="2" marginBottom="42px">
           <OrderedList spacing={3} ref={ref}>
             {culturalSites.map((culturalSite, index) => (
               <ListItem key={index}>
