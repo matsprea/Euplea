@@ -32,22 +32,22 @@ export const geocodeSite = async (site) => {
     country: 'Italy',
   }
 
-  const qAddress = {
-    q: `${site['?siteFullAddress']?.value}, ${site['?siteCityName']?.value}}`,
-  }
+  // const qAddress = {
+  //   q: `${site['?siteFullAddress']?.value}, ${site['?siteCityName']?.value}}`,
+  // }
 
   const qName =
     site['?siteLabel']?.value === 'IRE'
-      ? qAddress
+      ? qAddressStructured
       : {
           q: `${site['?siteLabel']?.value}}`,
         }
 
   const valueAddressStructured = await getGeocoding(qAddressStructured)
-  const valueAddress = await getGeocoding(qAddress)
+  // const valueAddress = await getGeocoding(qAddress)
   const valueName = await getGeocoding(qName)
 
-  const [value] = [valueAddressStructured, valueAddress, valueName]
+  const [value] = [valueAddressStructured, valueName]
     .filter((v) => v && 'lat' in v)
     .sort((a, b) => b.importance - a.importance)
 
