@@ -23,6 +23,7 @@ import {
   Stack,
   Spacer,
   useDisclosure,
+  Select,
 } from '@chakra-ui/react'
 
 import { GiCancel } from 'react-icons/gi'
@@ -30,12 +31,12 @@ import { FaSearchLocation, FaSearch } from 'react-icons/fa'
 import { useTranslation } from 'next-i18next'
 import { useForm } from 'react-hook-form'
 
-import { SearchData, Style } from '../../types';
+import { SearchData, Style, Region } from 'types'
 
 type SearchDrawerProps = {
   searchData?: SearchData
   isLoading: boolean
-} 
+}
 
 const buildQueryString = (any): string =>
   Object.entries(any)
@@ -66,11 +67,15 @@ export const SearchDrawer = ({
   const selectStyleValue = watch('style')
   const handleStyleChange = (style: Style) => setValue('style', style)
 
+  const selectRegionValue = watch('region')
+  const handleRegionChange = (ev: any) => setValue('region', ev.target.value)
+
   useEffect(() => {
     register('days')
     register('style', {
       required: `${t('This is required')}`,
     })
+    register('region')
   }, [register])
 
   const onSubmit = (values: SearchData) => {
@@ -138,6 +143,24 @@ export const SearchDrawer = ({
                       <Box>{selectDaysValue}</Box>
                     </SliderThumb>
                   </Slider>
+                </FormControl>
+
+                <FormControl isInvalid={!!errors.region}>
+                  <FormLabel htmlFor="region">{t('Region')}</FormLabel>
+
+                  <Select
+                    id="region"
+                    placeholder={t('Select a region')}
+                    step={1}
+                    value={selectRegionValue}
+                    onChange={handleRegionChange}
+                  >
+                    {Object.keys(Region).map((key) => (
+                      <option key={key} value={Region[key]}>
+                        {Region[key]}
+                      </option>
+                    ))}
+                  </Select>
                 </FormControl>
 
                 <FormControl isInvalid={!!errors.style}>

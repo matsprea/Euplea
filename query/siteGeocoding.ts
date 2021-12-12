@@ -27,7 +27,6 @@ const getGeocoding = (q) =>
   ).then(({ value }) => value)
 
 export const geocodeSite = async (site) => {
-  // console.log('geoCoding', site['?siteLabel']?.value)
 
   const qAddressStructured = {
     street: site['?siteFullAddress']?.value,
@@ -53,10 +52,7 @@ export const geocodeSite = async (site) => {
   //   getQuery(qAddressStructured)
   // )()
   // const valueName = await geocodingQuery(getQuery(qName))()
-
-  // console.log('valueAddressStructured', valueAddressStructured)
-  // console.log('valueName', valueName)
-
+ 
   const [value] = [valueAddressStructured, valueName]
     .filter((v) => v && 'lat' in v)
     .sort((a, b) => b.importance - a.importance)

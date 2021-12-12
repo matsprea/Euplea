@@ -3,7 +3,7 @@ import {
   prefixBeniCulturali as prefix,
   sourcesBeniCulturali as sources,
 } from 'query'
-import { getWithCache } from 'cache'
+import { getWithCache, TTL } from 'cache'
 
 const containerId = 'region'
 
@@ -25,9 +25,12 @@ const myRegionsQuery = (region) => () =>
 
 const getSparqlRegions = (region: string) =>
   region
-    ? getWithCache(containerId, `${region}`, myRegionsQuery(region)).then(
-        ({ value }) => value
-      )
+    ? getWithCache(
+        containerId,
+        `${region}`,
+        myRegionsQuery(region),
+        TTL.Month
+      ).then(({ value }) => value)
     : Promise.resolve([])
 
 export const getRegions = getSparqlRegions

@@ -40,8 +40,6 @@ const getAllSparQLSites = (culturalSite: string) =>
   })
 
 const buildSitesDictionary = (siteList: any[]) => {
-  // console.log('buildSitesDictionary', siteList)
-
   const sitesDictionary = {}
   for (const site of siteList) {
     const siteId = site['?site'].value

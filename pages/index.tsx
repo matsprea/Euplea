@@ -13,7 +13,7 @@ import {
 import { useTranslation, SSRConfig } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-import { SearchData, Style } from 'types'
+import { Region, SearchData, Style } from 'types'
 import { useCulturalSiteAPI } from 'hooks'
 import { Header, SearchDrawer, MapContainer } from 'components'
 import { useRef, useEffect, useState } from 'react'
@@ -41,11 +41,13 @@ const MapPage = (): JSX.Element => {
   const style = query?.style as Style
   const days = Number(query?.days ?? 2)
   const subject = query?.subject as string
-
+  const region = query?.region as Region
+  
   const searchData: SearchData = {
     style,
     days,
     subject,
+    region
   }
 
   const { data: culturalSites, status } = useCulturalSiteAPI(
