@@ -11,11 +11,14 @@ import {
   Tag,
   TagLabel,
 } from '@chakra-ui/react'
+import { useTranslation } from 'next-i18next'
 import { forwardRef } from 'react'
 import { GiGreekTemple } from 'react-icons/gi'
 
 export const ItinerarySteps = forwardRef<any, any>(
   ({ culturalSites, isOpen }, ref) => {
+    const {t } = useTranslation()
+    
     return (
       <Collapse in={isOpen} animateOpacity>
         <Box p="2" marginBottom="42px">
@@ -34,7 +37,7 @@ export const ItinerarySteps = forwardRef<any, any>(
                   </Link>
                   <Spacer />
                   <Tag size="lg" borderRadius="full" minWidth="100px">
-                    <TagLabel>{culturalSite['?count'].value} items</TagLabel>
+                    <TagLabel>{t('Cultural items', culturalSite['?count'].value)}</TagLabel>
                   </Tag>
                 </HStack>
                 <Box>

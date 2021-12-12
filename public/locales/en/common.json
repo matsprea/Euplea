@@ -16,10 +16,13 @@
   "Amenities" : "Amenities",
   "Accomodations" : "Accommodation",
   "Searching for" : "Searching for",
-  "Search Toast": "{{subject}} for {{days}} days with style {{style}}",
+  "Search Toast": "{{subject}} for {{days}} days with style {{style}} in {{region}}",
   "Show itinerary" : "Show itinerary",
   "Hide itinerary" : "Hide itinerary",
   "Credits" : "Credits",
   "Made with" : "Made with ❤️ by {{name}}",
-  "Subject" : "Subject"
+  "Subject" : "Subject",
+  "Select a region" : "Select a region",
+  "Region" : "Region",
+  "Cultural items" : "{{count}} cultural items"
 }

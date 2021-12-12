@@ -68,7 +68,7 @@ const MapPage = (): JSX.Element => {
 
   useEffect(() => {
     if (isLoading && style && days && subject && !toast.isActive(TOAST_ID)) {
-      addToast(t('Search Toast', { ...searchData, style: t(style) }))
+      addToast(t('Search Toast', { ...searchData, style: t(style), region: region ?? 'Italia' }))
     }
     if (!isLoading) {
       toast.closeAll()
