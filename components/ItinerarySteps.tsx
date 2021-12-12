@@ -22,10 +22,14 @@ export const ItinerarySteps = forwardRef<any, any>(
     return (
       <Collapse in={isOpen} animateOpacity>
         <Box p="2" marginBottom="42px">
-          {/* <Heading as="h2">Cultural institution</Heading> */}
           <VStack spacing={3} ref={ref}>
-            {culturalSites.map((culturalSite, index) => (
-              <Box key={index} w="100%" shadow="md" padding={2}>
+            {culturalSites.map((culturalSite, _index) => (
+              <Box
+                key={culturalSite['?culturalInstituteOrSite'].value}
+                w="100%"
+                shadow="md"
+                padding={2}
+              >
                 <HStack>
                   <Link
                     href={culturalSite['?culturalInstituteOrSite'].value}
@@ -37,15 +41,20 @@ export const ItinerarySteps = forwardRef<any, any>(
                   </Link>
                   <Spacer />
                   <Tag size="lg" borderRadius="full" minWidth="100px">
-                    <TagLabel>{t('Cultural items', culturalSite['?count'].value)}</TagLabel>
+                    <TagLabel>
+                      {t('Cultural items', culturalSite['?count'].value)}
+                    </TagLabel>
                   </Tag>
                 </HStack>
                 <Box>
                   <VStack>
-                    {/* <Heading as="h4">Sites:</Heading> */}
-                    {/* <UnorderedList spacing={3}>*/}
-                    {culturalSite['site'].map((site, index) => (
-                      <Flex Box key={index} w="100%" padding={2}>
+                    {culturalSite['site'].map((site, _index) => (
+                      <Flex
+                        Box
+                        key={site['?site']?.value}
+                        w="100%"
+                        padding={2}
+                      >
                         <Avatar
                           bgColor="teal"
                           icon={<GiGreekTemple color="white" fontSize="2rem" />}
@@ -62,7 +71,6 @@ export const ItinerarySteps = forwardRef<any, any>(
                         <Spacer />
                       </Flex>
                     ))}
-                    {/*</UnorderedList> */}
                   </VStack>
                 </Box>
               </Box>
