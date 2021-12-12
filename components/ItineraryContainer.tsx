@@ -12,7 +12,6 @@ import { ItinerarySteps } from 'components'
 import { SearchData } from 'types'
 import { FaCaretDown, FaCaretUp, FaShareAlt } from 'react-icons/fa'
 
-
 type ItineraryContainerProps = {
   culturalSites: any[]
   searchData: SearchData
@@ -51,18 +50,18 @@ export const ItineraryContainer = ({
       }, 500)
   }, [isOpen])
 
-  const canShare = navigator.canShare && navigator.canShare()
-
   return (
     <>
       <HStack p="2">
-        <Button
-          p="2"
-          onClick={showItinerary}
-          leftIcon={isOpen ? <FaCaretUp /> : <FaCaretDown />}
-        >
-          {isOpen ? t('Hide itinerary') : t('Show itinerary')}
-        </Button>
+        <Box>
+          <Button
+            p="2"
+            onClick={showItinerary}
+            leftIcon={isOpen ? <FaCaretUp /> : <FaCaretDown />}
+          >
+            {isOpen ? t('Hide itinerary') : t('Show itinerary')}
+          </Button>
+        </Box>
         <Spacer />
         <Box>
           <Heading as="h2" color="teal" size="md">
@@ -70,11 +69,11 @@ export const ItineraryContainer = ({
           </Heading>
         </Box>
         <Spacer />
-        {canShare && (
+        <Box>
           <Button p="2" onClick={shareItinerary} leftIcon={<FaShareAlt />}>
             {t('Share')}
           </Button>
-        )}
+        </Box>
       </HStack>
       <ItinerarySteps
         ref={ItineraryList}
