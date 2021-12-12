@@ -5,6 +5,8 @@ import {
   Spacer,
   HStack,
   Heading,
+  useMediaQuery,
+  IconButton,
 } from '@chakra-ui/react'
 import { useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -24,6 +26,7 @@ export const ItineraryContainer = ({
   const { t } = useTranslation()
   const ItineraryList = useRef<any>()
   const { isOpen, onToggle } = useDisclosure()
+  const [isMobile] = useMediaQuery('(max-width: 768px)')
 
   const itineraryTitle = t('Itinerary title', {
     ...searchData,
@@ -35,13 +38,14 @@ export const ItineraryContainer = ({
     onToggle()
   }
 
-  const shareItinerary = async () => {
-    await navigator.share({
-      url: window.location.href,
-      title: itineraryTitle,
-      text: 'TBD',
-    })
-  }
+  const shareItinerary = async () =>
+    navigator.share
+      ? await navigator.share({
+          url: window.location.href,
+          title: itineraryTitle,
+          text: itineraryTitle,
+        })
+      : Promise.resolve()
 
   useEffect(() => {
     isOpen &&
@@ -54,13 +58,21 @@ export const ItineraryContainer = ({
     <>
       <HStack p="2">
         <Box>
-          <Button
-            p="2"
-            onClick={showItinerary}
-            leftIcon={isOpen ? <FaCaretUp /> : <FaCaretDown />}
-          >
-            {isOpen ? t('Hide itinerary') : t('Show itinerary')}
-          </Button>
+          {!isMobile ? (
+            <Button
+              p="2"
+              onClick={showItinerary}
+              leftIcon={isOpen ? <FaCaretUp /> : <FaCaretDown />}
+            >
+              {isOpen ? t('Hide itinerary') : t('Show itinerary')}
+            </Button>
+          ) : (
+            <IconButton
+              onClick={showItinerary}
+              aria-label={isOpen ? t('Hide itinerary') : t('Show itinerary')}
+              icon={isOpen ? <FaCaretUp /> : <FaCaretDown />}
+            />
+          )}
         </Box>
         <Spacer />
         <Box>
@@ -70,9 +82,17 @@ export const ItineraryContainer = ({
         </Box>
         <Spacer />
         <Box>
-          <Button p="2" onClick={shareItinerary} leftIcon={<FaShareAlt />}>
-            {t('Share')}
-          </Button>
+          {!isMobile ? (
+            <Button p="2" onClick={shareItinerary} leftIcon={<FaShareAlt />}>
+              {t('Share')}
+            </Button>
+          ) : (
+            <IconButton
+              onClick={shareItinerary}
+              aria-label={t('Share')}
+              icon={<FaShareAlt />}
+            />
+          )}
         </Box>
       </HStack>
       <ItinerarySteps
