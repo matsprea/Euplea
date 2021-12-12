@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { getRegions } from 'query'
+import { Region } from 'types'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { region } = req.query
@@ -7,10 +8,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (!region || typeof region !== 'string')
     res.status(400).json({ error: 'Missing region' })
   else {
-   
-    await getRegions(region).then((data) =>
-      res.status(200).json(data)
-    )
+    const myRegion = region as Region
+    
+    await getRegions(myRegion).then((data) => res.status(200).json(data))
   }
 }
 
