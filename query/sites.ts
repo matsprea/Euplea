@@ -9,6 +9,7 @@ import {
   query3,
   query4,
 } from './sitesSparql'
+import { Region } from 'types'
 
 const containerId = 'site'
 
@@ -103,28 +104,28 @@ const removeSiteDuplicationBySiteLabel = (siteList: any[]) => {
   return Object.values(sitesDictionary)
 }
 
-const getGeocodedSites = async (siteList: any[]) => {
+const getGeocodedSites = (region: Region) => async (siteList: any[]) => {
   const sitesWithLatLong = siteList.filter(siteWithGeocoding)
   const uniqueSiteWithLatLong = removeSiteDuplicationByLatLong(sitesWithLatLong)
   const sitesWithOutLatLong = siteList.filter(siteWithoutGeocoding)
 
-  const sitesGeocoded = await Promise.all(sitesWithOutLatLong.map(geocodeSite))
+  const sitesGeocoded = await Promise.all(sitesWithOutLatLong.map(geocodeSite(region)))
 
   const value = [...uniqueSiteWithLatLong, ...sitesGeocoded.flat()]
 
   return value
 }
 
-const getSitesNoCache = (culturalSite: string) =>
+const getSitesNoCache = (culturalSite: string, region: Region) =>
   getSparQlSite(culturalSite)
     .then(getSeeAlsoSites)
-    .then(getGeocodedSites)
+    .then(getGeocodedSites(region))
     .then((sites) => sites.filter(siteWithGeocoding))
     .then(removeSiteDuplicationBySiteLabel)
 
-const getSitesWithCache = (culturalSite: string) =>
-  getWithCache(containerId, `getSitesWithCache-${culturalSite}`, () =>
-    getSitesNoCache(culturalSite)
+const getSitesWithCache = (culturalSite: string, region: Region) =>
+  getWithCache(containerId, `getSitesWithCache-${culturalSite}-${region}`, () =>
+    getSitesNoCache(culturalSite, region)
   ).then(({ value }) => value)
 
 export const getSites = withCache ? getSitesWithCache : getSitesNoCache

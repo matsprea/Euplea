@@ -6,6 +6,7 @@ import {
   getRegions,
 } from 'query'
 import { getWithCache, TTL } from 'cache'
+import { Region } from 'types'
 
 const getRegionFilter = (regionIds: string[]) =>
   regionIds.length > 0
@@ -52,7 +53,7 @@ const culturalSiteWithoutSite = ({ site }) => site.length > 0
 
 export const getCulturalSitesWithSites = (
   subject: string,
-  region: string,
+  region: Region,
   numberOfDays: number
 ) =>
   subject.length >= 3
@@ -61,7 +62,7 @@ export const getCulturalSitesWithSites = (
           .then((culturalSites) =>
             Promise.all(
               culturalSites.splice(0, numberOfDays + 5).map((culturalSite) =>
-                getSites(culturalSite['?culturalInstituteOrSite'].value).then(
+                getSites(culturalSite['?culturalInstituteOrSite'].value, region).then(
                   (site) => ({
                     ...culturalSite,
                     site,

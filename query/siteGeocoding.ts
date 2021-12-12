@@ -1,7 +1,9 @@
 import nominatim from 'nominatim-client'
 import { getWithCache, TTL } from 'cache'
+import { Region } from 'types'
 
 const containerId = 'siteGeocoding'
+const country = 'Italia'
 
 const geocodingClient = nominatim.createClient({
   useragent: 'Euplea',
@@ -26,24 +28,17 @@ const getGeocoding = (q) =>
     TTL.Forever
   ).then(({ value }) => value)
 
-export const geocodeSite = async (site) => {
-
+export const geocodeSite = (region: Region) => async (site) => {
   const qAddressStructured = {
     street: site['?siteFullAddress']?.value,
     city: site['?siteCityName']?.value,
-    country: 'Italia',
+    state: region,
+    country,
   }
 
-  // const qAddress = {
-  //   q: `${site['?siteFullAddress']?.value}, ${site['?siteCityName']?.value}}`,
-  // }
-
-  const qName =
-    site['?siteLabel']?.value === 'IRE'
-      ? qAddressStructured
-      : {
-          q: `${site['?siteLabel']?.value}}`,
-        }
+  const qName = {
+    q: `${site['?siteLabel']?.value} ${region ? `, ${region}` : ''}, ${country}`
+  }
 
   const valueAddressStructured = await getGeocoding(qAddressStructured)
   const valueName = await getGeocoding(qName)
@@ -52,7 +47,10 @@ export const geocodeSite = async (site) => {
   //   getQuery(qAddressStructured)
   // )()
   // const valueName = await geocodingQuery(getQuery(qName))()
- 
+
+  // console.log('valueAddressStructured', valueAddressStructured)
+  // console.log('valueName', valueName)
+
   const [value] = [valueAddressStructured, valueName]
     .filter((v) => v && 'lat' in v)
     .sort((a, b) => b.importance - a.importance)

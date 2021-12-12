@@ -4,6 +4,7 @@ import {
   sourcesBeniCulturali as sources,
 } from 'query'
 import { getWithCache, TTL } from 'cache'
+import { ItalianRegionsMap, Region } from 'types'
 
 const containerId = 'region'
 
@@ -20,14 +21,14 @@ WHERE {
 const mapRegions = (regions) =>
   regions.map((region) => region.get('?region').value)
 
-const myRegionsQuery = (region) => () =>
-  mySparQLQuery(query(region), sources).then(mapRegions)
+const myRegionsQuery = (region: Region) => () =>
+  mySparQLQuery(query(ItalianRegionsMap.get(region)), sources).then(mapRegions)
 
-const getSparqlRegions = (region: string) =>
+const getSparqlRegions = (region: Region) =>
   region
     ? getWithCache(
         containerId,
-        `${region}`,
+        `${region}3`,
         myRegionsQuery(region),
         TTL.Month
       ).then(({ value }) => value)
