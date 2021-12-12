@@ -55,7 +55,7 @@ export const ItineraryContainer = ({
   }, [isOpen])
 
   return (
-    <>
+    <Box marginBottom="42px">
       <HStack p="2">
         <Box>
           {!isMobile ? (
@@ -100,6 +100,6 @@ export const ItineraryContainer = ({
         culturalSites={culturalSites}
         isOpen={isOpen}
       />
-    </>
+    </Box>
   )
 }

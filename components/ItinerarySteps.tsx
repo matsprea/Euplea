@@ -21,7 +21,7 @@ export const ItinerarySteps = forwardRef<any, any>(
     
     return (
       <Collapse in={isOpen} animateOpacity>
-        <Box p="2" marginBottom="42px">
+        <Box p="2">
           <VStack spacing={3} ref={ref}>
             {culturalSites.map((culturalSite, _index) => (
               <Box
