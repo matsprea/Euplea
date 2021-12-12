@@ -57,14 +57,25 @@ const IndexPage = ({
     }
   }, [isLoading])
 
+  const itineraryTitle = t('Itinerary title', {
+    ...searchData,
+    style: t(searchData.style),
+    region: searchData.region ?? 'Italia',
+  })
+
+  const pageTile = isCulturalSites
+    ? `${itineraryTitle} - ${t('header')}`
+    : t('header')
+
   return (
     <>
-      <Header title={t('header')} />
+      <Header title={pageTile} />
 
       <MapContainer
         isCulturalSites={isCulturalSites}
         isLoading={isLoading}
         culturalSites={culturalSites}
+        searchData={searchData}
       />
     </>
   )

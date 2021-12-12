@@ -24,5 +24,6 @@
   "Subject" : "Soggetto",
   "Select a region": "Seleziona una regione",
   "Region" : "Regione",
-  "Cultural items" : "{{count}} beni culturali"
+  "Cultural items" : "{{count}} beni culturali",
+  "Itinerary title": "Itinerario con soggetto {{subject}} per {{days}} giorni con stile {{style}} in {{region}}"
 }

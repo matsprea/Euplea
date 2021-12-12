@@ -35,7 +35,7 @@ export const ItinerarySteps = forwardRef<any, any>(
                     href={culturalSite['?culturalInstituteOrSite'].value}
                     isExternal
                   >
-                    <Heading as="h2" size="lg">
+                    <Heading as="h3" size="md">
                       {culturalSite['?culturalInstituteOrSiteLabel'].value}
                     </Heading>
                   </Link>
@@ -62,7 +62,7 @@ export const ItinerarySteps = forwardRef<any, any>(
                           marginRight={2}
                         />
                         <Box>
-                          <Heading as="h3" size="md">
+                          <Heading as="h4" size="sm">
                             {site['?siteLabel'].value}
                           </Heading>
                           {site['?siteFullAddress']?.value},{' '}

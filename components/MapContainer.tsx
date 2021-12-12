@@ -5,6 +5,7 @@ import { Box, Progress, VStack } from '@chakra-ui/react'
 import { CulturalSitesProvider, CurrentLocationProvider } from 'context'
 import { MapSkeleton, ItineraryContainer } from 'components'
 import { useEffect, useState } from 'react'
+import { SearchData } from 'types'
 
 const MAP_CENTER = '42.504306, 12.572639'
 const mapCenter = process.env.MAP_CENTER ?? MAP_CENTER
@@ -17,7 +18,18 @@ const DynamicMap = dynamic(() => import('components/Map'), {
   loading: () => <MapSkeleton />,
 })
 
-export const MapContainer = ({ isCulturalSites, isLoading, culturalSites }) => {
+type MapContainerProps = {
+  isCulturalSites: boolean
+  isLoading: boolean
+  culturalSites: any[]
+  searchData: SearchData
+}
+export const MapContainer = ({
+  isCulturalSites,
+  isLoading,
+  culturalSites,
+  searchData,
+}: MapContainerProps) => {
   const [height, setHeight] = useState('100vh')
 
   useEffect(() => {
@@ -61,7 +73,10 @@ export const MapContainer = ({ isCulturalSites, isLoading, culturalSites }) => {
         </CurrentLocationProvider>
       </Box>
       {!isLoading && isCulturalSites && (
-        <ItineraryContainer culturalSites={culturalSites} />
+        <ItineraryContainer
+          culturalSites={culturalSites}
+          searchData={searchData}
+        />
       )}
     </VStack>
   )
