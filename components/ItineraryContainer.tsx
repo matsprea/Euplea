@@ -55,7 +55,7 @@ export const ItineraryContainer = ({
   }, [isOpen])
 
   return (
-    <Box marginBottom="42px">
+    <Box style={{ marginBottom: '42px' }}>
       <HStack p="2">
         <Box>
           {!isMobile ? (
