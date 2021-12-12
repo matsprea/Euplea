@@ -7,7 +7,7 @@ import 'styles/globals.css'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css'
 import { theme } from 'theme'
-import { Footer } from 'components'
+import { BasePage } from 'components'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,33 +17,18 @@ const queryClient = new QueryClient({
   },
 })
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-        <Head>
-          <meta
-            name="viewport"
-            content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
-          />
-        </Head>
-        <Component {...pageProps} />
-        <Footer />
-      </ChakraProvider>
-    </QueryClientProvider>
-  )
-}
-
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext: AppContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-
-//   return { ...appProps }
-// }
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
+  <QueryClientProvider client={queryClient}>
+    <ChakraProvider theme={theme}>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
+        />
+      </Head>
+      <BasePage Component={Component} pageProps={pageProps}   />
+    </ChakraProvider>
+  </QueryClientProvider>
+)
 
 export default appWithTranslation(MyApp)
