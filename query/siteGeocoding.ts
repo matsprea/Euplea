@@ -1,5 +1,5 @@
 import nominatim from 'nominatim-client'
-import { getWithCache } from 'cache'
+import { getWithCache, TTL } from 'cache'
 
 const containerId = 'siteGeocoding'
 
@@ -8,7 +8,7 @@ const geocodingClient = nominatim.createClient({
   referer: 'https://euplea.herokuapp.com',
 })
 
-const geocodingQuery = (query) => () =>
+const geocodingQuery = (query: nominatim.SearchOptions) => () =>
   geocodingClient
     .search(query)
     .then(([result]) => result ?? { query, result, date: Date.now() })
@@ -22,14 +22,17 @@ const getGeocoding = (q) =>
   getWithCache(
     containerId,
     JSON.stringify(q),
-    geocodingQuery(getQuery(q))
+    geocodingQuery(getQuery(q)),
+    TTL.Forever
   ).then(({ value }) => value)
 
 export const geocodeSite = async (site) => {
+  // console.log('geoCoding', site['?siteLabel']?.value)
+
   const qAddressStructured = {
     street: site['?siteFullAddress']?.value,
     city: site['?siteCityName']?.value,
-    country: 'Italy',
+    country: 'Italia',
   }
 
   // const qAddress = {
@@ -44,8 +47,15 @@ export const geocodeSite = async (site) => {
         }
 
   const valueAddressStructured = await getGeocoding(qAddressStructured)
-  // const valueAddress = await getGeocoding(qAddress)
   const valueName = await getGeocoding(qName)
+
+  // const valueAddressStructured = await geocodingQuery(
+  //   getQuery(qAddressStructured)
+  // )()
+  // const valueName = await geocodingQuery(getQuery(qName))()
+
+  // console.log('valueAddressStructured', valueAddressStructured)
+  // console.log('valueName', valueName)
 
   const [value] = [valueAddressStructured, valueName]
     .filter((v) => v && 'lat' in v)

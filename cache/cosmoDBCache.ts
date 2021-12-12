@@ -1,14 +1,22 @@
 import { CosmosClient } from '@azure/cosmos'
 import { createHmac } from './createHmac'
 
-const endpoint = process.env.COSMOS_ENDPOINT
-const key = process.env.COSMOS_KEY
+const COSMOS_ENDPOINT = process.env.COSMOS_ENDPOINT
+const COSMOS_KEY = process.env.COSMOS_KEY
 
-const client = endpoint && new CosmosClient({ endpoint, key })
+const client =
+  COSMOS_ENDPOINT &&
+  new CosmosClient({ endpoint: COSMOS_ENDPOINT, key: COSMOS_KEY })
 const EupleaDb = client?.database('Euplea')
 
-const ttlDefault = -1
-const ttlError = 60 * 60 * 24
+export const enum TTL {
+  Forever = -1,
+  Day = 60 * 60 * 24,
+  Week = 60 * 60 * 24 * 7,
+  Month = 60 * 60 * 24 * 30,
+  Year = 60 * 60 * 24 * 365,
+  Error = 60 * 60 * 24,
+}
 
 const getContainer = async (containerId: string) => {
   const { container } = await EupleaDb.containers
@@ -33,35 +41,15 @@ const getItem = (containerId: string, id: string) =>
       throw error
     })
 
-const updateItem =
-  (containerId: string, id: string) =>
-  async (value, ttl = ttlDefault) =>
-    (await getItem(containerId, id))
-      .replace({
-        id,
-        value,
-        ttl,
-      })
-      .then(getResourceFromItem)
-      .catch((error) => {
-        console.error(`updateItem ${containerId} ${id}`, error)
-        return value
-      })
-
 const getFromCache = async (containerId: string, id: string) =>
-  (await getItem(containerId, id)).read().then(getResourceFromItem)
+  (await getItem(containerId, createHmac(id))).read().then(getResourceFromItem)
 
-const putInCache = async (
-  containerId: string,
-  id: string,
-  value,
-  ttl = ttlDefault
-) =>
+const putInCache = async (containerId: string, id: string, value, ttl: TTL) =>
   EupleaDb &&
   getContainer(containerId).then((container) =>
     container.items
-      .create({
-        id,
+      .upsert({
+        id: createHmac(id),
         value,
         ttl,
       })
@@ -72,29 +60,43 @@ const putInCache = async (
       })
   )
 
+const executeAndPutInCache = (
+  containerId: string,
+  id: string,
+  operation: () => Promise<any>,
+  ttl: TTL
+) =>
+  operation()
+    .then((data) => putInCache(containerId, id, data, ttl))
+    .catch((error) =>
+      putInCache(containerId, id, { error, key: id }, TTL.Error).catch(
+        (error) => {
+          console.error(`executeAndPutInCache ${containerId}`, error)
+          return []
+        }
+      )
+    )
+
 export const getWithCache = async (
   containerId: string,
-  key: string,
+  id: string,
   operation: () => Promise<any>,
-  ttl = ttlDefault
+  ttl: TTL = TTL.Year
 ) =>
   EupleaDb
-    ? getFromCache(containerId, createHmac(key)).then((data) => {
+    ? getFromCache(containerId, id).then((data) => {
         if (
           data?.value?.date &&
-          data.value.date + 1000 * ttlError < Date.now()
+          data.value.date + 1000 * TTL.Error < Date.now()
         ) {
-          return operation().then((data) =>
-            updateItem(containerId, createHmac(key))(data, ttlError)
-          )
+          return executeAndPutInCache(containerId, id, operation, ttl)
         }
         if (data !== undefined && data !== null) {
           return data?.error ?? data
         }
-        return operation()
-          .then((data) => putInCache(containerId, createHmac(key), data, ttl))
-          .catch((error) =>
-            putInCache(containerId, createHmac(key), { error, key }, ttlError)
-          )
+        return executeAndPutInCache(containerId, id, operation, ttl)
       })
-    : operation()
+    : operation().catch((error) => {
+        console.error(`getWithCache ${containerId}`, error)
+        return []
+      })

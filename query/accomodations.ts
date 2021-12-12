@@ -87,8 +87,7 @@ const getSparqlAccomodations = (lat: number, long: number, style: Style) =>
   getWithCache(
     containerId,
     `${lat}-${long}-${style}`,
-    mySparQLQuery(query(lat, long, style), sources)
+    () => mySparQLQuery(query(lat, long, style), sources)
   ).then(({ value }) => value)
 
-export const getAccomodations = (lat: number, long: number, style: Style) =>
-  getSparqlAccomodations(lat, long, style)
+export const getAccomodations = getSparqlAccomodations

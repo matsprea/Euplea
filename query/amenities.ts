@@ -41,8 +41,7 @@ const getSparqlAmenities = (lat: number, long: number, style: Style) =>
   getWithCache(
     containerId,
     `${lat}-${long}-${style}`,
-    mySparQLQuery(query(lat, long, style), sources)
+    () => mySparQLQuery(query(lat, long, style), sources)
   ).then(({ value }) => value)
 
-export const getAmenities = (lat: number, long: number, style: Style) =>
-  getSparqlAmenities(lat, long, style)
+export const getAmenities =  getSparqlAmenities 

@@ -4,10 +4,9 @@
   "Create a new itinerary" : "Create a new itinerary",
   "Cancel" : "Cancel",
   "Days" : "Days",
-  "Topic": "Topic",
   "This is required": "This is required",
   "Minimum length should be" : "Minimum length should be {{length}}",
-  "Please enter a topic" : "Please enter a topic",
+  "Please enter a subject" : "Please enter a subject",
   "Description" : "Description",
   "Style" : "Style",
   "Luxury" : "Luxury",
@@ -17,9 +16,10 @@
   "Amenities" : "Amenities",
   "Accomodations" : "Accommodation",
   "Searching for" : "Searching for",
-  "Search Toast": "{{topic}} for {{days}} days with style {{style}}",
+  "Search Toast": "{{subject}} for {{days}} days with style {{style}}",
   "Show itinerary" : "Show itinerary",
   "Hide itinerary" : "Hide itinerary",
   "Credits" : "Credits",
-  "Made with" : "Made with ❤️ by {{name}}"
+  "Made with" : "Made with ❤️ by {{name}}",
+  "Subject" : "Subject"
 }

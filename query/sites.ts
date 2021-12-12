@@ -1,91 +1,95 @@
-import {
-  mySparQLQuery,
-  prefixBeniCulturali as prefix,
-  sourcesBeniCulturali as sources,
-} from 'query'
+import { mySparQLQuery, sourcesBeniCulturali as sources } from 'query'
 import { getWithCache } from 'cache'
 import { geocodeSite } from './siteGeocoding'
-
-const query = (culturalSite) => `${prefix}
-SELECT ?site (SAMPLE(?siteSeeAlso) AS ?siteSeeAlso) (SAMPLE(?siteLabel) AS ?siteLabel) (SAMPLE(?sitePreview) AS ?sitePreview) (SAMPLE(?siteFullAddress) AS ?siteFullAddress) (SAMPLE(?siteCityName) AS ?siteCityName) (SAMPLE(?lat) as ?lat) (SAMPLE(?long) as ?long)  
-WHERE {
- ?culturalInstituteOrSite a cis:CulturalInstituteOrSite ;
- cis:hasSite ?site ;
- rdfs:label ?label .
-
- ?site rdfs:label ?siteLabel ;
- cis:siteAddress ?siteAddress .
-
- FILTER ( ?culturalInstituteOrSite = <${culturalSite}> ) .
-
- OPTIONAL { ?site owl:deprecated ?deprecatedSite } .
- FILTER ( !BOUND(?deprecatedSite ) ) .
- 
- OPTIONAL { ?site rdfs:seeAlso ?siteSeeAlso } .
- OPTIONAL { ?site pico:preview ?sitePreview  } .
-
- OPTIONAL { ?siteAddress clvapit:fullAddress ?siteFullAddress } .
- OPTIONAL { ?siteAddress clvapit:hasCity ?siteCity .
-
-  ?siteCity l0:name ?siteCityName  
- } .
-
- OPTIONAL { ?culturalInstituteOrSite geo:lat ?siteLat0 ;
-  geo:long ?siteLong0 
- } .
-
- OPTIONAL { ?site a-loc:lat ?siteLat1 ;
-  a-loc:long ?siteLong1 
- } .
-
- OPTIONAL { ?site clvapit:hasGeometry ?siteGeometry .
-  ?siteGeometry a-loc:lat ?siteLat2 ;
-  a-loc:long ?siteLong2 
- } .
-
- OPTIONAL { ?site clvapit:hasGeometry ?siteGeometry .
-  ?siteGeometry a-loc:hasCoordinates ?siteCoordinates .
-
-  ?siteCoordinates a-loc:lat ?siteLat3 ;
-  a-loc:long ?siteLong3 
- } .
- 
- OPTIONAL { SELECT ?siteLat4 ?siteLong4 
-  WHERE { ?cultpro rdf:type/rdfs:subClassOf* arco:CulturalProperty ;
-    a-loc:hasCulturalPropertyAddress ?siteAddress ;
-    clvapit:hasGeometry ?cpGeometry .
-    
-    ?cpGeometry a-loc:hasCoordinates ?cpCoordinates .
-    
-    ?cpCoordinates a-loc:lat ?siteLat4 ;
-    a-loc:long ?siteLong4 
-  }
-  LIMIT 1
- } .
-
- BIND(COALESCE( ?siteLat0, ?siteLat1, ?siteLat2, ?siteLat3 ) AS ?siteLat) .
- BIND(COALESCE( ?siteLong0, ?siteLong1, ?siteLong2, ?siteLong3  ) AS  ?siteLong) .
- 
- BIND( ROUND( xsd:float(?siteLat)*1000000)/1000000 AS ?lat) .
- BIND( ROUND( xsd:float(?siteLong)*1000000)/1000000 AS ?long) .
-}
-GROUP BY ?site
-`
+import {
+  onlySites,
+  onlyLatLong,
+  query1,
+  query2,
+  query3,
+  query4,
+} from './sitesSparql'
 
 const containerId = 'site'
 
-const getSparQLSites = (culturalSite: string) =>
-  getWithCache(
-    containerId,
-    culturalSite,
-    mySparQLQuery(query(culturalSite), sources)
-  ).then(({ value }) => value)
+const withCache = true
+
+const mySparQLQueryBeniCulturali = (query: string) =>
+  mySparQLQuery(query, sources).then((response) =>
+    JSON.parse(JSON.stringify(response))
+  )
 
 const siteWithoutGeocoding = (site) => !siteWithGeocoding(site)
-
 const siteWithGeocoding = (site) => '?lat' in site && '?long' in site
 
-const removeSiteDuplicationByLatLong = (siteList) => {
+const unionSiteLatLong = (sites, latLong) =>
+  sites.map((site) => ({
+    ...site,
+    ...latLong,
+  }))
+
+const getAllSparQLSites = (culturalSite: string) =>
+  Promise.all(
+    [onlySites, onlyLatLong, query1, query2, query3, query4]
+      .map((query) => query(culturalSite))
+      .map(mySparQLQueryBeniCulturali)
+  ).then(([sites, latLong, ...siteLists]) => {
+    return [...siteLists.flat(), ...unionSiteLatLong(sites, latLong)].filter(
+      (site) => !!site
+    )
+  })
+
+const buildSitesDictionary = (siteList: any[]) => {
+  // console.log('buildSitesDictionary', siteList)
+
+  const sitesDictionary = {}
+  for (const site of siteList) {
+    const siteId = site['?site'].value
+    sitesDictionary[siteId] = [...(sitesDictionary[siteId] ?? []), site]
+  }
+  return Object.values(sitesDictionary)
+}
+
+const distinctSiteLatLong = (siteValues: any[]) => {
+  if (siteValues.length === 0) return []
+
+  const siteWithLatLong = siteValues.filter(siteWithGeocoding)
+
+  const value = siteWithLatLong.length > 0 ? siteWithLatLong[0] : siteValues[0]
+
+  return value
+}
+
+const getSparQlSiteNoCache = (culturalSite: string) =>
+  getAllSparQLSites(culturalSite)
+    .then(buildSitesDictionary)
+    .then(distinctSiteLatLong)
+
+const getSparQlSiteWithCache = (culturalSite: string) => {
+  return getWithCache(
+    containerId,
+    `getSparQlSiteWithCache-${culturalSite}`,
+    () => getSparQlSiteNoCache(culturalSite)
+  ).then(({ value }) => value)
+}
+
+const getSparQlSite = withCache ? getSparQlSiteWithCache : getSparQlSiteNoCache
+
+const getSeeAlsoSites = async (siteList: any[]) => {
+  const seeAlsoList = siteList
+    .filter((site) => '?siteSeeAlso' in site)
+    .map((site) => site['?siteSeeAlso'].value)
+
+  const seeAlsoSiteList = await Promise.all(
+    seeAlsoList.map(getSparQlSite)
+  ).then((siteLists) => siteLists.flat())
+
+  const value = [...siteList, ...seeAlsoSiteList]
+
+  return value
+}
+
+const removeSiteDuplicationByLatLong = (siteList: any[]) => {
   const sitesDictionary = {}
   for (const site of siteList) {
     sitesDictionary[`${site['?lat'].value}_${site['?long'].value}`] = site
@@ -93,24 +97,12 @@ const removeSiteDuplicationByLatLong = (siteList) => {
   return Object.values(sitesDictionary)
 }
 
-const removeSiteDuplicationBySiteLabel = (siteList) => {
+const removeSiteDuplicationBySiteLabel = (siteList: any[]) => {
   const sitesDictionary = {}
-  for (const site of siteList.reverse()) {
+  for (const site of siteList) {
     sitesDictionary[site['?siteLabel'].value] = site
   }
   return Object.values(sitesDictionary)
-}
-
-const getSeeAlsoSites = async (siteList: any[]) => {
-  const notSeeAlsoList = siteList.filter((site) => !('?siteSeeAlso' in site))
-
-  const seeAlsoList = await Promise.all(
-    siteList
-      .filter((site) => '?siteSeeAlso' in site)
-      .map((site) => getSparQLSites(site['?siteSeeAlso'].value))
-  )
-
-  return [...notSeeAlsoList, ...seeAlsoList.flat()]
 }
 
 const getGeocodedSites = async (siteList: any[]) => {
@@ -120,12 +112,21 @@ const getGeocodedSites = async (siteList: any[]) => {
 
   const sitesGeocoded = await Promise.all(sitesWithOutLatLong.map(geocodeSite))
 
-  return [...uniqueSiteWithLatLong, ...sitesGeocoded.flat()]
+  const value = [...uniqueSiteWithLatLong, ...sitesGeocoded.flat()]
+
+  return value
 }
 
-export const getSites = (culturalSite) =>
-  getSparQLSites(culturalSite)
+const getSitesNoCache = (culturalSite: string) =>
+  getSparQlSite(culturalSite)
     .then(getSeeAlsoSites)
     .then(getGeocodedSites)
     .then((sites) => sites.filter(siteWithGeocoding))
     .then(removeSiteDuplicationBySiteLabel)
+
+const getSitesWithCache = (culturalSite: string) =>
+  getWithCache(containerId, `getSitesWithCache-${culturalSite}`, () =>
+    getSitesNoCache(culturalSite)
+  ).then(({ value }) => value)
+
+export const getSites = withCache ? getSitesWithCache : getSitesNoCache

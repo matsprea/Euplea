@@ -4,10 +4,9 @@
   "Create a new itinerary" : "Crea un nuovo itinerario",
   "Cancel" : "Annulla",
   "Days" : "Giorni",
-  "Topic": "Argomento",
   "This is required" : "Questo è obbligatorio",
   "Minimum length should be" : "La lunghezza minima è {{length}}",
-  "Please enter a topic" : "Scegli un argomento",
+  "Please enter a subject" : "Scegli un argomento",
   "Description" : "Descrizione",
   "Style" : "Stile",
   "Luxury" : "Lusso",
@@ -17,9 +16,10 @@
   "Amenities" : "Servizi",
   "Accomodations" : "Alloggi",
   "Searching for" : "Ricerca per",
-  "Search Toast": "{{topic}} per {{days}} giorni con stile {{style}}",
+  "Search Toast": "{{subject}} per {{days}} giorni con stile {{style}}",
   "Show itinerary" : "Mostra itinerario",
   "Hide itinerary" : "Nascondi itinerario",
   "Credits" : "Credits",
-  "Made with" : "Fatto con ❤️ da {{name}}"
+  "Made with" : "Fatto con ❤️ da {{name}}",
+  "Subject" : "Soggetto"
 }

@@ -98,12 +98,12 @@ export const SearchDrawer = ({
           <DrawerBody>
             <form id="my-form" onSubmit={handleSubmit(onSubmit)}>
               <Stack spacing="24px">
-                <FormControl isInvalid={!!errors.topic}>
-                  <FormLabel htmlFor="topic">{t('Topic')}</FormLabel>
+                <FormControl isInvalid={!!errors.subject}>
+                  <FormLabel htmlFor="subject">{t('Subject')}</FormLabel>
                   <Input
-                    id="topic"
-                    placeholder={t('Please enter a topic')}
-                    {...register('topic', {
+                    id="subject"
+                    placeholder={t('Please enter a subject')}
+                    {...register('subject', {
                       required: `${t('This is required')}`,
                       minLength: {
                         value: 4,
@@ -114,7 +114,7 @@ export const SearchDrawer = ({
                     })}
                   />
                   <FormErrorMessage>
-                    {errors.topic && errors.topic.message}
+                    {errors.subject && errors.subject.message}
                   </FormErrorMessage>
                 </FormControl>
 

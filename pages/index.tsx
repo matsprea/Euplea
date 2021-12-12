@@ -40,16 +40,16 @@ const MapPage = (): JSX.Element => {
 
   const style = query?.style as Style
   const days = Number(query?.days ?? 2)
-  const topic = query?.topic as string
+  const subject = query?.subject as string
 
   const searchData: SearchData = {
     style,
     days,
-    topic,
+    subject,
   }
 
   const { data: culturalSites, status } = useCulturalSiteAPI(
-    style && days && topic && searchData
+    style && days && subject && searchData
   )
 
   const isLoading = status === 'loading'
@@ -59,13 +59,13 @@ const MapPage = (): JSX.Element => {
       status !== 'loading' &&
         style &&
         days &&
-        topic &&
+        subject &&
         culturalSites?.length > 0
     )
-  }, [status, style, days, topic, JSON.stringify(culturalSites)])
+  }, [status, style, days, subject, JSON.stringify(culturalSites)])
 
   useEffect(() => {
-    if (isLoading && style && days && topic && !toast.isActive(TOAST_ID)) {
+    if (isLoading && style && days && subject && !toast.isActive(TOAST_ID)) {
       addToast(t('Search Toast', { ...searchData, style: t(style) }))
     }
     if (!isLoading) {
