@@ -13,7 +13,11 @@ const otherInfoOverpass = (overpass) => {
   return otherInfo
 }
 
-const otherInfoSparql = (osm) => ({})
+const otherInfoSparql = (osm) => {
+  const turism = osm['?tourism'].value
+
+  return { turism, ...('?stars' in osm ? { stars: osm['?stars'].value } : {}) }
+}
 
 const otherInfo = useOverpass ? otherInfoOverpass : otherInfoSparql
 

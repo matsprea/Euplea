@@ -13,12 +13,16 @@ const AmenitiesIcon = PointOfInterestsIcon(
 
 const otherInfoOverpass = (overpass) => {
   const { tags } = overpass
-  const otherInfo = {...tags}
+  const otherInfo = { ...tags }
   delete otherInfo.name
   return otherInfo
 }
 
-const otherInfoSparql = (osm) => ({})
+const otherInfoSparql = (osm) => {
+  const amenity = osm['?amenity'].value
+
+  return { amenity }
+}
 
 const otherInfo = useOverpass ? otherInfoOverpass : otherInfoSparql
 
@@ -28,5 +32,5 @@ export const Amenities = ({ style, radius }): JSX.Element =>
     color: 'transparent',
     useAPI: useAmenityAPI,
     queryParams: { style, radius },
-    otherInfo
+    otherInfo,
   })

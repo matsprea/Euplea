@@ -36,7 +36,7 @@ export const PointOfInterests = ({
       data={pointOfInterests.map(
         useOverpass
           ? overpassToPointOfInterest(otherInfo)
-          : osmToPointOfInterest
+          : osmToPointOfInterest(otherInfo)
       )}
       icon={icon}
       color={color}

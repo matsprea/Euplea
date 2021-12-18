@@ -43,33 +43,34 @@ export const siteToPointOfInterest = (site): PointOfInterest => ({
   lat: parseFloat(site['?lat'].value),
   long: parseFloat(site['?long'].value),
   label: site['?siteLabel'].value,
+  otherInfo: {
+    address: site['?siteFullAddress'].value,
+    city: site['?siteCityName'].value,
+  },
 })
 
-export const osmToPointOfInterest = (osm): PointOfInterest => {
-  const regex = /^\w+\((\d+\.\d+)\s(\d+\.\d+)\)$/s
-  const [, long, lat] = regex.exec(osm['?coordinates'].value)
+export const osmToPointOfInterest =
+  (otherInfo) =>
+  (osm): PointOfInterest => {
+    const regex = /^\w+\((\d+\.\d+)\s(\d+\.\d+)\)$/s
+    const [, long, lat] = regex.exec(osm['?coordinates'].value)
 
-  return {
-    lat: parseFloat(lat),
-    long: parseFloat(long),
-    label: osm['?name'].value,
+    return {
+      lat: parseFloat(lat),
+      long: parseFloat(long),
+      label: osm['?name'].value,
+      otherInfo: otherInfo && otherInfo(osm),
+    }
   }
-}
 
 export const overpassToPointOfInterest =
   (otherInfo) =>
-  (overpass): PointOfInterest => {
-    const lat = parseFloat(overpass.lat)
-    const long = parseFloat(overpass.lon)
-    const label = overpass?.tags?.name
-
-    return {
-      lat,
-      long,
-      label,
-      otherInfo: otherInfo && otherInfo(overpass),
-    }
-  }
+  (overpass): PointOfInterest => ({
+    lat: parseFloat(overpass.lat),
+    long: parseFloat(overpass.lon),
+    label: overpass?.tags?.name,
+    otherInfo: otherInfo && otherInfo(overpass),
+  })
 
 const getMinMax = (latValues: number[], longValues: number[]) => [
   [Math.max(...latValues), Math.max(...longValues)],
