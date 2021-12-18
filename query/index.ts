@@ -1,4 +1,4 @@
-export * from './accomodations'
+export * from './accomodation'
 export * from './amenities'
 export * from './culturalSites'
 export * from './sites'

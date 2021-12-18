@@ -1,10 +1,10 @@
 import { coordinatesLongLatFromArray } from 'utils/coordinates'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Style } from 'types'
-import { getAccomodations } from 'query'
+import { getSparqlAccomodations, getOverpassAccomodations } from 'query'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { coordinates, style = Style.Medium } = req.query
+  const { coordinates, style = Style.Medium, overpass = false } = req.query
 
   if (!coordinates || typeof coordinates !== 'string')
     res.status(400).json({ error: 'Missing coordinates' })
@@ -13,12 +13,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const sites = coordinatesLongLatFromArray(coordinates.split(','))
 
+    const getAccomodations = overpass
+      ? getOverpassAccomodations
+      : getSparqlAccomodations
+
     await Promise.all(
       sites.map(([long, lat]) =>
         getAccomodations(parseFloat(lat), parseFloat(long), myStyle)
       )
     )
-      .then((results) => results.flat().filter((v) => !('error' in v)))
+      .then((results) => results.flat())
       .then((results) => res.status(200).json(results))
   }
 }

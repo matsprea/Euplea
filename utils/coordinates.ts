@@ -25,11 +25,18 @@ export const sitesofCulturalSites = (culturalSites) =>
 export const culturalSitesCoordinates = (culturalSites) =>
   siteCoordinates(fistSitesofCulturalSites(culturalSites))
 
-export const coordinatesLongLatFromArray = (arr) => {
+export const coordinatesLongLatFromArray = (arr: string[]) => {
   const coordinatesLongLat = []
   while (arr.length) coordinatesLongLat.push(arr.splice(0, 2))
 
   return coordinatesLongLat
+}
+
+export const bboxFromArray = (arr: string[]) => {
+  const bbox = []
+  while (arr.length) bbox.push(arr.splice(0, 4).join(', '))
+
+  return bbox
 }
 
 export const siteToPointOfInterest = (site): PointOfInterest => ({

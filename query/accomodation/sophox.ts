@@ -5,23 +5,18 @@ import {
 } from 'query'
 import { getWithCache } from 'cache'
 import { Style } from 'types'
+import { hostelStyle, tourismStyle } from './style'
 
-const tourismStyle = (style: Style = Style.Medium) => {
-  switch (style) {
-    case Style.Luxury:
-      return `""`
-    case Style.Medium:
-      return `"chalet" "apartment"`
-    case Style.Budget:
-      return `"hostel" "guest_house" "motel" "camp_site" "alpine_hut" "wilderness_hut"`
-    default:
-      return `""`
-  }
-}
+const accomodationRadius = 10 // kilometers
+
+const tourismStyleToSparql = (style: Style) =>
+  tourismStyle(style)
+    .map((tourism) => `'${tourism}'`)
+    .join(' ')
 
 const queryTurism = (lat: number, long: number, style: Style) => `
 SELECT * WHERE {
-  VALUES ?tourism { ${tourismStyle(style)} }
+  VALUES ?tourism { ${tourismStyleToSparql(style)} }
   
   ?osmid osmt:name ?name .
   ?osmid osmt:tourism ?tourism .
@@ -29,7 +24,7 @@ SELECT * WHERE {
   SERVICE wikibase:around {
     ?osmid osmm:loc ?coordinates.
     bd:serviceParam wikibase:center "Point(${long} ${lat})"^^geo:wktLiteral.
-    bd:serviceParam wikibase:radius "10". # kilometers
+    bd:serviceParam wikibase:radius "${accomodationRadius}". # kilometers
     bd:serviceParam wikibase:distance ?distance.
   }
 }
@@ -37,16 +32,10 @@ ORDER BY ASC(?distance)
 LIMIT 10
 `
 
-const hostelStyle = (style: Style = Style.Medium) => {
-  switch (style) {
-    case Style.Luxury:
-      return `'4', '4S', '4.5', '5', '5S', '6'`
-    case Style.Medium:
-      return `'3','3S', '3.5'`
-    case Style.Budget:
-      return `'1','1S', '1.5','2S', '2.5'`
-  }
-}
+const hostelStyleToSparql = (style: Style) =>
+  hostelStyle(style)
+    .map((star) => `'${star}'`)
+    .join(', ')
 
 const queryHotel = (lat: number, long: number, style: Style) => `
 SELECT * WHERE {
@@ -56,12 +45,12 @@ SELECT * WHERE {
   ?osmid osmt:tourism ?tourism .
   
   ?osmid osmt:stars ?stars .
-  FILTER ( ?stars IN (${hostelStyle(style)}) ) 
+  FILTER ( ?stars IN (${hostelStyleToSparql(style)}) ) 
 
   SERVICE wikibase:around {
     ?osmid osmm:loc ?coordinates.
     bd:serviceParam wikibase:center "Point(${long} ${lat})"^^geo:wktLiteral.
-    bd:serviceParam wikibase:radius "10". # kilometers
+    bd:serviceParam wikibase:radius "${accomodationRadius}". # kilometers
     bd:serviceParam wikibase:distance ?distance.
   }
 }
@@ -83,11 +72,13 @@ LIMIT 10
 
 const containerId = 'accomodation'
 
-const getSparqlAccomodations = (lat: number, long: number, style: Style) =>
+export const getSparqlAccomodations = (
+  lat: number,
+  long: number,
+  style: Style
+) =>
   getWithCache(
     containerId,
-    `${lat}-${long}-${style}`,
+    `sophox-${lat}-${long}-${style}-${accomodationRadius}`,
     () => mySparQLQuery(query(lat, long, style), sources)
-  ).then(({ value }) => value)
-
-export const getAccomodations = getSparqlAccomodations
+  ).then(({ value }) => !('error' in value) && value)
