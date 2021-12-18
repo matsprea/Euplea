@@ -1,17 +1,20 @@
-import { useRouter } from 'next/router'
 import { PointsOfInterestsFeatureGroup } from './PointsOfInterestsFeatureGroup'
 import { useCulturalSites } from 'context'
-import { Style } from 'types'
 import {
   coordinatesToLongLat,
   culturalSitesCoordinates,
   osmToPointOfInterest,
+  overpassToPointOfInterest,
 } from 'utils'
 
-export const PointOfInterests = ({ color, icon, useAPI }): JSX.Element => {
-  const { query } = useRouter()
-  const style = (query?.style as Style) ?? Style.Medium
+const overpass = parseInt(process.env.NEXT_PUBLIC_OVERPASS) === 1 ? true : false
 
+export const PointOfInterests = ({
+  color,
+  icon,
+  useAPI,
+  queryParams,
+}): JSX.Element => {
   const { culturalSites } = useCulturalSites()
 
   if (!culturalSites || culturalSites.length === 0) return <></>
@@ -20,15 +23,18 @@ export const PointOfInterests = ({ color, icon, useAPI }): JSX.Element => {
     culturalSitesCoordinates(culturalSites).map(coordinatesToLongLat)
 
   const { status, data: pointOfInterests } = useAPI({
+    ...queryParams,
     coordinates,
-    style,
+    overpass,
   })
   const isLoading = status === 'loading'
   if (isLoading || !pointOfInterests) return <></>
 
   return (
     <PointsOfInterestsFeatureGroup
-      data={pointOfInterests.map(osmToPointOfInterest)}
+      data={pointOfInterests.map(
+        overpass ? overpassToPointOfInterest : osmToPointOfInterest
+      )}
       icon={icon}
       color={color}
     />

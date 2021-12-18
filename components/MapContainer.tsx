@@ -67,7 +67,11 @@ export const MapContainer = ({
             </>
           ) : (
             <CulturalSitesProvider culturalSites={culturalSites}>
-              <DynamicMap initLocation={mapCenter} zoom={mapZoom} />
+              <DynamicMap
+                initLocation={mapCenter}
+                zoom={mapZoom}
+                searchData={searchData}
+              />
             </CulturalSitesProvider>
           )}
         </CurrentLocationProvider>

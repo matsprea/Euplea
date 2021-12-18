@@ -5,6 +5,7 @@ import { Region, SearchData, Style } from 'types'
 import { Footer } from './Footer'
 import { SearchDrawer } from './SearchDrawer'
 import NextLink from 'next/link'
+import { accomodationRadiusSetting, amenityRadiusSetting } from 'utils'
 
 export const BasePage = ({ Component, ...pageProps }): JSX.Element => {
   const { query } = useRouter()
@@ -13,12 +14,18 @@ export const BasePage = ({ Component, ...pageProps }): JSX.Element => {
   const days = Number(query?.days ?? 2) > 10 ? 10 : Number(query?.days ?? 2)
   const subject = query?.subject as string
   const region = query?.region as Region
+  const accomodationRadius = Number(
+    query?.accomodationRadius ?? accomodationRadiusSetting
+  )
+  const amenityRadius = Number(query?.amenityRadius ?? amenityRadiusSetting)
 
   const searchData: SearchData = {
     style,
     days,
     subject,
     region,
+    accomodationRadius,
+    amenityRadius,
   }
 
   const { data: culturalSites, status } = useCulturalSiteAPI(

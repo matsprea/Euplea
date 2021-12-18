@@ -9,14 +9,19 @@ import {
 } from 'components/layers'
 import { useTranslation } from 'next-i18next'
 import { useCulturalSites } from 'context'
+import { SearchData } from 'types'
 
 type MapProps = {
   initLocation: string
   zoom: number
-  
+  searchData: SearchData
 }
 
-export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
+export const Map = ({
+  initLocation,
+  zoom,
+  searchData,
+}: MapProps): JSX.Element => {
   const { t } = useTranslation()
   const { culturalSites } = useCulturalSites()
 
@@ -24,7 +29,7 @@ export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
     Number(initLocation.split(',')[0]),
     Number(initLocation.split(',')[1])
   )
- 
+
   return (
     <MapContainer
       center={center}
@@ -38,10 +43,16 @@ export const Map = ({ initLocation, zoom }: MapProps): JSX.Element => {
       {culturalSites.length > 0 && (
         <LayersControl position="topright">
           <LayersControl.Overlay name={t('Amenities')} checked>
-            <Amenities />
+            <Amenities
+              radius={searchData?.amenityRadius}
+              style={searchData.style}
+            />
           </LayersControl.Overlay>
           <LayersControl.Overlay name={t('Accomodations')} checked>
-            <Accomodations />
+            <Accomodations
+              radius={searchData?.accomodationRadius}
+              style={searchData.style}
+            />
           </LayersControl.Overlay>
         </LayersControl>
       )}

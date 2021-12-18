@@ -4,5 +4,7 @@ export type SearchData = {
   subject: string
   days: number
   style: Style
-  region: Region
+  region?: Region
+  accomodationRadius?: number
+  amenityRadius?: number
 }

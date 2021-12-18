@@ -32,6 +32,7 @@ import { useTranslation } from 'next-i18next'
 import { useForm } from 'react-hook-form'
 
 import { SearchData, Style, Region } from 'types'
+import { amenityRadiusMax, accomodationRadiusMax } from 'utils'
 
 type SearchDrawerProps = {
   searchData?: SearchData
@@ -70,16 +71,31 @@ export const SearchDrawer = ({
   const selectRegionValue = watch('region')
   const handleRegionChange = (ev: any) => setValue('region', ev.target.value)
 
+  const selectAmenityRadiusValue = watch('amenityRadius')
+  const handleAmenityRadiusChange = (amenityRadius: number) =>
+    setValue('amenityRadius', amenityRadius)
+
+  const selectAccomodationRadiusValue = watch('accomodationRadius')
+  const handleAccomodationRadiusChange = (accomodationRadius: number) =>
+    setValue('accomodationRadius', accomodationRadius)
+
   useEffect(() => {
     register('days')
     register('style', {
       required: `${t('This is required')}`,
     })
     register('region')
+    register('amenityRadius')
+    register('accomodationRadius')
   }, [register])
 
   const onSubmit = (values: SearchData) => {
-    router.push(`/?${buildQueryString(values)}`)
+    const queryString = buildQueryString({
+      ...values,
+      region: values.region ?? '',
+    })
+
+    router.push(`/?${queryString}`)
     onClose()
   }
 
@@ -150,11 +166,13 @@ export const SearchDrawer = ({
 
                   <Select
                     id="region"
-                    placeholder={t('Select a region')}
                     step={1}
                     value={selectRegionValue}
                     onChange={handleRegionChange}
                   >
+                    <option value="" selected>
+                      {t('Select a region')}
+                    </option>
                     {Object.keys(Region).map((key) => (
                       <option key={key} value={Region[key]}>
                         {Region[key]}
@@ -181,6 +199,54 @@ export const SearchDrawer = ({
                   <FormErrorMessage>
                     {errors.style && errors.style.message}
                   </FormErrorMessage>
+                </FormControl>
+
+                <FormControl isInvalid={!!errors.amenityRadius}>
+                  <FormLabel htmlFor="amenityRadius">
+                    {t('amenityRadius')}
+                  </FormLabel>
+
+                  <Slider
+                    id="amenityRadius"
+                    defaultValue={1}
+                    min={0.25}
+                    max={amenityRadiusMax}
+                    step={0.25}
+                    value={selectAmenityRadiusValue}
+                    onChange={handleAmenityRadiusChange}
+                  >
+                    <SliderTrack bg="teal.100">
+                      <Box position="relative" right={10} />
+                      <SliderFilledTrack bg="teal" />
+                    </SliderTrack>
+                    <SliderThumb boxSize={6}>
+                      <Box>{selectAmenityRadiusValue}</Box>
+                    </SliderThumb>
+                  </Slider>
+                </FormControl>
+
+                <FormControl isInvalid={!!errors.accomodationRadius}>
+                  <FormLabel htmlFor="accomodationRadius">
+                    {t('accomodationRadius')}
+                  </FormLabel>
+
+                  <Slider
+                    id="accomodationRadius"
+                    defaultValue={2.5}
+                    min={1}
+                    max={accomodationRadiusMax}
+                    step={0.5}
+                    value={selectAccomodationRadiusValue}
+                    onChange={handleAccomodationRadiusChange}
+                  >
+                    <SliderTrack bg="teal.100">
+                      <Box position="relative" right={10} />
+                      <SliderFilledTrack bg="teal" />
+                    </SliderTrack>
+                    <SliderThumb boxSize={6}>
+                      <Box>{selectAccomodationRadiusValue}</Box>
+                    </SliderThumb>
+                  </Slider>
                 </FormControl>
               </Stack>
             </form>

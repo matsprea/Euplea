@@ -24,6 +24,9 @@ COSMOS_KEY='YourAzureCosmosDBKey=='
 MAP_CENTER='42.504306, 12.572639' # Center of Italy
 MAP_ZOOM='6' # Zoom level
 SECRET='YourSecret'
+NEXT_PUBLIC_OVERPASS=1 # Set to 1 if you want to use the overpass-turbo API, 0 to use Sophox API
+NEXT_PUBLIC_AMENITY_RADIUS=5 # Radius in Kilometers for the amenities search
+NEXT_PUBLIC_ACCOMODATION_RADIUS=10 # Radius in Kilometers for the accomodation search
 ```
 
 ## Developer mode
@@ -80,7 +83,7 @@ docker build -t euplea .
 To run your `euplea` image and exposing it on port 3000, execute the following command
 
 ```bash
-docker run -e COSMOS_ENDPOINT -e COSMOS_KEY -e SECRET -e MAP_CENTER -e MAP_ZOOM -p 3000:3000 euplea
+docker run -e COSMOS_ENDPOINT -e COSMOS_KEY -e SECRET -e MAP_CENTER -e MAP_ZOOM -e NEXT_PUBLIC_OVERPASS -e NEXT_PUBLIC_AMENITY_RADIUS -e NEXT_PUBLIC_ACCOMODATION_RADIUS -p 3000:3000 euplea
 ```
 
 Please make your have configured correctly the [ENV variables](#env-variables)

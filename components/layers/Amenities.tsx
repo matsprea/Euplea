@@ -10,9 +10,10 @@ const AmenitiesIcon = PointOfInterestsIcon(
   'black'
 )
 
-export const Amenities = (): JSX.Element =>
+export const Amenities = ({ style, radius }): JSX.Element =>
   PointOfInterests({
     icon: AmenitiesIcon,
     color: 'transparent',
     useAPI: useAmenityAPI,
+    queryParams: { style, radius },
   })

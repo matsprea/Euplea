@@ -1,10 +1,16 @@
 import { coordinatesLongLatFromArray } from 'utils/coordinates'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { Style } from 'types'
-import { getAmenities } from 'query'
+import { getOverpassAmenities, getSparqlAmenities } from 'query'
+import { amenityRadiusMax } from 'utils'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { coordinates, style = Style.Medium } = req.query
+  const {
+    coordinates,
+    style = Style.Medium,
+    overpass = false,
+    radius,
+  } = req.query
 
   if (!coordinates || typeof coordinates !== 'string')
     res.status(400).json({ error: 'Missing coordinates' })
@@ -13,12 +19,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const sites = coordinatesLongLatFromArray(coordinates.split(','))
 
+    const getAmenities =
+      (overpass as string) === 'true'
+        ? getOverpassAmenities
+        : getSparqlAmenities
+
+    const radiusFloat = parseFloat(radius as string)
+    const myRadius =
+      !radiusFloat || radiusFloat > amenityRadiusMax * 2
+        ? amenityRadiusMax
+        : radiusFloat
+
     await Promise.all(
       sites.map(([long, lat]) =>
-        getAmenities(parseFloat(lat), parseFloat(long), myStyle)
+        getAmenities(parseFloat(lat), parseFloat(long), myStyle, myRadius)
       )
     )
-      .then((results) => results.flat().filter((v) => !('error' in v)))
+      .then((results) => results.flat())
       .then((results) => res.status(200).json(results))
   }
 }

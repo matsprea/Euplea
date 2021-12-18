@@ -5,9 +5,10 @@ import { PointOfInterestsIcon } from './PointOfInterestsIcon'
 
 const AccomodationIcon = PointOfInterestsIcon('red', FaHotel, 'square', 'white')
 
-export const Accomodations = (): JSX.Element =>
+export const Accomodations = ({ style, radius }): JSX.Element =>
   PointOfInterests({
     icon: AccomodationIcon,
     color: 'transparent',
     useAPI: useAccomodationAPI,
+    queryParams: { style, radius },
   })

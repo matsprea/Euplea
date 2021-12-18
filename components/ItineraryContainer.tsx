@@ -28,10 +28,12 @@ export const ItineraryContainer = ({
   const { isOpen, onToggle } = useDisclosure()
   const [isMobile] = useMediaQuery('(max-width: 768px)')
 
+  const { region } = searchData
+
   const itineraryTitle = t('Itinerary title', {
     ...searchData,
     style: t(searchData.style),
-    region: searchData.region ?? 'Italia',
+    region: region ? region as string : 'Italia',
   })
 
   const showItinerary = () => {

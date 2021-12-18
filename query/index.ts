@@ -1,5 +1,5 @@
 export * from './accomodation'
-export * from './amenities'
+export * from './amenity'
 export * from './culturalSites'
 export * from './sites'
 export * from './siteGeocoding'

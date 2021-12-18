@@ -48,7 +48,7 @@ const IndexPage = ({
         t('Search Toast', {
           ...searchData,
           style: t(style),
-          region: region ?? 'Italia',
+          region: region ? (region as string) : 'Italia',
         })
       )
     }
