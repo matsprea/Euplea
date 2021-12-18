@@ -1,13 +1,20 @@
 import React from 'react'
 import { latLng } from 'leaflet'
 import { FeatureGroup, Marker, Tooltip, Circle } from 'react-leaflet'
-import { PointOfInterest} from 'types'
+import { PointOfInterest } from 'types'
 
 type PointsOfInterestProps = {
   data?: PointOfInterest[]
   icon: any
   color?: string
 }
+
+const otherInfoList = (otherInfo) =>
+  Object.entries(otherInfo).map(([key, value]) => (
+    <li key={key}>
+      {key}: {value}
+    </li>
+  ))
 
 export const PointsOfInterestsFeatureGroup = ({
   data = [],
@@ -17,7 +24,7 @@ export const PointsOfInterestsFeatureGroup = ({
   return (
     <FeatureGroup>
       {data &&
-        data.map(({ lat, long, label }) => {
+        data.map(({ lat, long, label, otherInfo }) => {
           const dot = latLng(lat, long)
           return (
             <Circle
@@ -28,7 +35,10 @@ export const PointsOfInterestsFeatureGroup = ({
               color={color}
             >
               <Marker position={dot} icon={icon}>
-                <Tooltip>{label}</Tooltip>
+                <Tooltip>
+                  <b>{label}</b>
+                  {otherInfo && <ul>{otherInfoList(otherInfo)}</ul>}
+                </Tooltip>
               </Marker>
             </Circle>
           )

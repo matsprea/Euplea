@@ -3,4 +3,5 @@ export type PointOfInterest = {
   long: number
   label?: string
   icon?: string
+  otherInfo?: string
 }

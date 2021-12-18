@@ -16,3 +16,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.leaflet-tooltip {
+  padding-left: 20px !important;
+}

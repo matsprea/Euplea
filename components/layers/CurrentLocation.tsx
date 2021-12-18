@@ -62,7 +62,25 @@ export const CurrentLocation = (): JSX.Element => {
       color="transparent"
     >
       <Marker position={currentLocationLatLong} icon={CurrentLocationIcon}>
-        <Tooltip>{t('Current Position')}</Tooltip>
+        <Tooltip>
+          <b>{t('Current Position')}</b>
+          <ul>
+            <li>
+              {t('Latitude')}: {currenteLocation.latitude}
+            </li>
+            <li>
+              {t('Longitude')}: {currenteLocation.longitude}
+            </li>
+            <li>
+              {t('Accuracy')}: {currenteLocation.accuracy} {t('meters')}
+            </li>
+            {currenteLocation.altitude && (
+              <li>
+                {t('Altitude')}: {currenteLocation.altitude}
+              </li>
+            )}
+          </ul>
+        </Tooltip>
       </Marker>
     </Circle>
   ) : null

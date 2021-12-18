@@ -27,5 +27,10 @@
   "Cultural items" : "{{count}} cultural items",
   "Itinerary title": "Itinerary about {{subject}} for {{days}} days with style {{style}} in {{region}}",
   "amenityRadius" : "Amenities range in Km",
-  "accomodationRadius" : "Accomodation range in Km"
+  "accomodationRadius" : "Accomodation range in Km",
+  "Latitude" : "Latitude",
+  "Longitude" : "Longitude",
+  "Altitude" : "Altitude",
+  "meters" : "meters",
+  "Accuracy" : "Accuracy"
 }

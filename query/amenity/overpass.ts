@@ -2,6 +2,7 @@ import { getWithCache } from 'cache'
 import queryOverpass from '@derhuerst/query-overpass'
 import { Style } from 'types'
 import { amenityStyle } from './settings'
+import { mergeWaysNodes } from 'utils'
 
 const amenity =
   (lat: number, long: number, radius: number) => (amenity: string) =>
@@ -24,7 +25,7 @@ const query = (lat: number, long: number, style: Style, radius: number) => `
  );
 out body;`
 
-const containerId = 'amenity'
+const containerId = 'amenityOverpass'
 
 export const getOverpassAmenities = (
   lat: number,
@@ -32,8 +33,6 @@ export const getOverpassAmenities = (
   style: Style,
   radius: number
 ) =>
-  getWithCache(containerId, `overpass-${lat}-${long}-${style}-${radius}`, () =>
-    queryOverpass(query(lat, long, style, radius)).then((results) =>
-      results.filter((item) => item.type === 'node')
-    )
+  getWithCache(containerId, `${lat}-${long}-${style}-${radius}`, () =>
+    queryOverpass(query(lat, long, style, radius)).then(mergeWaysNodes)
   ).then(({ value }) => value)

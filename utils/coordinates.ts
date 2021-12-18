@@ -1,4 +1,3 @@
-import { NumberInputStepper } from '@chakra-ui/react'
 import { PointOfInterest } from 'types'
 
 export const siteCoordinates = (sites: any[]) => [
@@ -57,17 +56,20 @@ export const osmToPointOfInterest = (osm): PointOfInterest => {
   }
 }
 
-export const overpassToPointOfInterest = (overpass): PointOfInterest => {
-  const lat = parseFloat(overpass.lat)
-  const long = parseFloat(overpass.lon)
-  const label = overpass?.tags?.name
+export const overpassToPointOfInterest =
+  (otherInfo) =>
+  (overpass): PointOfInterest => {
+    const lat = parseFloat(overpass.lat)
+    const long = parseFloat(overpass.lon)
+    const label = overpass?.tags?.name
 
-  return {
-    lat,
-    long,
-    label,
+    return {
+      lat,
+      long,
+      label,
+      otherInfo: otherInfo && otherInfo(overpass),
+    }
   }
-}
 
 const getMinMax = (latValues: number[], longValues: number[]) => [
   [Math.max(...latValues), Math.max(...longValues)],

@@ -5,15 +5,16 @@ import {
   culturalSitesCoordinates,
   osmToPointOfInterest,
   overpassToPointOfInterest,
+  useOverpass,
 } from 'utils'
 
-const overpass = parseInt(process.env.NEXT_PUBLIC_OVERPASS) === 1 ? true : false
-
+ 
 export const PointOfInterests = ({
   color,
   icon,
   useAPI,
   queryParams,
+  otherInfo
 }): JSX.Element => {
   const { culturalSites } = useCulturalSites()
 
@@ -25,7 +26,7 @@ export const PointOfInterests = ({
   const { status, data: pointOfInterests } = useAPI({
     ...queryParams,
     coordinates,
-    overpass,
+    useOverpass,
   })
   const isLoading = status === 'loading'
   if (isLoading || !pointOfInterests) return <></>
@@ -33,7 +34,9 @@ export const PointOfInterests = ({
   return (
     <PointsOfInterestsFeatureGroup
       data={pointOfInterests.map(
-        overpass ? overpassToPointOfInterest : osmToPointOfInterest
+        useOverpass
+          ? overpassToPointOfInterest(otherInfo)
+          : osmToPointOfInterest
       )}
       icon={icon}
       color={color}

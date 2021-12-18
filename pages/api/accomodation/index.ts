@@ -5,7 +5,12 @@ import { getSparqlAccomodations, getOverpassAccomodations } from 'query'
 import { accomodationRadiusMax } from 'utils'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { coordinates, style = Style.Medium, overpass, radius } = req.query
+  const {
+    coordinates,
+    style = Style.Medium,
+    useOverpass = 'false',
+    radius,
+  } = req.query
 
   if (!coordinates || typeof coordinates !== 'string')
     res.status(400).json({ error: 'Missing coordinates' })
@@ -15,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const sites = coordinatesLongLatFromArray(coordinates.split(','))
 
     const getAccomodations =
-      (overpass as string) === 'true'
+      (useOverpass as string) === 'true'
         ? getOverpassAccomodations
         : getSparqlAccomodations
 

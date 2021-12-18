@@ -8,7 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     coordinates,
     style = Style.Medium,
-    overpass = false,
+    useOverpass = 'false',
     radius,
   } = req.query
 
@@ -20,7 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const sites = coordinatesLongLatFromArray(coordinates.split(','))
 
     const getAmenities =
-      (overpass as string) === 'true'
+      (useOverpass as string) === 'true'
         ? getOverpassAmenities
         : getSparqlAmenities
 

@@ -35,7 +35,7 @@ ORDER BY ASC(?distance)
 LIMIT 10
 `
 
-const containerId = 'amenity'
+const containerId = 'amenitySophox'
 
 export const getSparqlAmenities = (
   lat: number,

@@ -2,8 +2,20 @@ import { FaHotel } from 'react-icons/fa'
 import { PointOfInterests } from './PointOfInterests'
 import { useAccomodationAPI } from 'hooks'
 import { PointOfInterestsIcon } from './PointOfInterestsIcon'
+import { useOverpass } from 'utils'
 
 const AccomodationIcon = PointOfInterestsIcon('red', FaHotel, 'square', 'white')
+
+const otherInfoOverpass = (overpass) => {
+  const { tags } = overpass
+  const otherInfo = { ...tags }
+  delete otherInfo.name
+  return otherInfo
+}
+
+const otherInfoSparql = (osm) => ({})
+
+const otherInfo = useOverpass ? otherInfoOverpass : otherInfoSparql
 
 export const Accomodations = ({ style, radius }): JSX.Element =>
   PointOfInterests({
@@ -11,4 +23,5 @@ export const Accomodations = ({ style, radius }): JSX.Element =>
     color: 'transparent',
     useAPI: useAccomodationAPI,
     queryParams: { style, radius },
+    otherInfo,
   })

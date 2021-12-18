@@ -27,5 +27,10 @@
   "Cultural items" : "{{count}} beni culturali",
   "Itinerary title": "Itinerario con soggetto {{subject}} per {{days}} giorni con stile {{style}} in {{region}}",
   "amenityRadius" : "Distanza servizi in Km",
-  "accomodationRadius" : "Distanza alloggi in Km"
+  "accomodationRadius" : "Distanza alloggi in Km",
+  "Latitude" : "Latitudine",
+  "Longitude" : "Longitudine",
+  "Altitude" : "Altitudine",
+  "meters" : "metri",
+  "Accuracy" : "Accuratezza"
 }

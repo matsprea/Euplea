@@ -9,3 +9,6 @@ export const accomodationRadiusSetting = process.env
 export const amenityRadiusSetting = process.env.NEXT_PUBLIC_AMENITY_RADIUS
   ? parseInt(process.env.NEXT_PUBLIC_AMENITY_RADIUS)
   : amenityRadiusMax // kilometers
+
+export const useOverpass =
+  parseInt(process.env.NEXT_PUBLIC_OVERPASS) === 1 ? true : false
