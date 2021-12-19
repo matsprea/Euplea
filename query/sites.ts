@@ -68,7 +68,8 @@ const getSparQlSiteWithCache = (culturalSite: string) => {
   return getWithCache(
     containerId,
     `getSparQlSiteWithCache-${culturalSite}`,
-    () => getSparQlSiteNoCache(culturalSite)
+    () => getSparQlSiteNoCache(culturalSite),
+    TTL.Month
   ).then(({ value }) => value)
 }
 
