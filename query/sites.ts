@@ -109,7 +109,9 @@ const getGeocodedSites = (region: Region) => async (siteList: any[]) => {
   const uniqueSiteWithLatLong = removeSiteDuplicationByLatLong(sitesWithLatLong)
   const sitesWithOutLatLong = siteList.filter(siteWithoutGeocoding)
 
-  const sitesGeocoded = await Promise.all(sitesWithOutLatLong.map(geocodeSite(region)))
+  const sitesGeocoded = await Promise.all(
+    sitesWithOutLatLong.map(geocodeSite(region))
+  )
 
   const value = [...uniqueSiteWithLatLong, ...sitesGeocoded.flat()]
 

@@ -7,6 +7,7 @@ import {
 } from 'query'
 import { getWithCache, TTL } from 'cache'
 import { Region } from 'types'
+import { withCache } from 'utils'
 
 const getRegionFilter = (regionIds: string[]) =>
   regionIds.length > 0
@@ -44,13 +45,20 @@ ORDER BY DESC(?count)
 
 const containerId = 'culturalSite'
 
-const getCulturalSites = (subject: string, regionIds: string[]) =>
+const getCulturalSitesWithNoCache = (subject, regionIds) =>
+  mySparQLQuery(query(subject, regionIds), sources)
+
+const getCulturalSitesWithCache = (subject: string, regionIds: string[]) =>
   getWithCache(
     containerId,
     `${subject}-${regionIds}`,
-    () => mySparQLQuery(query(subject, regionIds), sources),
+    () => getCulturalSitesWithNoCache(subject, regionIds),
     TTL.Week
   ).then(({ value }) => value)
+
+const getCulturalSites = withCache
+  ? getCulturalSitesWithCache
+  : getCulturalSitesWithNoCache
 
 const culturalSiteWithoutSite = ({ site }) => site.length > 0
 
@@ -64,13 +72,15 @@ export const getCulturalSitesWithSites = (
         getCulturalSites(subject, regionIds)
           .then((culturalSites) =>
             Promise.all(
-              culturalSites.splice(0, numberOfDays + 5).map((culturalSite) =>
-                getSites(culturalSite['?culturalInstituteOrSite'].value, region).then(
-                  (site) => ({
-                    ...culturalSite,
-                    site,
-                  })
-                )
+              // culturalSites.splice(0, numberOfDays + 5).map((culturalSite) =>
+              culturalSites.map((culturalSite) =>
+                getSites(
+                  culturalSite['?culturalInstituteOrSite'].value,
+                  region
+                ).then((site) => ({
+                  ...culturalSite,
+                  site,
+                }))
               )
             )
           )

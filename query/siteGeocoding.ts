@@ -1,6 +1,7 @@
 import nominatim from 'nominatim-client'
 import { getWithCache, TTL } from 'cache'
 import { Region } from 'types'
+import { withCache } from 'utils'
 
 const containerId = 'siteGeocoding'
 const country = 'Italia'
@@ -10,7 +11,7 @@ const geocodingClient = nominatim.createClient({
   referer: 'https://euplea.herokuapp.com',
 })
 
-const geocodingQuery = (query: nominatim.SearchOptions) => () =>
+const getGeocodingWithNoCache = (query: any) =>
   geocodingClient
     .search(query)
     .then(([result]) => result ?? { query, result, date: Date.now() })
@@ -20,13 +21,15 @@ const getQuery = (q) => ({
   limit: 1,
 })
 
-const getGeocoding = (q) =>
+const getGeocodingWithCache = (q: any) =>
   getWithCache(
     containerId,
     JSON.stringify(q),
-    geocodingQuery(getQuery(q)),
+    () => getGeocodingWithNoCache(getQuery(q)),
     TTL.Forever
   ).then(({ value }) => value)
+
+const getGeocoding = withCache ? getGeocodingWithCache : getGeocodingWithNoCache
 
 export const geocodeSite = (region: Region) => async (site) => {
   const qAddressStructured = {
@@ -37,7 +40,9 @@ export const geocodeSite = (region: Region) => async (site) => {
   }
 
   const qName = {
-    q: `${site['?siteLabel']?.value} ${region ? `, ${region}` : ''}, ${country}`
+    q: `${site['?siteLabel']?.value} ${
+      region ? `, ${region}` : ''
+    }, ${country}`,
   }
 
   const valueAddressStructured = await getGeocoding(qAddressStructured)

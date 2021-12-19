@@ -6,13 +6,19 @@ import {
 import { getWithCache } from 'cache'
 import { Style } from 'types'
 import { hostelStyle, tourismStyle } from './settings'
-  
+import { withCache } from 'utils'
+
 const tourismStyleToSparql = (style: Style) =>
   tourismStyle(style)
     .map((tourism) => `'${tourism}'`)
     .join(' ')
 
-const queryTurism = (lat: number, long: number, style: Style, radius: number) => `
+const queryTurism = (
+  lat: number,
+  long: number,
+  style: Style,
+  radius: number
+) => `
 SELECT * WHERE {
   VALUES ?tourism { ${tourismStyleToSparql(style)} }
   
@@ -35,7 +41,12 @@ const hostelStyleToSparql = (style: Style) =>
     .map((star) => `'${star}'`)
     .join(', ')
 
-const queryHotel = (lat: number, long: number, style: Style, radius: number) => `
+const queryHotel = (
+  lat: number,
+  long: number,
+  style: Style,
+  radius: number
+) => `
 SELECT * WHERE {
   VALUES ?tourism { "hotel" }
   
@@ -56,7 +67,12 @@ ORDER BY ASC(?distance)
 LIMIT 10
 `
 
-const query = (lat: number, long: number, style: Style, radius: number) => `${prefix}
+const query = (
+  lat: number,
+  long: number,
+  style: Style,
+  radius: number
+) => `${prefix}
 SELECT DISTINCT * WHERE {
   {
     ${queryHotel(lat, long, style, radius)}
@@ -70,12 +86,23 @@ LIMIT 10
 
 const containerId = 'accomodationSophox'
 
-export const getSparqlAccomodations = (
+const getSparqlAccomodationsWithNoCache = (
+  lat: number,
+  long: number,
+  style: Style,
+  radius: number
+) => mySparQLQuery(query(lat, long, style, radius), sources)
+
+const getSparqlAccomodationsWithCache = (
   lat: number,
   long: number,
   style: Style,
   radius: number
 ) =>
   getWithCache(containerId, `sophox-${lat}-${long}-${style}-${radius}`, () =>
-    mySparQLQuery(query(lat, long, style, radius), sources)
+    getSparqlAccomodationsWithNoCache(lat, long, style, radius)
   ).then(({ value }) => !('error' in value) && value)
+
+export const getSparqlAccomodations = withCache
+  ? getSparqlAccomodationsWithCache
+  : getSparqlAccomodationsWithNoCache

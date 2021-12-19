@@ -4,6 +4,7 @@ import {
   prefixBeniCulturali as prefix,
   sourcesBeniCulturali as sources,
 } from 'query'
+import { withCache } from 'utils'
 
 const containerId = 'subject'
 
@@ -24,17 +25,19 @@ WHERE {
 const mapSubject = (subjects) =>
   subjects.map((subject) => subject.get('?sub').value)
 
-const mySubjectQuery = (subject) => () =>
-  mySparQLQuery(query(subject), sources).then(mapSubject)
-
-const getSparqlSubjects = (subject: string) =>
+const getSubjectsWithNoCache = (subject) =>
   subject && subject.length >= 3
-    ? getWithCache(
-        containerId,
-        `${subject}`,
-        mySubjectQuery(subject),
-        TTL.Month
-      ).then(({ value }) => value)
+    ? mySparQLQuery(query(subject), sources).then(mapSubject)
     : Promise.resolve([])
 
-export const getSubjects = getSparqlSubjects
+const getSubjectsWithCache = (subject: string) =>
+  getWithCache(
+    containerId,
+    `${subject}`,
+    () => getSubjectsWithNoCache(subject),
+    TTL.Month
+  ).then(({ value }) => value)
+
+export const getSubjects = withCache
+  ? getSubjectsWithCache
+  : getSubjectsWithNoCache

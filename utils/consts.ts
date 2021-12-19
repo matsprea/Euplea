@@ -12,3 +12,5 @@ export const amenityRadiusSetting = process.env.NEXT_PUBLIC_AMENITY_RADIUS
 
 export const useOverpass =
   parseInt(process.env.NEXT_PUBLIC_OVERPASS) === 1 ? true : false
+
+export const withCache = process.env.COSMOS_ENDPOINT && process.env.COSMOS_KEY

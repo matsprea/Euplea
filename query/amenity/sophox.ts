@@ -6,6 +6,7 @@ import {
 import { getWithCache } from 'cache'
 import { Style } from 'types'
 import { amenityStyle } from './settings'
+import { withCache } from 'utils'
 
 const amenityStyleToSparql = (style: Style) =>
   amenityStyle(style)
@@ -37,12 +38,19 @@ LIMIT 10
 
 const containerId = 'amenitySophox'
 
-export const getSparqlAmenities = (
+const getSparqlAmenitiesWithNoCache = (lat: number, long: number, style: Style, radius: number) =>
+  mySparQLQuery(query(lat, long, style, radius), sources)
+
+const getSparqlAmenitiesWithCache = (
   lat: number,
   long: number,
   style: Style,
   radius: number
 ) =>
   getWithCache(containerId, `sophox-${lat}-${long}-${style}-${radius}`, () =>
-    mySparQLQuery(query(lat, long, style, radius), sources)
+    getSparqlAmenitiesWithNoCache(lat, long, style, radius)
   ).then(({ value }) => !('error' in value) && value)
+
+export const getSparqlAmenities = withCache
+  ? getSparqlAmenitiesWithCache
+  : getSparqlAmenitiesWithNoCache
