@@ -32,13 +32,6 @@ export const coordinatesLongLatFromArray = (arr: string[]) => {
   return coordinatesLongLat
 }
 
-export const bboxFromArray = (arr: string[]) => {
-  const bbox = []
-  while (arr.length) bbox.push(arr.splice(0, 4).join(', '))
-
-  return bbox
-}
-
 export const siteToPointOfInterest = (site): PointOfInterest => ({
   lat: parseFloat(site['?lat'].value),
   long: parseFloat(site['?long'].value),
@@ -72,7 +65,7 @@ export const overpassToPointOfInterest =
     otherInfo: otherInfo && otherInfo(overpass),
   })
 
-const getMinMax = (latValues: number[], longValues: number[]) => [
+export const getMinMax = (latValues: number[], longValues: number[]) => [
   [Math.max(...latValues), Math.max(...longValues)],
   [Math.min(...latValues), Math.min(...longValues)],
 ]

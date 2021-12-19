@@ -25,6 +25,7 @@ module.exports = {
     '!**/theme/**',
     '!**/types/**',
     '!**/.next/**',
+    '!**/test/**',
   ],
   coveragePathIgnorePatterns: [
     'jest.config.js',
@@ -32,5 +33,6 @@ module.exports = {
     'next.config.js',
     'next-i18next.config.js',
     '_document.js',
+    'consts.ts',
   ],
 }
