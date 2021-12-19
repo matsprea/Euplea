@@ -59,21 +59,20 @@ const distinctSiteLatLong = (siteValues: any[]) => {
   return value
 }
 
-const getSparQlSiteNoCache = (culturalSite: string) =>
+const getSparqlSiteNoCache = (culturalSite: string) =>
   getAllSparQLSites(culturalSite)
     .then(buildSitesDictionary)
     .then(distinctSiteLatLong)
 
-const getSparQlSiteWithCache = (culturalSite: string) => {
-  return getWithCache(
+const getSparqlSiteWithCache = (culturalSite: string) =>
+  getWithCache(
     containerId,
-    `getSparQlSiteWithCache-${culturalSite}`,
-    () => getSparQlSiteNoCache(culturalSite),
+    `getSparqlSiteWithCache-${culturalSite}`,
+    () => getSparqlSiteNoCache(culturalSite),
     TTL.Month
   ).then(({ value }) => value)
-}
 
-const getSparQlSite = withCache ? getSparQlSiteWithCache : getSparQlSiteNoCache
+const getSparqlSite = withCache ? getSparqlSiteWithCache : getSparqlSiteNoCache
 
 const getSeeAlsoSites = async (siteList: any[]) => {
   const seeAlsoList = siteList
@@ -81,7 +80,7 @@ const getSeeAlsoSites = async (siteList: any[]) => {
     .map((site) => site['?siteSeeAlso'].value)
 
   const seeAlsoSiteList = await Promise.all(
-    seeAlsoList.map(getSparQlSite)
+    seeAlsoList.map(getSparqlSite)
   ).then((siteLists) => siteLists.flat())
 
   const value = [...siteList, ...seeAlsoSiteList]
@@ -120,7 +119,7 @@ const getGeocodedSites = (region: Region) => async (siteList: any[]) => {
 }
 
 const getSitesNoCache = (culturalSite: string, region: Region) =>
-  getSparQlSite(culturalSite)
+  getSparqlSite(culturalSite)
     .then(getSeeAlsoSites)
     .then(getGeocodedSites(region))
     .then((sites) => sites.filter(siteWithGeocoding))
@@ -129,7 +128,7 @@ const getSitesNoCache = (culturalSite: string, region: Region) =>
 const getSitesWithCache = (culturalSite: string, region: Region) =>
   getWithCache(
     containerId,
-    `getSitesWithCache-${culturalSite}-${region}`,
+    `getSites-${culturalSite}-${region}`,
     () => getSitesNoCache(culturalSite, region),
     TTL.Month
   ).then(({ value }) => value)

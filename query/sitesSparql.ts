@@ -11,12 +11,11 @@ WHERE {
  rdfs:label ?label .
 
  ?site rdfs:label ?siteLabel ;
- cis:isPartOf ?isPartOf ;
  cis:siteAddress ?siteAddress .
 
  FILTER ( ?culturalInstituteOrSite = <${culturalSite}> ) .
- 
- OPTIONAL { ?site cis:isPartOf ?isPartOf . 
+  
+ OPTIONAL { ?site cis:isPartOf ?isPartOf .
   ?isPartOf rdfs:label ?isPartOfLabel  } .
 
  OPTIONAL { ?site owl:deprecated ?deprecatedSite } .
