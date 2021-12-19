@@ -2,7 +2,12 @@ import { getWithCache, TTL } from 'cache'
 import queryOverpass from '@derhuerst/query-overpass'
 import { Style } from 'types'
 import { hostelStyle, tourismStyle } from './settings'
-import { accomodationMaxCount, filterOverpassErrors, mergeWaysNodes, withCache } from 'utils'
+import {
+  accomodationMaxCount,
+  filterOverpassErrors,
+  mergeWaysNodes,
+  withCache,
+} from 'utils'
 
 const turism =
   (lat: number, long: number, radius: number) => (turism: string) =>

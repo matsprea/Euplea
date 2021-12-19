@@ -8,13 +8,12 @@ import {
   useOverpass,
 } from 'utils'
 
- 
 export const PointOfInterests = ({
   color,
   icon,
   useAPI,
   queryParams,
-  otherInfo
+  otherInfo,
 }): JSX.Element => {
   const { culturalSites } = useCulturalSites()
 
@@ -33,11 +32,13 @@ export const PointOfInterests = ({
 
   return (
     <PointsOfInterestsFeatureGroup
-      data={pointOfInterests.map(
-        useOverpass
-          ? overpassToPointOfInterest(otherInfo)
-          : osmToPointOfInterest(otherInfo)
-      )}
+      data={pointOfInterests
+        .map(
+          useOverpass
+            ? overpassToPointOfInterest(otherInfo)
+            : osmToPointOfInterest(otherInfo)
+        )
+        .filter(({ lat, long }) => !isNaN(lat) && !isNaN(long))}
       icon={icon}
       color={color}
     />
