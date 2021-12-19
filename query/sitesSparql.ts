@@ -2,7 +2,7 @@ import { prefixBeniCulturali as prefix } from 'query'
 
 const baseQuery = (latLong: string) => (culturalSite: string) =>
   `${prefix}
-SELECT ?site (SAMPLE(?siteSeeAlso) AS ?siteSeeAlso) (SAMPLE(?siteLabel) AS ?siteLabel) (SAMPLE(?sitePreview) AS ?sitePreview) (SAMPLE(?siteFullAddress) AS ?siteFullAddress) (SAMPLE(?siteCityName) AS ?siteCityName) ${
+SELECT ?site (SAMPLE(?siteSeeAlso) AS ?siteSeeAlso) (SAMPLE(?siteLabel) AS ?siteLabel) (SAMPLE(?sitePreview) AS ?sitePreview) (SAMPLE(?siteFullAddress) AS ?siteFullAddress) (SAMPLE(?siteCityName) AS ?siteCityName) (SAMPLE(?isPartOfLabel) as ?isPartOfLabel) ${
     latLong ? `(SAMPLE(?lat) as ?lat) (SAMPLE(?long) as ?long)` : ''
   }
 WHERE {
@@ -11,9 +11,13 @@ WHERE {
  rdfs:label ?label .
 
  ?site rdfs:label ?siteLabel ;
+ cis:isPartOf ?isPartOf ;
  cis:siteAddress ?siteAddress .
 
  FILTER ( ?culturalInstituteOrSite = <${culturalSite}> ) .
+ 
+ OPTIONAL { ?site cis:isPartOf ?isPartOf . 
+  ?isPartOf rdfs:label ?isPartOfLabel  } .
 
  OPTIONAL { ?site owl:deprecated ?deprecatedSite } .
  FILTER ( !BOUND(?deprecatedSite ) ) .

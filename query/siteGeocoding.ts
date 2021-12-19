@@ -45,18 +45,17 @@ export const geocodeSite = (region: Region) => async (site) => {
     }, ${country}`,
   }
 
+  const pPartOf = {
+    q: `${site['?isPartOfLabel']?.value} ${
+      region ? `, ${region}` : ''
+    }, ${country}`,
+  }
+
   const valueAddressStructured = await getGeocoding(qAddressStructured)
   const valueName = await getGeocoding(qName)
+  const valuePartOf = await getGeocoding(pPartOf)
 
-  // const valueAddressStructured = await geocodingQuery(
-  //   getQuery(qAddressStructured)
-  // )()
-  // const valueName = await geocodingQuery(getQuery(qName))()
-
-  // console.log('valueAddressStructured', valueAddressStructured)
-  // console.log('valueName', valueName)
-
-  const [value] = [valueAddressStructured, valueName]
+  const [value] = [valueAddressStructured, valueName, valuePartOf]
     .filter((v) => v && 'lat' in v)
     .sort((a, b) => b.importance - a.importance)
 
