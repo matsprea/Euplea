@@ -20,12 +20,15 @@ const getRegionFilter = (regionIds: string[]) =>
     : ''
 
 const query = (subject: string, regionIds: string[]) => `${prefix}
-SELECT ?culturalInstituteOrSite (SAMPLE(?culturalInstituteOrSiteLabel) as ?culturalInstituteOrSiteLabel) (COUNT(?cultpro) AS ?count) 
+SELECT ?culturalInstituteOrSite (SAMPLE(?culturalInstituteOrSiteLabel) as ?culturalInstituteOrSiteLabel) (COUNT( DISTINCT ?cultpro) AS ?count) (SAMPLE(?cityLabel) as ?cityLabel)
 WHERE {
  ?cultpro rdf:type/rdfs:subClassOf* arco:CulturalProperty ;
  a-loc:hasCulturalInstituteOrSite ?culturalInstituteOrSite ;
  a-loc:hasCulturalPropertyAddress ?address ;
  a-cd:hasSubject ?subject .
+ 
+ ?address clvapit:hasCity ?city .
+ ?city rdfs:label ?cityLabel .
   
  ?subject rdfs:label ?subjectLabel .
  FILTER(REGEX(STR(?subjectLabel), "${subject}", "i")) 
