@@ -14,20 +14,52 @@ This project uses `yarn` as package manager, after cloning this repository in yo
 yarn
 ```
 
-### ENV variables
+## ENV variables
 
-You may also want to create a  `.env.local` file in the project root to provide some ENV variables to the project with appropiates values for an [Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/) instance that this project uses as caching layer
+You may also want to create a  `.env.local` file in the project root to provide some ENV variables
 
 ```text
+NEXT_PUBLIC_OVERPASS=1 # Set to 1 if you want to use the overpass-turbo API, 0 to use Sophox API
 COSMOS_ENDPOINT='https://your-azure-cosmosdb.documents.azure.com:443/'
 COSMOS_KEY='YourAzureCosmosDBKey=='
-MAP_CENTER='42.504306, 12.572639' # Center of Italy
-MAP_ZOOM='6' # Zoom level
 SECRET='YourSecret'
-NEXT_PUBLIC_OVERPASS=1 # Set to 1 if you want to use the overpass-turbo API, 0 to use Sophox API
-NEXT_PUBLIC_AMENITY_RADIUS=5 # Radius in Kilometers for the amenities search
-NEXT_PUBLIC_ACCOMODATION_RADIUS=10 # Radius in Kilometers for the accomodation search
+MAP_CENTER='42.504306, 12.572639' # Initial center of the map
+MAP_ZOOM='6' # Zoom level
+CULTURAINSTITUTE_PER_DAY=2 # Number of cultural institutes to visit per day
+NEXT_PUBLIC_AMENITY_RADIUS=2 # Radius in Kilometers for the amenities search
+AMENITY_MAX_COUNT=10 # Maximum number of amenities to be returned for each day
+NEXT_PUBLIC_ACCOMODATION_RADIUS=5 # Radius in Kilometers for the accomodation search
+ACCOMODATION_MAX_COUNT=10 # Maximum number of accomodations to show for each day
 ```
+
+### Overpass vs Sophox
+
+It's possible to use the [overpass-turbo API](<https://overpass-turbo.eu/>) or the [Sophox API](<https://sophox.com/>) to retrieve the amenities and accomodations.
+
+Until [this Sophox issue](<https://github.com/Sophox/sophox/issues/27>) will be resolved, the overpass-turbo API should be used.
+
+### Cache
+
+To improve the peformance a caching mechanism is implemented using [Azure Cosmos DB](<https://azure.microsoft.com/services/cosmos-db/>).
+
+To enable it you need to set the `COSMOS_ENDPOINT` and `COSMOS_KEY` environment variables to the values of your Cosmos DB account.
+If you are not providing these values, the caching mechanism will be disabled.
+
+The `SECRET` environment variable is used to hash the cache entries keys.
+
+### Map
+
+The map will be displayed using [Leaflet](<https://leafletjs.com/>) and it will be centered on the `MAP_CENTER` and zoomed to the `MAP_ZOOM` level.
+
+### Itinerary
+
+The itinerary will be created using date from [Ministero della cultura](https://www.beniculturali.it/) and you can select how many cultura institeutes you want to view per day with `CULTURAINSTITUTE_PER_DAY`.
+
+### Amenities and Accomodations
+
+You can set the `NEXT_PUBLIC_AMENITY_RADIUS` and `NEXT_PUBLIC_ACCOMODATION_RADIUS` to the maximum radius in Kilometers to be searched around each cultural institute.
+
+`AMENITY_MAX_COUNT` and `ACCOMODATION_MAX_COUNT` is used to configure the maximum number of results to returned for each cultura institute.
 
 ## Developer mode
 
@@ -39,7 +71,9 @@ yarn dev
 
 Open the url <http://localhost:3000> with your browser
 
-## How to run it
+## Production
+
+### How to run it
 
 Execute the following command to build the project for production:
 
@@ -55,7 +89,7 @@ yarn start
 
 Please make your have configured correctly the [ENV variables](#env-variables)
 
-## Docker
+### Docker
 
 A [Dockerfile](./Dockerfile) has been provided to allow to build and run the project in a container
 
@@ -83,8 +117,9 @@ docker build -t euplea .
 To run your `euplea` image and exposing it on port 3000, execute the following command
 
 ```bash
-docker run -e COSMOS_ENDPOINT -e COSMOS_KEY -e SECRET -e MAP_CENTER -e MAP_ZOOM -e NEXT_PUBLIC_OVERPASS -e NEXT_PUBLIC_AMENITY_RADIUS -e NEXT_PUBLIC_ACCOMODATION_RADIUS -p 3000:3000 euplea
+docker run --env-file ./env.list -p 3000:3000 euplea
 ```
 
-Please make your have configured correctly the [ENV variables](#env-variables)
+Please make your have configured correctly the [ENV variables](#env-variables) in the `env.list` file
+
 You can fine more informations about passing ENV variables on [Docker documentation](https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file)

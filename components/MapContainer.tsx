@@ -1,17 +1,10 @@
 import dynamic from 'next/dynamic'
-
 import { Box, Progress, VStack } from '@chakra-ui/react'
-
 import { CulturalSitesProvider, CurrentLocationProvider } from 'context'
 import { MapSkeleton, ItineraryContainer } from 'components'
 import { useEffect, useState } from 'react'
 import { SearchData } from 'types'
-
-const MAP_CENTER = '42.504306, 12.572639'
-const mapCenter = process.env.MAP_CENTER ?? MAP_CENTER
-
-const MAP_ZOOM = '6'
-const mapZoom = Number(process.env.MAP_ZOOM ?? MAP_ZOOM)
+import { mapCenter, mapZoom } from 'utils'
 
 const DynamicMap = dynamic(() => import('components/Map'), {
   ssr: false,

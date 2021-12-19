@@ -2,7 +2,7 @@ import { getWithCache } from 'cache'
 import queryOverpass from '@derhuerst/query-overpass'
 import { Style } from 'types'
 import { amenityStyle } from './settings'
-import { mergeWaysNodes, withCache } from 'utils'
+import { amenityMaxCount, mergeWaysNodes, withCache } from 'utils'
 
 const amenity =
   (lat: number, long: number, radius: number) => (amenity: string) =>
@@ -23,7 +23,7 @@ const query = (lat: number, long: number, style: Style, radius: number) => `
 (
     ${queryAmenity(lat, long, style, radius)}
  );
-out body;`
+out body ${amenityMaxCount};`
 
 const containerId = 'amenityOverpass'
 

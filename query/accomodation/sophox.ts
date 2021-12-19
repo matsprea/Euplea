@@ -6,7 +6,7 @@ import {
 import { getWithCache } from 'cache'
 import { Style } from 'types'
 import { hostelStyle, tourismStyle } from './settings'
-import { withCache } from 'utils'
+import { accomodationMaxCount, withCache } from 'utils'
 
 const tourismStyleToSparql = (style: Style) =>
   tourismStyle(style)
@@ -81,7 +81,7 @@ SELECT DISTINCT * WHERE {
   }
 }
 ORDER BY ASC(?distance)
-LIMIT 10
+LIMIT ${accomodationMaxCount}
 `
 
 const containerId = 'accomodationSophox'

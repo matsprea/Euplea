@@ -44,8 +44,8 @@ export const siteToPointOfInterest = (site): PointOfInterest => ({
   long: parseFloat(site['?long'].value),
   label: site['?siteLabel'].value,
   otherInfo: {
-    address: site['?siteFullAddress'].value,
-    city: site['?siteCityName'].value,
+    address: site['?siteFullAddress']?.value,
+    city: site['?siteCityName']?.value,
   },
 })
 

@@ -1,12 +1,11 @@
 import { CosmosClient } from '@azure/cosmos'
+import { cosmosEndpoint, cosmosKey } from 'utils'
 import { createHmac } from './createHmac'
 
-const COSMOS_ENDPOINT = process.env.COSMOS_ENDPOINT
-const COSMOS_KEY = process.env.COSMOS_KEY
-
 const client =
-  COSMOS_ENDPOINT &&
-  new CosmosClient({ endpoint: COSMOS_ENDPOINT, key: COSMOS_KEY })
+  cosmosEndpoint &&
+  cosmosKey &&
+  new CosmosClient({ endpoint: cosmosEndpoint, key: cosmosKey })
 const EupleaDb = client?.database('Euplea')
 
 export const enum TTL {

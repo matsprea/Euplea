@@ -7,7 +7,7 @@ import {
 } from 'query'
 import { getWithCache, TTL } from 'cache'
 import { Region } from 'types'
-import { withCache } from 'utils'
+import { culturalInstituteOrSitePerDay, withCache } from 'utils'
 
 const getRegionFilter = (regionIds: string[]) =>
   regionIds.length > 0
@@ -62,6 +62,76 @@ const getCulturalSites = withCache
 
 const culturalSiteWithoutSite = ({ site }) => site.length > 0
 
+const getFirstsCity = (
+  culturalPropertiesByCity: Map<string, number>
+): string => {
+  const [city] = Array.from(culturalPropertiesByCity.entries()).sort(
+    (a, b) => b[1] - a[1]
+  )[0]
+  return city
+}
+
+
+const getCulturaSitesByCity = (
+  culturalPropertiesByCity: Map<string, any[]>,
+  city: string
+): any[] =>
+  culturalPropertiesByCity
+    .get(city)
+    .sort((a, b) => Number(b['?count'].value) - Number(a['?count'].value))
+    .splice(0, culturalInstituteOrSitePerDay)
+
+const getTopCulturaSites = (
+  culturalSitesByCity: Map<string, any[]>,
+  culturalPropertiesByCity: Map<string, number>
+) => {
+  const city = getFirstsCity(culturalPropertiesByCity)
+  const culturaSites = getCulturaSitesByCity(culturalSitesByCity, city)
+
+  return culturaSites
+}
+
+const getCulturalSitesId = (culturalSites: any[]): string[] =>
+  culturalSites.map((site) => site['?culturalInstituteOrSite'].value)
+
+const culturalSitesByDay = (culturalSites: any[]): any[][] => {
+  if (culturalSites.length === 1) {
+    return [culturalSites]
+  }
+
+  const culturalSitesByCity = new Map<string, any[]>()
+  const culturalPropertiesCountByCity = new Map<string, number>()
+
+  culturalSites.forEach((culturalSite) => {
+    culturalSitesByCity.set(culturalSite['?cityLabel'].value, [
+      ...(culturalSitesByCity.get(culturalSite['?cityLabel'].value) ?? []),
+      culturalSite,
+    ])
+
+    culturalPropertiesCountByCity.set(
+      culturalSite['?cityLabel'].value,
+      (culturalPropertiesCountByCity.get(culturalSite['?cityLabel'].value) ??
+        0) + Number(culturalSite['?count'].value)
+    )
+  })
+
+  const topCulturaSites = getTopCulturaSites(
+    culturalSitesByCity,
+    culturalPropertiesCountByCity
+  )
+
+  const topCulturaSitesIDs = getCulturalSitesId(topCulturaSites)
+
+  const otherCulturaSites = culturalSites.filter(
+    (cs) => !topCulturaSitesIDs.includes(cs['?culturalInstituteOrSite'].value)
+  )
+
+  return [topCulturaSites, ...culturalSitesByDay(otherCulturaSites)]
+}
+
+const filterByNumberOfDays = (numberOfDays: number) => (culturalSites: any) =>
+  culturalSitesByDay(culturalSites).slice(0, numberOfDays).flat()
+
 export const getCulturalSitesWithSites = (
   subject: string,
   region: Region,
@@ -87,6 +157,6 @@ export const getCulturalSitesWithSites = (
           .then((culturalSites) =>
             culturalSites.filter(culturalSiteWithoutSite)
           )
-          .then((culturalSites) => culturalSites.slice(0, numberOfDays))
+          .then(filterByNumberOfDays(numberOfDays))
       )
     : Promise.resolve([])

@@ -6,7 +6,7 @@ import {
 import { getWithCache } from 'cache'
 import { Style } from 'types'
 import { amenityStyle } from './settings'
-import { withCache } from 'utils'
+import { amenityMaxCount, withCache } from 'utils'
 
 const amenityStyleToSparql = (style: Style) =>
   amenityStyle(style)
@@ -33,7 +33,7 @@ SELECT * WHERE {
    }
 }
 ORDER BY ASC(?distance)
-LIMIT 10
+LIMIT ${amenityMaxCount}
 `
 
 const containerId = 'amenitySophox'
