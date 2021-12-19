@@ -19,15 +19,20 @@ export const enum TTL {
 }
 
 const getContainer = async (containerId: string) => {
-  const { container } = await EupleaDb.containers
+  const { container, resource } = await EupleaDb.containers
     .createIfNotExists({
       id: containerId,
       partitionKey: '/id',
     })
     .catch((error) => {
       console.error(`getContainer ${containerId}`, error)
-      return { container: null }
+      return { container: null, resource: null }
     })
+
+  if (container && resource.defaultTtl !== -1) {
+    await container.replace({ ...resource, defaultTtl: TTL.Forever })
+  }
+
   return container
 }
 
