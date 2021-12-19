@@ -17,8 +17,8 @@ import { GiGreekTemple } from 'react-icons/gi'
 
 export const ItinerarySteps = forwardRef<any, any>(
   ({ culturalSites, isOpen }, ref) => {
-    const {t } = useTranslation()
-    
+    const { t } = useTranslation()
+
     return (
       <Collapse in={isOpen} animateOpacity>
         <Box p="2">
@@ -42,19 +42,16 @@ export const ItinerarySteps = forwardRef<any, any>(
                   <Spacer />
                   <Tag size="lg" borderRadius="full" minWidth="100px">
                     <TagLabel>
-                      {t('Cultural items', culturalSite['?count'].value)}
+                      {t('Cultural items', {
+                        count: culturalSite['?count'].value,
+                      })}
                     </TagLabel>
                   </Tag>
                 </HStack>
                 <Box>
                   <VStack>
                     {culturalSite['site'].map((site, _index) => (
-                      <Flex
-                        Box
-                        key={site['?site']?.value}
-                        w="100%"
-                        padding={2}
-                      >
+                      <Flex Box key={site['?site']?.value} w="100%" padding={2}>
                         <Avatar
                           bgColor="teal"
                           icon={<GiGreekTemple color="white" fontSize="2rem" />}
