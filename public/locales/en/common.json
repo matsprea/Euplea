@@ -32,5 +32,6 @@
   "Longitude" : "Longitude",
   "Altitude" : "Altitude",
   "meters" : "meters",
-  "Accuracy" : "Accuracy"
+  "Accuracy" : "Accuracy",
+  "Share" : "Share"
 }
