@@ -3,7 +3,7 @@ import {
   sourcesSophox as sources,
   prefixSophox as prefix,
 } from 'query'
-import { getWithCache } from 'cache'
+import { getWithCache, TTL } from 'cache'
 import { Style } from 'types'
 import { hostelStyle, tourismStyle } from './settings'
 import { accomodationMaxCount, withCache } from 'utils'
@@ -99,8 +99,11 @@ const getSparqlAccomodationsWithCache = (
   style: Style,
   radius: number
 ) =>
-  getWithCache(containerId, `sophox-${lat}-${long}-${style}-${radius}`, () =>
-    getSparqlAccomodationsWithNoCache(lat, long, style, radius)
+  getWithCache(
+    containerId,
+    `sophox-${lat}-${long}-${style}-${radius}`,
+    () => getSparqlAccomodationsWithNoCache(lat, long, style, radius),
+    TTL.Year
   ).then(({ value }) => !('error' in value) && value)
 
 export const getSparqlAccomodations = withCache

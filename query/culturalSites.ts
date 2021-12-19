@@ -53,7 +53,7 @@ const getCulturalSitesWithCache = (subject: string, regionIds: string[]) =>
     containerId,
     `${subject}-${regionIds}`,
     () => getCulturalSitesWithNoCache(subject, regionIds),
-    TTL.Week
+    TTL.Month
   ).then(({ value }) => value)
 
 const getCulturalSites = withCache
@@ -70,7 +70,6 @@ const getFirstsCity = (
   )[0]
   return city
 }
-
 
 const getCulturaSitesByCity = (
   culturalPropertiesByCity: Map<string, any[]>,
@@ -95,7 +94,7 @@ const getCulturalSitesId = (culturalSites: any[]): string[] =>
   culturalSites.map((site) => site['?culturalInstituteOrSite'].value)
 
 const culturalSitesByDay = (culturalSites: any[]): any[][] => {
-  if (culturalSites.length === 1) {
+  if (culturalSites.length <= 1) {
     return [culturalSites]
   }
 
@@ -103,15 +102,17 @@ const culturalSitesByDay = (culturalSites: any[]): any[][] => {
   const culturalPropertiesCountByCity = new Map<string, number>()
 
   culturalSites.forEach((culturalSite) => {
-    culturalSitesByCity.set(culturalSite['?cityLabel'].value, [
-      ...(culturalSitesByCity.get(culturalSite['?cityLabel'].value) ?? []),
+    const city = culturalSite['?cityLabel'].value
+    culturalSitesByCity.set(city, [
+      ...(culturalSitesByCity.has(city) ? culturalSitesByCity.get(city) : []),
       culturalSite,
     ])
 
     culturalPropertiesCountByCity.set(
       culturalSite['?cityLabel'].value,
-      (culturalPropertiesCountByCity.get(culturalSite['?cityLabel'].value) ??
-        0) + Number(culturalSite['?count'].value)
+      (culturalPropertiesCountByCity.has(city)
+        ? culturalPropertiesCountByCity.get(city)
+        : 0) + Number(culturalSite['?count'].value)
     )
   })
 

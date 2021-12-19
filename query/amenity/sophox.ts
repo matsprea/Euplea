@@ -3,7 +3,7 @@ import {
   sourcesSophox as sources,
   prefixSophox as prefix,
 } from 'query'
-import { getWithCache } from 'cache'
+import { getWithCache, TTL } from 'cache'
 import { Style } from 'types'
 import { amenityStyle } from './settings'
 import { amenityMaxCount, withCache } from 'utils'
@@ -47,8 +47,11 @@ const getSparqlAmenitiesWithCache = (
   style: Style,
   radius: number
 ) =>
-  getWithCache(containerId, `sophox-${lat}-${long}-${style}-${radius}`, () =>
-    getSparqlAmenitiesWithNoCache(lat, long, style, radius)
+  getWithCache(
+    containerId,
+    `sophox-${lat}-${long}-${style}-${radius}`,
+    () => getSparqlAmenitiesWithNoCache(lat, long, style, radius),
+    TTL.Year
   ).then(({ value }) => !('error' in value) && value)
 
 export const getSparqlAmenities = withCache

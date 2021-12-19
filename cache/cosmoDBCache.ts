@@ -85,7 +85,7 @@ export const getWithCache = async (
   containerId: string,
   id: string,
   operation: () => Promise<any>,
-  ttl: TTL = TTL.Year
+  ttl: TTL
 ) =>
   EupleaDb
     ? getFromCache(containerId, id).then((data) => {

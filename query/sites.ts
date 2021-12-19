@@ -1,5 +1,5 @@
 import { mySparQLQuery, sourcesBeniCulturali as sources } from 'query'
-import { getWithCache } from 'cache'
+import { getWithCache, TTL } from 'cache'
 import { geocodeSite } from './siteGeocoding'
 import {
   onlySites,
@@ -126,8 +126,11 @@ const getSitesNoCache = (culturalSite: string, region: Region) =>
     .then(removeSiteDuplicationBySiteLabel)
 
 const getSitesWithCache = (culturalSite: string, region: Region) =>
-  getWithCache(containerId, `getSitesWithCache-${culturalSite}-${region}`, () =>
-    getSitesNoCache(culturalSite, region)
+  getWithCache(
+    containerId,
+    `getSitesWithCache-${culturalSite}-${region}`,
+    () => getSitesNoCache(culturalSite, region),
+    TTL.Month
   ).then(({ value }) => value)
 
 export const getSites = withCache ? getSitesWithCache : getSitesNoCache

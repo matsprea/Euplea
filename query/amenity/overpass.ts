@@ -1,8 +1,8 @@
-import { getWithCache } from 'cache'
+import { getWithCache, TTL } from 'cache'
 import queryOverpass from '@derhuerst/query-overpass'
 import { Style } from 'types'
 import { amenityStyle } from './settings'
-import { amenityMaxCount, mergeWaysNodes, withCache } from 'utils'
+import { amenityMaxCount, filterOverpassErrors, mergeWaysNodes, withCache } from 'utils'
 
 const amenity =
   (lat: number, long: number, radius: number) => (amenity: string) =>
@@ -32,7 +32,10 @@ const getOverpassAmenitiesWithNoCache = (
   long: number,
   style: Style,
   radius: number
-) => queryOverpass(query(lat, long, style, radius)).then(mergeWaysNodes)
+) =>
+  queryOverpass(query(lat, long, style, radius))
+    .then(mergeWaysNodes)
+    .then(filterOverpassErrors)
 
 export const getOverpassAmenitiesWithCache = (
   lat: number,
@@ -40,8 +43,11 @@ export const getOverpassAmenitiesWithCache = (
   style: Style,
   radius: number
 ) =>
-  getWithCache(containerId, `overpass-${lat}-${long}-${style}-${radius}`, () =>
-    getOverpassAmenitiesWithNoCache(lat, long, style, radius)
+  getWithCache(
+    containerId,
+    `overpass-${lat}-${long}-${style}-${radius}`,
+    () => getOverpassAmenitiesWithNoCache(lat, long, style, radius),
+    TTL.Year
   ).then(({ value }) => value)
 
 export const getOverpassAmenities = withCache

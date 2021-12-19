@@ -13,3 +13,6 @@ export const mergeWaysNodes = (results: any[]) => {
     })),
   ]
 }
+
+export const filterOverpassErrors = (results: any[]) =>
+  results.filter((item) => 'error' in item)
