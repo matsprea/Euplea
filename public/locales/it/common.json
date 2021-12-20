@@ -39,6 +39,6 @@
   "DataSources1" : "Questa applicazione web permette di fare ricerche nel <2>database dei dati culturali</2> del <6>Ministero della Cultura</6> reso disponibile come <10>Linked Open Data</10>.",
   "DataSources2":"I dati per gli alloggi ed i servizi sono forniti da <2>OpenStreetMap</2> usando <6>Sophox</6> ed <10>Overpass Turbo</10>.",
   "DataSources3":"I dati sono mostrati sulla mappa usando <2>leaflet</2> ed la mappa è fornita da <6>OpenStreetMap</6>.",
-  "LicenceKey":"Questa applicazione web app è distribuita con licenza <2>Apache License 2.0</2> ed il codice sorgente è disponibile in questo <6>repository<6>.",
+  "LicenceKey":"Questa applicazione web è distribuita con licenza <2>Apache License 2.0</2> ed il codice sorgente è disponibile in questo <6>repository<6>.",
   "Data sources" : "Sorgenti Dati"
 }
