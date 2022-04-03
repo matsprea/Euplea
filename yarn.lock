@@ -3055,10 +3055,10 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@derhuerst/query-overpass@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@derhuerst/query-overpass/-/query-overpass-2.0.0.tgz#74e3653bc0ad63a30ab816ef7415b95bbdbe0f3a"
-  integrity sha512-B5tY8mp3dxHwwuUj8q9EN3B+djZlfkMa7LdR/D4jgHR1YDhD0LOd2T0Z2uHulV379+87IdoPMAPRU0ZsIJ7MBg==
+"@derhuerst/query-overpass@2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@derhuerst/query-overpass/-/query-overpass-2.0.1.tgz#d9aa0024b3330ee3e14a4ed058af84a7664259a0"
+  integrity sha512-PsXtAsVhmGc7XO4UgkaBhGYqN6n5LgRh6IwC4Cep9YOJ8hk5T2OUKzGILPFIqGHvL3yo6CRsCk+Wa+6XmCRW3w==
   dependencies:
     fetch-ponyfill "^6.0.0"
     p-retry "^4.1.0"
