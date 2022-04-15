@@ -32,7 +32,7 @@
     "react-hook-form": "7.29.0",
     "react-icons": "4.3.1",
     "react-leaflet": "3.2.5",
-    "react-query": "3.34.19"
+    "react-query": "3.34.20"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "12.1.5",
