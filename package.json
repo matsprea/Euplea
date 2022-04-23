@@ -19,7 +19,7 @@
     "@emotion/styled": "11.8.1",
     "axios": "0.26.1",
     "framer-motion": "6.3.1",
-    "leaflet": "1.7.1",
+    "leaflet": "1.8.0",
     "leaflet-extra-markers": "1.2.1",
     "leaflet-polylinedecorator": "1.6.0",
     "next": "12.1.5",
