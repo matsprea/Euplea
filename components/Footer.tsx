@@ -35,7 +35,7 @@ export const Footer = (): JSX.Element => {
               color="black"
               as="span"
             >
-              {t('Credits')}
+              {t<string>('Credits')}
             </Button>
           </Link>
         </NextLink>

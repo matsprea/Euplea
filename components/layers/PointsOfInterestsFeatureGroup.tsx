@@ -12,7 +12,7 @@ type PointsOfInterestProps = {
 const otherInfoList = (otherInfo) =>
   Object.entries(otherInfo).map(([key, value]) => (
     <li key={key}>
-      {key}: {value}
+      ${`${key}: ${value}`}
     </li>
   ))
 

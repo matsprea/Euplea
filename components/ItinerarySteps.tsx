@@ -42,7 +42,7 @@ export const ItinerarySteps = forwardRef<any, any>(
                   <Spacer />
                   <Tag size="lg" borderRadius="full" minWidth="100px">
                     <TagLabel>
-                      {t('Cultural items', {
+                      {t<string>('Cultural items', {
                         count: culturalSite['?count'].value,
                       })}
                     </TagLabel>
@@ -51,7 +51,7 @@ export const ItinerarySteps = forwardRef<any, any>(
                 <Box>
                   <VStack>
                     {culturalSite['site'].map((site, _index) => (
-                      <Flex Box key={site['?site']?.value} w="100%" padding={2}>
+                      <Flex key={site['?site']?.value} w="100%" padding={2}>
                         <Avatar
                           bgColor="teal"
                           icon={<GiGreekTemple color="white" fontSize="2rem" />}

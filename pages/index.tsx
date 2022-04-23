@@ -30,7 +30,7 @@ const IndexPage = ({
     toastIdRef.current = toast({
       description,
       position: 'top',
-      title: t('Searching for'),
+      title: t<string>('Searching for'),
       duration: null,
       id: TOAST_ID,
     })
