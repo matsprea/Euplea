@@ -1,5 +1,10 @@
 {
-  "private": true,
+  "homepage": "https://euplea.herokuapp.com/",
+  "bugs": {
+    "url": "https://github.com/matsprea/Euplea/issues"
+  },
+  "license": "Apache-2.0",
+  "author": "Matteo Spreafico",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -70,6 +75,6 @@
     ]
   },
   "engines": {
-    "node": "^16"
+    "node": "^16 || ^18"
   }
 }
