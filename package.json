@@ -1,10 +1,12 @@
 {
   "homepage": "https://euplea.herokuapp.com/",
+  "description": "Euplea - Viaggi nella bellezza dell'arte",
   "bugs": {
     "url": "https://github.com/matsprea/Euplea/issues"
   },
   "license": "Apache-2.0",
   "author": "Matteo Spreafico",
+  "repository": "git@github.com:matsprea/Euplea.git",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
