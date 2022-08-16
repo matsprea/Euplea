@@ -29,7 +29,7 @@
     "leaflet": "1.8.0",
     "leaflet-extra-markers": "1.2.1",
     "leaflet-polylinedecorator": "1.6.0",
-    "next": "12.1.6",
+    "next": "12.2.5",
     "next-i18next": "11.3.0",
     "next-pwa": "5.5.5",
     "nominatim-client": "3.2.1",
@@ -42,7 +42,7 @@
     "react-query": "3.39.2"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "12.1.6",
+    "@next/eslint-plugin-next": "12.2.5",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.3.0",
     "@testing-library/user-event": "14.4.3",
@@ -54,7 +54,7 @@
     "@typescript-eslint/parser": "5.33.1",
     "babel-jest": "28.1.3",
     "eslint": "8.22.0",
-    "eslint-config-next": "12.1.6",
+    "eslint-config-next": "12.2.5",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-react": "7.30.1",
     "eslint-plugin-testing-library": "5.6.0",
