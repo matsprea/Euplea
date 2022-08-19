@@ -18,7 +18,7 @@
     "test-all": "yarn lint && yarn type-check && yarn test"
   },
   "dependencies": {
-    "@azure/cosmos": "3.16.4",
+    "@azure/cosmos": "3.17.0",
     "@chakra-ui/react": "2.2.8",
     "@comunica/actor-init-sparql": "1.22.3",
     "@derhuerst/query-overpass": "2.0.1",
