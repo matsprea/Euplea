@@ -25,7 +25,7 @@
     "@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
     "axios": "0.27.2",
-    "framer-motion": "7.3.2",
+    "framer-motion": "7.3.4",
     "leaflet": "1.8.0",
     "leaflet-extra-markers": "1.2.1",
     "leaflet-polylinedecorator": "1.6.0",
