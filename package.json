@@ -30,7 +30,7 @@
     "leaflet-extra-markers": "1.2.1",
     "leaflet-polylinedecorator": "1.6.0",
     "next": "12.3.0",
-    "next-i18next": "11.3.0",
+    "next-i18next": "12.0.1",
     "next-pwa": "5.6.0",
     "nominatim-client": "3.2.1",
     "osrm.js": "5.5.0",
