@@ -38,7 +38,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "7.36.1",
     "react-icons": "4.4.0",
-    "react-leaflet": "4.0.2",
+    "react-leaflet": "4.1.0",
     "react-query": "3.39.2"
   },
   "devDependencies": {
