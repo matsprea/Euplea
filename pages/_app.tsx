@@ -1,37 +1,34 @@
 import { AppProps } from 'next/app'
 import Head from 'next/head'
 import { ChakraProvider } from '@chakra-ui/react'
-import '../styles/globals.css'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { appWithTranslation } from 'next-i18next'
+import 'styles/globals.css'
 import 'leaflet/dist/leaflet.css'
-import theme from '../theme'
+import 'leaflet-extra-markers/dist/css/leaflet.extra-markers.min.css'
+import { theme } from 'theme'
+import { BasePage } from 'components'
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
-  return (
-    <>
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+})
+
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
+  <QueryClientProvider client={queryClient}>
+    <ChakraProvider theme={theme}>
       <Head>
-        <title>Euplea - Viaggi nella bellezza dell&apos;arte</title>
         <meta
           name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
         />
       </Head>
-      <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </>
-  )
-}
+      <BasePage Component={Component} pageProps={pageProps}   />
+    </ChakraProvider>
+  </QueryClientProvider>
+)
 
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext: AppContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-
-//   return { ...appProps }
-// }
-
-export default MyApp
+export default appWithTranslation(MyApp)

@@ -1,44 +1,92 @@
-import dynamic from 'next/dynamic'
-import { QueryClient, QueryClientProvider } from 'react-query'
-import { Flex, Center, Box, Heading } from '@chakra-ui/react'
-import { MapSkeleton } from '../components/MapSkeleton'
-import { Sidebar } from '../components/Sidebar'
+import { GetStaticProps } from 'next'
+import { useToast } from '@chakra-ui/react'
+import { useTranslation, SSRConfig } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { Header, MapContainer } from 'components'
+import { useRef, useEffect, useState } from 'react'
+import { SearchData } from 'types'
 
-const DynamicMap = dynamic(() => import('../components/Map'), {
-  ssr: false,
-  loading: () => <MapSkeleton />,
-})
+const TOAST_ID = 'search-toast'
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
-})
+type IndexPageProps = {
+  searchData: SearchData
+  culturalSites: any[]
+  isLoading: boolean
+}
 
-const defaultInitLocation = { lat: 45.464664, lng: 9.18854 }
+const IndexPage = ({
+  searchData,
+  culturalSites,
+  isLoading,
+}: IndexPageProps): JSX.Element => {
+  const { t } = useTranslation()
+  const toastIdRef = useRef<any>()
+  const [isCulturalSites, setIsCulturalSites] = useState<boolean>(false)
+  const toast = useToast()
 
-const MapPage = (): JSX.Element => {
+  const { style, days, subject, region } = searchData
+
+  const addToast = (description: string) => {
+    toastIdRef.current = toast({
+      description,
+      position: 'top',
+      title: t<string>('Searching for'),
+      duration: null,
+      id: TOAST_ID,
+    })
+  }
+
+  useEffect(() => {
+    setIsCulturalSites(
+      !isLoading && style && days && subject && culturalSites?.length > 0
+    )
+  }, [isLoading, style, days, subject, JSON.stringify(culturalSites)])
+
+  useEffect(() => {
+    if (isLoading && style && days && subject && !toast.isActive(TOAST_ID)) {
+      addToast(
+        t('Search Toast', {
+          ...searchData,
+          style: t(style),
+          region: region ? (region as string) : 'Italia',
+        })
+      )
+    }
+    if (!isLoading) {
+      toast.closeAll()
+    }
+  }, [isLoading])
+
+  const itineraryTitle = t('Itinerary title', {
+    ...searchData,
+    style: t(searchData.style),
+    region: searchData.region ?? 'Italia',
+  })
+
+  const pageTile = isCulturalSites
+    ? `${itineraryTitle} - ${t('header')}`
+    : t('header')
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <Flex>
-        <Sidebar />
-        <Flex className="App " w="100%" direction="column">
-          <Flex h="100px" w="100%">
-            <Center h="100px" w="100%">
-              <Heading as="h1">Euplea</Heading>
-              {/* <Cassetto /> */}
-            </Center>
-          </Flex>
+    <>
+      <Header title={pageTile} />
 
-          <Box w="100%">
-            <DynamicMap initLocation={defaultInitLocation} />
-          </Box>
-        </Flex>
-      </Flex>
-    </QueryClientProvider>
+      <MapContainer
+        isCulturalSites={isCulturalSites}
+        isLoading={isLoading}
+        culturalSites={culturalSites}
+        searchData={searchData}
+      />
+    </>
   )
 }
 
-export default MapPage
+export const getStaticProps: GetStaticProps<SSRConfig> = async ({
+  locale,
+}) => ({
+  props: {
+    ...(await serverSideTranslations(locale, ['common'])),
+  },
+})
+
+export default IndexPage

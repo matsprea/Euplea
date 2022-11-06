@@ -10,7 +10,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="it">
+      <Html>
         <Head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -23,10 +23,18 @@ class MyDocument extends Document {
             content="Euplea - Viaggi nella bellezza dell'arte"
           />
           <meta name="description" content=" " />
-          <meta name="keywords" content=" " />
+          <meta
+            name="keywords"
+            content="beni culturarli, heritage sites, itinerary, itineraries"
+          />
           <meta name="msapplication-config" content="/browserconfig.xml" />
           <meta name="msapplication-TileColor" content="#4fd1c5" />
           <meta name="theme-color" content="#4fd1c5" />
+          <meta name="author" content="Matteo Spreafico" />
+          <meta
+            name="google-site-verification"
+            content={process.env.NEXT_PUBLIC_GOGGLE_SITE_VERIFICATION}
+          />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="manifest" href="/manifest.json" />
           <link
