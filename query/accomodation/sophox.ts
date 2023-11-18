@@ -104,7 +104,7 @@ const getSparqlAccomodationsWithCache = (
     `sophox-${lat}-${long}-${style}-${radius}`,
     () => getSparqlAccomodationsWithNoCache(lat, long, style, radius),
     TTL.Year
-  ).then(({ value }) => !('error' in value) && value)
+  ).then((value) => !('error' in value) && value)
 
 export const getSparqlAccomodations = withCache
   ? getSparqlAccomodationsWithCache
