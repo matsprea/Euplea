@@ -65,7 +65,7 @@ export const SearchDrawer = ({
   const selectDaysValue = watch('days', 2)
   const handleDaysChange = (days: number) => setValue('days', days)
 
-  const selectStyleValue = watch('style', Style.Medium)
+  const selectStyleValue = watch('style')
   const handleStyleChange = (style: Style) => setValue('style', style)
 
   const selectRegionValue = watch('region')
@@ -81,7 +81,9 @@ export const SearchDrawer = ({
 
   useEffect(() => {
     register('days')
-    register('style')
+    register('style', {
+      required: `${t('This is required')}`,
+    })
     register('region')
     register('amenityRadius')
     register('accomodationRadius')
