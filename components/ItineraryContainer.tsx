@@ -66,7 +66,7 @@ export const ItineraryContainer = ({
               onClick={showItinerary}
               leftIcon={isOpen ? <FaCaretUp /> : <FaCaretDown />}
             >
-              {isOpen ? t<string>('Hide itinerary') : t<string>('Show itinerary')}
+              {isOpen ? t('Hide itinerary') : t('Show itinerary')}
             </Button>
           ) : (
             <IconButton
@@ -86,7 +86,7 @@ export const ItineraryContainer = ({
         <Box>
           {!isMobile ? (
             <Button p="2" onClick={shareItinerary} leftIcon={<FaShareAlt />}>
-              {t<string>('Share')}
+              {t('Share')}
             </Button>
           ) : (
             <IconButton

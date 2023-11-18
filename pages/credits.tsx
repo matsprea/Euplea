@@ -37,12 +37,12 @@ const CreditsPage = (): JSX.Element => {
       >
         <Center>
           <Heading as="h2" size="lg" color="teal">
-            {t<string>('Credits')}
+            {t('Credits')}
           </Heading>
         </Center>
         <Box m={2} boxShadow="md" p="6" rounded="md">
           <Heading as="h3" size="md" color="teal" m={2}>
-            {t<string>('Licence')}
+            {t('Licence')}
           </Heading>
           <p>
             <Trans i18nKey="LicenceKey">
@@ -70,7 +70,7 @@ const CreditsPage = (): JSX.Element => {
         </Box>
         <Box m={2} boxShadow="md" p="6" rounded="md">
           <Heading as="h3" size="md" color="teal" m={2}>
-            {t<string>('Data sources')}
+            {t('Data sources')}
           </Heading>
           <p>
             <Trans i18nKey="DataSources1">

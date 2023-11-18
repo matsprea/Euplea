@@ -106,14 +106,14 @@ export const SearchDrawer = ({
         leftIcon={<FaSearchLocation />}
         onClick={onOpen}
       >
-        {t<string>('Search')}
+        {t('Search')}
       </Button>
       <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">
-            {t<string>('Create a new itinerary')}
+            {t('Create a new itinerary')}
           </DrawerHeader>
 
           <DrawerBody>
@@ -121,7 +121,7 @@ export const SearchDrawer = ({
               <Stack spacing="24px">
                 <FormControl isInvalid={!!errors.subject}>
                   <FormLabel htmlFor="subject">
-                    {t<string>('Subject')}
+                    {t('Subject')}
                   </FormLabel>
                   <Input
                     id="subject"
@@ -142,7 +142,7 @@ export const SearchDrawer = ({
                 </FormControl>
 
                 <FormControl isInvalid={!!errors.days}>
-                  <FormLabel htmlFor="days">{t<string>('Days')}</FormLabel>
+                  <FormLabel htmlFor="days">{t('Days')}</FormLabel>
 
                   <Slider
                     id="days"
@@ -164,7 +164,7 @@ export const SearchDrawer = ({
                 </FormControl>
 
                 <FormControl isInvalid={!!errors.region}>
-                  <FormLabel htmlFor="region">{t<string>('Region')}</FormLabel>
+                  <FormLabel htmlFor="region">{t('Region')}</FormLabel>
 
                   <Select
                     id="region"
@@ -173,7 +173,7 @@ export const SearchDrawer = ({
                     onChange={handleRegionChange}
                   >
                     <option value="" selected>
-                      {t<string>('Select a region')}
+                      {t('Select a region')}
                     </option>
                     {Object.keys(Region).map((key) => (
                       <option key={key} value={Region[key]}>
@@ -184,7 +184,7 @@ export const SearchDrawer = ({
                 </FormControl>
 
                 <FormControl isInvalid={!!errors.style}>
-                  <FormLabel htmlFor="style">{t<string>('Style')}</FormLabel>
+                  <FormLabel htmlFor="style">{t('Style')}</FormLabel>
 
                   <RadioGroup
                     id="style"
@@ -192,9 +192,9 @@ export const SearchDrawer = ({
                     onChange={handleStyleChange}
                   >
                     <Stack>
-                      <Radio value={Style.Luxury}>{t<string>('Luxury')}</Radio>
-                      <Radio value={Style.Medium}>{t<string>('Medium')}</Radio>
-                      <Radio value={Style.Budget}>{t<string>('Budget')}</Radio>
+                      <Radio value={Style.Luxury}>{t('Luxury')}</Radio>
+                      <Radio value={Style.Medium}>{t('Medium')}</Radio>
+                      <Radio value={Style.Budget}>{t('Budget')}</Radio>
                     </Stack>
                   </RadioGroup>
 
@@ -205,7 +205,7 @@ export const SearchDrawer = ({
 
                 <FormControl isInvalid={!!errors.amenityRadius}>
                   <FormLabel htmlFor="amenityRadius">
-                    {t<string>('amenityRadius')}
+                    {t('amenityRadius')}
                   </FormLabel>
 
                   <Slider
@@ -229,7 +229,7 @@ export const SearchDrawer = ({
 
                 <FormControl isInvalid={!!errors.accomodationRadius}>
                   <FormLabel htmlFor="accomodationRadius">
-                    {t<string>('accomodationRadius')}
+                    {t('accomodationRadius')}
                   </FormLabel>
 
                   <Slider
@@ -256,11 +256,11 @@ export const SearchDrawer = ({
 
           <DrawerFooter borderTopWidth="1px">
             <Button type="submit" form="my-form" mr={3} leftIcon={<FaSearch />}>
-              {t<string>('Search')}
+              {t('Search')}
             </Button>
             <Spacer />
             <Button variant="outline" onClick={onClose} leftIcon={<GiCancel />}>
-              {t<string>('Cancel')}
+              {t('Cancel')}
             </Button>
           </DrawerFooter>
         </DrawerContent>

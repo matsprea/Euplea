@@ -63,7 +63,7 @@ export const CurrentLocation = (): JSX.Element => {
     >
       <Marker position={currentLocationLatLong} icon={CurrentLocationIcon}>
         <Tooltip>
-          <b>{t<string>('Current Position')}</b>
+          <b>{t('Current Position')}</b>
           <ul>
             <li>{`${t('Latitude')}: ${currenteLocation.latitude}`}</li>
             <li>{`${t('Longitude')}: ${currenteLocation.longitude}`}</li>

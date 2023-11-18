@@ -42,7 +42,7 @@ export const ItinerarySteps = forwardRef<any, any>(
                   <Spacer />
                   <Tag size="lg" borderRadius="full" minWidth="100px">
                     <TagLabel>
-                      {t<string>('Cultural items', {
+                      {t('Cultural items', {
                         count: culturalSite['?count'].value,
                       })}
                     </TagLabel>
