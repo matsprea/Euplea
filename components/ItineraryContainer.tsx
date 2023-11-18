@@ -9,7 +9,7 @@ import {
   IconButton,
 } from '@chakra-ui/react'
 import { useRef, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'next-i18next'
 import { ItinerarySteps } from 'components'
 import { SearchData } from 'types'
 import { FaCaretDown, FaCaretUp, FaShareAlt } from 'react-icons/fa'
