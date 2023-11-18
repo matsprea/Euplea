@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 
 const getAPI = async (params) => {
   const [resource, queryParams] = params.queryKey
@@ -19,4 +19,4 @@ const getAPI = async (params) => {
 }
 
 export const useAPI = (resource: string) => (queryParams: any) =>
-  useQuery([resource, queryParams], getAPI)
+  useQuery({ queryKey: [resource, queryParams], queryFn: getAPI})

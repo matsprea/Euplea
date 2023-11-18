@@ -23,7 +23,7 @@ export const Footer = (): JSX.Element => {
           </Link>
         </NextLink>
         <Spacer />
-        <Box>{t('Made with', { name: 'Matteo' })}</Box>
+        <Box>{t('Made with', { name: 'Matteo Spreafico' })}</Box>
         <Spacer />
         <NextLink passHref href="/credits">
           <Link>
