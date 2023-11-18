@@ -104,13 +104,28 @@ const removeSiteDuplicationBySiteLabel = (siteList: any[]) => {
   return Object.values(sitesDictionary)
 }
 
+const mapSeries = async (iterable, fn) => {
+  const results = []
+
+  for (const x of iterable) {
+    results.push(await fn(x))
+  }
+
+  return results
+}
+
 const getGeocodedSites = (region: Region) => async (siteList: any[]) => {
   const sitesWithLatLong = siteList.filter(siteWithGeocoding)
   const uniqueSiteWithLatLong = removeSiteDuplicationByLatLong(sitesWithLatLong)
   const sitesWithOutLatLong = siteList.filter(siteWithoutGeocoding)
 
-  const sitesGeocoded = await Promise.all(
-    sitesWithOutLatLong.map(geocodeSite(region))
+  // const sitesGeocoded = await Promise.all(
+  //   sitesWithOutLatLong.map(geocodeSite(region))
+  // )
+
+  const sitesGeocoded = await mapSeries(
+    sitesWithOutLatLong,
+    geocodeSite(region)
   )
 
   const value = [...uniqueSiteWithLatLong, ...sitesGeocoded.flat()]

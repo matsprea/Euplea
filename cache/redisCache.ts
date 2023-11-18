@@ -2,7 +2,7 @@ import { Redis } from '@upstash/redis'
 import { redisUrl, redisToken, withCache } from 'utils'
 
 import { createHmac } from './createHmac'
- 
+
 const redis = new Redis({
   url: redisUrl,
   token: redisToken,
@@ -14,7 +14,7 @@ export const enum TTL {
   Week = 60 * 60 * 24 * 7,
   Month = 60 * 60 * 24 * 30,
   Year = 60 * 60 * 24 * 365,
-  Error = 60 * 60 * 24,
+  Error = 60 * 5,
 }
 
 const getFromCache = (containerId: string, id: string) =>
@@ -33,17 +33,14 @@ const executeAndPutInCache = (
 ) =>
   operation()
     .then((data) => {
-      // console.log({ containerId, id, data, type: typeof data })
       putInCache(containerId, id, data, ttl)
-      return data;
+      return data
     })
     .catch((error) =>
-      putInCache(containerId, id, { error }, TTL.Error).catch(
-        (error) => {
-          console.error(`executeAndPutInCache ${containerId}`, error)
-          return []
-        }
-      )
+      putInCache(containerId, id, { error }, TTL.Error).catch((error) => {
+        console.error(`executeAndPutInCache ${containerId}`, error)
+        return []
+      })
     )
 
 export const getWithCache = async (
@@ -54,9 +51,9 @@ export const getWithCache = async (
 ) =>
   withCache
     ? getFromCache(containerId, id).then((data: any) => {
-        // console.log({ containerId, id, data, type: typeof data })
+        if ('error' in data) return []
         if (data !== undefined && data !== null) {
-          return data?.error ?? data
+          return data
         }
         return executeAndPutInCache(containerId, id, operation, ttl)
       })

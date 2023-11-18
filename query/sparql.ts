@@ -12,7 +12,7 @@ export const mySparQLQuery = (query, sources) =>
       return r.bindings()
     })
     .catch((error: any) => {
-      console.error(`Error: mySparQLQuert ${error}`)
+      console.error(`Error: mySparQLQuery ${error}`)
       throw error
     })
 

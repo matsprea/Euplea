@@ -8,13 +8,15 @@ const country = 'Italia'
 
 const geocodingClient = nominatim.createClient({
   useragent: 'Euplea',
-  referer: 'https://euplea.herokuapp.com',
+  referer: 'https://euplea',
 })
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
 const getGeocodingWithNoCache = (query: any) =>
-  geocodingClient
+  sleep(1000).then(() => geocodingClient
     .search(query)
-    .then(([result]) => result ?? { query, result, date: Date.now() })
+    .then(([result]) => result ?? { query, result, date: Date.now() }))
 
 const getQuery = (q) => ({
   ...q,

@@ -141,10 +141,10 @@ export const getCulturalSitesWithSites = (
   subject.length >= 3
     ? getRegions(region).then((regionIds) =>
         getCulturalSites(subject, regionIds)
-          .then((culturalSites) =>
-            Promise.all(
+          .then((culturalSites) => {
+            return Promise.all(
               // culturalSites.splice(0, numberOfDays + 5).map((culturalSite) =>
-              culturalSites.filter((culturalSite) => culturalSite['?culturalInstituteOrSite']?.value).map((culturalSite) =>
+              culturalSites && culturalSites.filter((culturalSite) => culturalSite['?culturalInstituteOrSite']?.value).map((culturalSite) =>
                 getSites(
                   culturalSite['?culturalInstituteOrSite'].value,
                   region
@@ -154,6 +154,7 @@ export const getCulturalSitesWithSites = (
                 }))
               )
             )
+              }
           )
           .then((culturalSites) =>
             culturalSites.filter(culturalSiteWithoutSite)
