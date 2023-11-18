@@ -13,10 +13,9 @@ export const amenityRadiusSetting = process.env.NEXT_PUBLIC_AMENITY_RADIUS
 export const useOverpass =
   parseInt(process.env.NEXT_PUBLIC_OVERPASS) === 1 ? true : false
 
-export const withCache = process.env.REDIS_URL && process.env.REDIS_TOKEN
+export const withCache = true
 
 export const redisUrl = process.env.REDIS_URL
-export const redisToken = process.env.REDIS_TOKEN
 
 export const secret =
   process.env.SECRET ||

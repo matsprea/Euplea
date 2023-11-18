@@ -62,28 +62,26 @@ export const SearchDrawer = ({
     watch,
   } = useForm<SearchData>({ defaultValues })
 
-  const selectDaysValue = watch('days')
+  const selectDaysValue = watch('days', 2)
   const handleDaysChange = (days: number) => setValue('days', days)
 
-  const selectStyleValue = watch('style')
+  const selectStyleValue = watch('style', Style.Medium)
   const handleStyleChange = (style: Style) => setValue('style', style)
 
   const selectRegionValue = watch('region')
   const handleRegionChange = (ev: any) => setValue('region', ev.target.value)
 
-  const selectAmenityRadiusValue = watch('amenityRadius')
+  const selectAmenityRadiusValue = watch('amenityRadius', 1)
   const handleAmenityRadiusChange = (amenityRadius: number) =>
     setValue('amenityRadius', amenityRadius)
 
-  const selectAccomodationRadiusValue = watch('accomodationRadius')
+  const selectAccomodationRadiusValue = watch('accomodationRadius', 2.5)
   const handleAccomodationRadiusChange = (accomodationRadius: number) =>
     setValue('accomodationRadius', accomodationRadius)
 
   useEffect(() => {
     register('days')
-    register('style', {
-      required: `${t('This is required')}`,
-    })
+    register('style')
     register('region')
     register('amenityRadius')
     register('accomodationRadius')
@@ -146,7 +144,6 @@ export const SearchDrawer = ({
 
                   <Slider
                     id="days"
-                    defaultValue={2}
                     min={1}
                     max={7}
                     step={1}
@@ -168,10 +165,9 @@ export const SearchDrawer = ({
 
                   <Select
                     id="region"
-                    value={selectRegionValue}
+                    defaultValue={selectRegionValue}
                     onChange={handleRegionChange}
-                    defaultValue=""
-                  >
+                   >
                     <option value="">
                       {t('Select a region')}
                     </option>
@@ -210,7 +206,6 @@ export const SearchDrawer = ({
 
                   <Slider
                     id="amenityRadius"
-                    defaultValue={1}
                     min={0.25}
                     max={amenityRadiusMax}
                     step={0.25}
@@ -234,7 +229,6 @@ export const SearchDrawer = ({
 
                   <Slider
                     id="accomodationRadius"
-                    defaultValue={2.5}
                     min={1}
                     max={accomodationRadiusMax}
                     step={0.5}
