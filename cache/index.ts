@@ -1,1 +1,1 @@
-export * from './cosmoDBCache'
+export * from './redisCache'

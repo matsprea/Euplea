@@ -10,7 +10,6 @@ const { i18n } = require('./next-i18next.config')
  */
 const nextConfig = withPWA({
   reactStrictMode: true,
-  target: process.env.BUILD_TARGET,
   i18n,
 })
 

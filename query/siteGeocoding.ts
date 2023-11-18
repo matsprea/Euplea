@@ -27,7 +27,7 @@ const getGeocodingWithCache = (q: any) =>
     JSON.stringify(q),
     () => getGeocodingWithNoCache(getQuery(q)),
     TTL.Forever
-  ).then(({ value }) => value)
+  ) 
 
 const getGeocoding = withCache ? getGeocodingWithCache : getGeocodingWithNoCache
 

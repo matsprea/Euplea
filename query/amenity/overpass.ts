@@ -48,8 +48,8 @@ export const getOverpassAmenitiesWithCache = (
     `overpass-${lat}-${long}-${style}-${radius}`,
     () => getOverpassAmenitiesWithNoCache(lat, long, style, radius),
     TTL.Year
-  ).then(({ value }) => value)
-
+  ) 
+  
 export const getOverpassAmenities = withCache
   ? getOverpassAmenitiesWithCache
   : getOverpassAmenitiesWithNoCache

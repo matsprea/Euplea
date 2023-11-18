@@ -54,7 +54,7 @@ const getCulturalSitesWithCache = (subject: string, regionIds: string[]) =>
     `${subject}-${regionIds}`,
     () => getCulturalSitesWithNoCache(subject, regionIds),
     TTL.Month
-  ).then(({ value }) => value)
+  )
 
 const getCulturalSites = withCache
   ? getCulturalSitesWithCache

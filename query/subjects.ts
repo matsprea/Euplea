@@ -36,7 +36,7 @@ const getSubjectsWithCache = (subject: string) =>
     `${subject}`,
     () => getSubjectsWithNoCache(subject),
     TTL.Month
-  ).then(({ value }) => value)
+  ) 
 
 export const getSubjects = withCache
   ? getSubjectsWithCache

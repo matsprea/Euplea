@@ -70,7 +70,7 @@ const getSparqlSiteWithCache = (culturalSite: string) =>
     `getSparqlSiteWithCache-${culturalSite}`,
     () => getSparqlSiteNoCache(culturalSite),
     TTL.Month
-  ).then(({ value }) => value)
+  )
 
 const getSparqlSite = withCache ? getSparqlSiteWithCache : getSparqlSiteNoCache
 
@@ -131,6 +131,6 @@ const getSitesWithCache = (culturalSite: string, region: Region) =>
     `getSites-${culturalSite}-${region}`,
     () => getSitesNoCache(culturalSite, region),
     TTL.Month
-  ).then(({ value }) => value)
+  )
 
 export const getSites = withCache ? getSitesWithCache : getSitesNoCache

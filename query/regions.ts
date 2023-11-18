@@ -35,7 +35,7 @@ const getRegionsWithCache = (region: Region) =>
     `${region}`,
     () => getRegionsWithNoCache(region),
     TTL.Month
-  ).then(({ value }) => value)
+  ) 
 
 export const getRegions = withCache
   ? getRegionsWithCache

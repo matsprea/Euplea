@@ -20,8 +20,8 @@ You may also want to create a  `.env.local` file in the project root to provide 
 
 ```text
 NEXT_PUBLIC_OVERPASS=1 # Set to 1 if you want to use the overpass-turbo API, 0 to use Sophox API
-COSMOS_ENDPOINT='https://your-azure-cosmosdb.documents.azure.com:443/'
-COSMOS_KEY='YourAzureCosmosDBKey=='
+REDIS_URL='https://***.upstash.io'
+REDIS_TOKEN='YourRedisToken'
 SECRET='YourSecret'
 MAP_CENTER='42.504306, 12.572639' # Initial center of the map
 MAP_ZOOM='6' # Zoom level
@@ -40,9 +40,9 @@ Until [this Sophox issue](<https://github.com/Sophox/sophox/issues/27>) will be 
 
 ### Cache
 
-To improve the peformance a caching mechanism is implemented using [Azure Cosmos DB](<https://azure.microsoft.com/services/cosmos-db/>).
+To improve the peformance a caching mechanism is implemented using [Upstas](<https://upstash.com/>) Redis.
 
-To enable it you need to set the `COSMOS_ENDPOINT` and `COSMOS_KEY` environment variables to the values of your Cosmos DB account.
+To enable it you need to set the `REDIS_URL` and `REDIS_TOKEN` environment variables to the values of your account.
 If you are not providing these values, the caching mechanism will be disabled.
 
 The `SECRET` environment variable is used to hash the cache entries keys.
@@ -66,7 +66,7 @@ You can set the `NEXT_PUBLIC_AMENITY_RADIUS` and `NEXT_PUBLIC_ACCOMODATION_RADIU
 Execute the following command to start the project locally in developer mode:
 
 ```bash
-yarn dev
+pnpm dev
 ```
 
 Open the url <http://localhost:3000> with your browser
@@ -78,13 +78,13 @@ Open the url <http://localhost:3000> with your browser
 Execute the following command to build the project for production:
 
 ```bash
-yarn build
+pnpm build
 ```
 
 To start the project in production mode, execute the following command
 
 ```bash
-yarn start
+pnpm start
 ```
 
 Please make your have configured correctly the [ENV variables](#env-variables)
