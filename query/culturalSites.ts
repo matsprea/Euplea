@@ -144,7 +144,7 @@ export const getCulturalSitesWithSites = (
           .then((culturalSites) =>
             Promise.all(
               // culturalSites.splice(0, numberOfDays + 5).map((culturalSite) =>
-              culturalSites.map((culturalSite) =>
+              culturalSites.filter((culturalSite) => culturalSite['?culturalInstituteOrSite']?.value).map((culturalSite) =>
                 getSites(
                   culturalSite['?culturalInstituteOrSite'].value,
                   region

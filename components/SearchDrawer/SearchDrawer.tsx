@@ -168,11 +168,11 @@ export const SearchDrawer = ({
 
                   <Select
                     id="region"
-                    // step={1}
                     value={selectRegionValue}
                     onChange={handleRegionChange}
+                    defaultValue=""
                   >
-                    <option value="" selected>
+                    <option value="">
                       {t('Select a region')}
                     </option>
                     {Object.keys(Region).map((key) => (
