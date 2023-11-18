@@ -16,6 +16,7 @@ export const useOverpass =
 export const withCache = true
 
 export const redisUrl = process.env.REDIS_URL
+export const redisToken = process.env.REDIS_TOKEN
 
 export const secret =
   process.env.SECRET ||

@@ -1,10 +1,13 @@
-import { createClient } from 'redis'
+import { Redis } from '@upstash/redis'
 
-import { redisUrl } from 'utils'
+import { redisUrl, redisToken } from 'utils'
 
 import { createHmac } from './createHmac'
 
-const redis = await createClient(redisUrl ? { url: redisUrl }: undefined).connect()
+const redis = new Redis({
+  url: redisUrl,
+  token: redisToken,
+})
 
 export const enum TTL {
   Forever = -1,
@@ -20,7 +23,7 @@ const getFromCache = (containerId: string, id: string) =>
 
 const putInCache = (containerId: string, id: string, value, ttl: TTL) =>
   redis.set(`${containerId}_${createHmac(id)}`, value, {
-    EX: ttl !== TTL.Forever ? ttl : undefined,
+    ex: ttl !== TTL.Forever ? ttl : undefined,
   })
 
 const executeAndPutInCache = (
@@ -48,10 +51,9 @@ export const getWithCache = async (
   ttl: TTL
 ) =>
   getFromCache(containerId, id).then((data: any) => {
-        if (data !== undefined && data !== null) {
-          if ('error' in data) return []
-          return data
-        }
-        return executeAndPutInCache(containerId, id, operation, ttl)
-      })
- 
+    if (data !== undefined && data !== null) {
+      if ('error' in data) return []
+      return data
+    }
+    return executeAndPutInCache(containerId, id, operation, ttl)
+  })
