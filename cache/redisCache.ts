@@ -51,8 +51,8 @@ export const getWithCache = async (
 ) =>
   withCache
     ? getFromCache(containerId, id).then((data: any) => {
-        if ('error' in data) return []
         if (data !== undefined && data !== null) {
+          if ('error' in data) return []
           return data
         }
         return executeAndPutInCache(containerId, id, operation, ttl)
