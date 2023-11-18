@@ -73,6 +73,9 @@ dependencies:
     version: 3.39.3(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
+  '@comunica/types':
+    specifier: 1.22.0
+    version: 1.22.0
   '@next/eslint-plugin-next':
     specifier: 13.5.6
     version: 13.5.6
@@ -4329,7 +4332,6 @@ packages:
       asynciterator: 3.8.1
       immutable: 3.8.2
       sparqlalgebrajs: 3.0.3
-    dev: false
 
   /@comunica/utils-datasource@1.22.2(@comunica/core@1.22.0):
     resolution: {integrity: sha512-f4md6ydlNu/0lCrcts0T+Rqwbyx68IdmCvyd8DChg/hWlVqKbrKW8RKPzYhIN7kyF/+IDqg0a0KVpoaaD1mBYw==}
@@ -4943,7 +4945,6 @@ packages:
     resolution: {integrity: sha512-5zm8bN2/CC634dTcn/0AhTRLaQRjXDZs3QfcAsQKNturHT7XVWcKy/8p3P5gXl+YkZTAmy7T5M/LyiT/jbkENw==}
     dependencies:
       '@types/node': 20.9.1
-    dev: false
 
   /@react-leaflet/core@2.1.0(leaflet@1.9.4)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Qk7Pfu8BSarKGqILj4x7bCSZ1pjuAPZ+qmRwH5S7mDS91VSbVVsJSrW4qA+GPrro8t69gFYVMWb1Zc4yFmPiVg==}
@@ -5335,7 +5336,6 @@ packages:
     resolution: {integrity: sha512-A9cCkdFzMMYeY1oyd+yxqc0DEyrKnq/M5rPZ/xgGrRhlHglNt0JXw+uh9JsS0IbIOdWKXiqwD2Bn2wGhpSCrYA==}
     dependencies:
       rdf-js: 4.0.2
-    dev: false
 
   /@types/stack-utils@2.0.3:
     resolution: {integrity: sha512-9aEbYZ3TbYMznPdcdr3SmIrLXwC/AKZXQeCf9Pgao5CKb8CyHuEX5jzWPTkvregvhRJHcpRO6BFoGW9ycaOkYw==}
@@ -6008,7 +6008,6 @@ packages:
 
   /asynciterator@3.8.1:
     resolution: {integrity: sha512-SmdG0FUY3pYGOZZGdYq8Qb/DCRDXBFZUk08V1/4lbBXdAQvcC3Kxzz9FUDPBTik7VAVltt4cZirAPtJv3gOpEw==}
-    dev: false
 
   /asyncjoin@1.1.2:
     resolution: {integrity: sha512-zi6B+C3GgEu8qrmFn3gDd58cbGNaNFW3s8DJmCxUOjQwqWZcQO6dEoZBWl56+QGQyX0da0FRX1fsAyYB9LmwJA==}
@@ -8167,7 +8166,6 @@ packages:
     dependencies:
       inherits: 2.0.4
       minimalistic-assert: 1.0.1
-    dev: false
 
   /hasown@2.0.0:
     resolution: {integrity: sha512-vUptKVTpIJhcczKBbgnS+RtcuYMB8+oNzPK2/Hp3hanz8JmpATdmmgLgSaadVREkDm+e2giHwY3ZRkyjSIDDFA==}
@@ -8279,7 +8277,6 @@ packages:
   /immutable@3.8.2:
     resolution: {integrity: sha512-15gZoQ38eYjEjxkorfbcgBKBL6R7T459OuK+CpcWt7O3KF4uPCx2tD0uFETlUDIyo+1789crbMhTvQBSR5yBMg==}
     engines: {node: '>=0.10.0'}
-    dev: false
 
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -9574,7 +9571,6 @@ packages:
 
   /minimalistic-assert@1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
-    dev: false
 
   /minimalistic-crypto-utils@1.0.1:
     resolution: {integrity: sha512-JIYlbt6g8i5jKfJ3xz7rF0LXmv2TkDxBLUkiBeZ7bAx4GnnNMr8xFpGnOxn6GhTEHx3SjRrZEoU+j04prX1ktg==}
@@ -10257,7 +10253,6 @@ packages:
     resolution: {integrity: sha512-TfQD63Lokabd09ES1jAtKK8AA6rkr9rwyUBGo6olOt1CE0Um36CUQIqytyf0am2ouBPR0l7SaHxCiMcPGHkt1A==}
     dependencies:
       '@rdfjs/types': 1.1.0
-    dev: false
 
   /rdf-isomorphic@1.3.1:
     resolution: {integrity: sha512-6uIhsXTVp2AtO6f41PdnRV5xZsa0zVZQDTBdn0br+DZuFf5M/YD+T6m8hKDUnALI6nFL/IujTMLgEs20MlNidQ==}
@@ -10266,13 +10261,11 @@ packages:
       hash.js: 1.1.7
       rdf-string: 1.6.3
       rdf-terms: 1.11.0
-    dev: false
 
   /rdf-js@4.0.2:
     resolution: {integrity: sha512-ApvlFa/WsQh8LpPK/6hctQwG06Z9ztQQGWVtrcrf9L6+sejHNXLPOqL+w7q3hF+iL0C4sv3AX1PUtGkLNzyZ0Q==}
     dependencies:
       '@rdfjs/types': 1.1.0
-    dev: false
 
   /rdf-literal@1.3.1:
     resolution: {integrity: sha512-+o/PGOfJchyay9Rjrvi/oveRJACnt2WFO3LhEvtPlsRD1tFmwVUCMU+s33FtQprMo+z1ohFrv/yfEQ6Eym4KgQ==}
@@ -10347,7 +10340,6 @@ packages:
     dependencies:
       '@rdfjs/types': 1.1.0
       rdf-data-factory: 1.1.2
-    dev: false
 
   /rdf-terms@1.11.0:
     resolution: {integrity: sha512-iKlVgnMopRKl9pHVNrQrax7PtZKRCT/uJIgYqvuw1VVQb88zDvurtDr1xp0rt7N9JtKtFwUXoIQoEsjyRo20qQ==}
@@ -10355,7 +10347,6 @@ packages:
       '@rdfjs/types': 1.1.0
       rdf-data-factory: 1.1.2
       rdf-string: 1.6.3
-    dev: false
 
   /rdfa-streaming-parser@1.5.0:
     resolution: {integrity: sha512-A+Kl0vbRQKK3SqgWdCiR48Hi75LK6z6glPdGcbLXMw6qMRcLeIKe4p6yFkPXpbwtegmOa94uaxeLs5HMdo66AQ==}
@@ -11076,7 +11067,6 @@ packages:
       rdf-isomorphic: 1.3.1
       rdf-string: 1.6.3
       sparqljs: 3.7.1
-    dev: false
 
   /sparqlee@1.10.0:
     resolution: {integrity: sha512-rKuyXIIyEsRsACZC86yrN0m/rUhKZQl6HfqeIqAC+5WXE08PB/tGQ9RPxiwo+P6u6QEk2Sd/h6Yq1pnT0607JA==}
@@ -11103,7 +11093,6 @@ packages:
     hasBin: true
     dependencies:
       rdf-data-factory: 1.1.2
-    dev: false
 
   /sparqljson-parse@1.7.0:
     resolution: {integrity: sha512-/88g7aK1QZ42YvMx+nStNeZsiVJhmg/OC4RNnQk+ybItvEkQiTOpnYDmST5FnzOIsSmp5RxAZDCIDdMK1h7Ynw==}
