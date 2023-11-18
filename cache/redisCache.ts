@@ -53,7 +53,7 @@ export const getWithCache = async (
   ttl: TTL
 ) =>
   withCache
-    ? getFromCache(containerId, id).then((data) => {
+    ? getFromCache(containerId, id).then((data: any) => {
         // console.log({ containerId, id, data, type: typeof data })
         if (data !== undefined && data !== null) {
           return data?.error ?? data
