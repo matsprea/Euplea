@@ -28,11 +28,9 @@ export const BasePage = ({ Component, ...pageProps }): JSX.Element => {
     amenityRadius,
   }
 
-  const { data: culturalSites, status } = useCulturalSiteAPI(
+  const { data: culturalSites, isLoading } = useCulturalSiteAPI(
     style && days && subject && searchData
   )
-
-  const isLoading = status === 'loading'
 
   return (
     <>
