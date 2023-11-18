@@ -8,13 +8,13 @@ const country = 'Italia'
 
 const geocodingClient = nominatim.createClient({
   useragent: 'Euplea',
-  referer: 'https://euplea',
+  referer: 'https://euplea.vercel.app',
 })
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 const getGeocodingWithNoCache = (query: any) =>
-  sleep(1000).then(() => geocodingClient
+  sleep(2000).then(() => geocodingClient
     .search(query)
     .then(([result]) => result ?? { query, result, date: Date.now() }))
 

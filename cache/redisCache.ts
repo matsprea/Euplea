@@ -37,12 +37,12 @@ const executeAndPutInCache = (
       putInCache(containerId, id, data, ttl)
       return data
     })
-    .catch((error) =>
+    .catch((error) => {
       putInCache(containerId, id, { error }, TTL.Error).catch((error) => {
         console.error(`executeAndPutInCache ${containerId}`, error)
         return []
       })
-    )
+    })
 
 export const getWithCache = async (
   containerId: string,

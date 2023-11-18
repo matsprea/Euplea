@@ -2,7 +2,7 @@ import { newEngine, IQueryResultBindings } from '@comunica/actor-init-sparql'
 
 const myEngine = newEngine()
 
-export const mySparQLQuery = (query, sources) =>
+export const mySparQLQuery = (query: string, sources) =>
   myEngine
     .query(query, {
       sources,
