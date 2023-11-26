@@ -1,21 +1,15 @@
-FROM node:lts-alpine as dependencies
-RUN apk add --no-cache libc6-compat
-WORKDIR /my-project
-RUN corepack enable
-RUN corepack prepare pnpm@latest --activate
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm i --frozen-lockfile
-
 FROM node:lts-alpine as builder
 WORKDIR /my-project
 RUN corepack enable
 RUN corepack prepare pnpm@latest --activate
 COPY . .
-COPY --from=dependencies /my-project/node_modules ./node_modules
+RUN pnpm i --frozen-lockfile
 RUN pnpm build
 
 FROM node:lts-alpine as runner
 WORKDIR /my-project
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate
 
 ENV NODE_ENV production
 
