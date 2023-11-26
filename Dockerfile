@@ -1,13 +1,15 @@
 FROM node:lts-alpine as dependencies
 RUN apk add --no-cache libc6-compat
-RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 WORKDIR /my-project
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm i --frozen-lockfile
 
 FROM node:lts-alpine as builder
-RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 WORKDIR /my-project
+RUN corepack enable
+RUN corepack prepare pnpm@latest --activate
 COPY . .
 COPY --from=dependencies /my-project/node_modules ./node_modules
 RUN pnpm build
