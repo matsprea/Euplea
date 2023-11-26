@@ -1,14 +1,16 @@
 FROM node:lts-alpine as dependencies
 RUN apk add --no-cache libc6-compat
+RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 WORKDIR /my-project
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 FROM node:lts-alpine as builder
+RUN wget -qO- https://get.pnpm.io/install.sh | ENV="$HOME/.shrc" SHELL="$(which sh)" sh -
 WORKDIR /my-project
 COPY . .
 COPY --from=dependencies /my-project/node_modules ./node_modules
-RUN yarn build
+RUN pnpm build
 
 FROM node:lts-alpine as runner
 WORKDIR /my-project
@@ -33,4 +35,4 @@ ENV PORT 3000
 
 ENV NEXT_TELEMETRY_DISABLED 1
 
-CMD ["yarn", "start"]
+CMD ["pnpm", "start"]
