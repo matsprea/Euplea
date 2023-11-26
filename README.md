@@ -20,11 +20,11 @@ You may also want to create a  `.env.local` file in the project root to provide 
 
 ```text
 NEXT_PUBLIC_OVERPASS=1 # Set to 1 if you want to use the overpass-turbo API, 0 to use Sophox API
-REDIS_URL='https://***.upstash.io'
-REDIS_TOKEN='YourRedisToken'
-SECRET='YourSecret'
+REDIS_URL=https://***.upstash.io
+REDIS_TOKEN=YourRedisToken=
+SECRET=YourSecret
 MAP_CENTER='42.504306, 12.572639' # Initial center of the map
-MAP_ZOOM='6' # Zoom level
+MAP_ZOOM=6 # Zoom level
 CULTURAINSTITUTE_PER_DAY=2 # Number of cultural institutes to visit per day
 NEXT_PUBLIC_AMENITY_RADIUS=2 # Radius in Kilometers for the amenities search
 AMENITY_MAX_COUNT=10 # Maximum number of amenities to be returned for each day
@@ -120,6 +120,12 @@ To run your `euplea` image and exposing it on port 3000, execute the following c
 docker run --env-file ./env.list -p 3000:3000 euplea
 ```
 
+To run the `euplea` image published and exposing it on port 3000, execute the following command
+
+```bash
+docker run --env-file ./env.list -p 3000:3000  ghcr.io/matsprea/euplea
+```
+
 Please make your have configured correctly the [ENV variables](#env-variables) in the `env.list` file
 
-You can fine more informations about passing ENV variables on [Docker documentation](https://docs.docker.com/engine/reference/commandline/run/#set-environment-variables--e---env---env-file)
+You can fine more informations about passing ENV variables on [Docker documentation](https://docs.docker.com/engine/reference/commandline/run/#env)
