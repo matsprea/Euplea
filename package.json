@@ -23,7 +23,7 @@
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
     "@tanstack/react-query": "5.13.4",
-    "@upstash/redis": "1.25.2",
+    "@upstash/redis": "1.25.1",
     "axios": "1.6.2",
     "framer-motion": "10.16.16",
     "leaflet": "1.9.4",
@@ -36,7 +36,7 @@
     "osrm.js": "5.5.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "7.49.0",
+    "react-hook-form": "7.49.2",
     "react-icons": "4.12.0",
     "react-leaflet": "4.2.1"
   },
