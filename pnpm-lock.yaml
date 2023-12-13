@@ -24,8 +24,8 @@ dependencies:
     specifier: 5.13.4
     version: 5.13.4(react@18.2.0)
   '@upstash/redis':
-    specifier: 1.25.2
-    version: 1.25.2
+    specifier: 1.25.1
+    version: 1.25.1
   axios:
     specifier: 1.6.2
     version: 1.6.2
@@ -63,8 +63,8 @@ dependencies:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
   react-hook-form:
-    specifier: 7.49.0
-    version: 7.49.0(react@18.2.0)
+    specifier: 7.49.2
+    version: 7.49.2(react@18.2.0)
   react-icons:
     specifier: 4.12.0
     version: 4.12.0(react@18.2.0)
@@ -5578,8 +5578,8 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@upstash/redis@1.25.2:
-    resolution: {integrity: sha512-iI3jgvmDIbe4Px0PskB8lrn1NXz7ZQyGpW9Ehmonk6SEFqhqssqIB04VmlNh8zZUXwzy6G9DaIa5gIUM6B7DwA==}
+  /@upstash/redis@1.25.1:
+    resolution: {integrity: sha512-ACj0GhJ4qrQyBshwFgPod6XufVEfKX2wcaihsEvSdLYnY+m+pa13kGt1RXm/yTHKf4TQi/Dy2A8z/y6WUEOmlg==}
     dependencies:
       crypto-js: 4.2.0
     dev: false
@@ -10365,8 +10365,8 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.2.43)(react@18.2.0)
     dev: false
 
-  /react-hook-form@7.49.0(react@18.2.0):
-    resolution: {integrity: sha512-gf4qyY4WiqK2hP/E45UUT6wt3Khl49pleEVcIzxhLBrD6m+GMWtLRk0vMrRv45D1ZH8PnpXFwRPv0Pewske2jw==}
+  /react-hook-form@7.49.2(react@18.2.0):
+    resolution: {integrity: sha512-TZcnSc17+LPPVpMRIDNVITY6w20deMdNi6iehTFLV1x8SqThXGwu93HjlUVU09pzFgZH7qZOvLMM7UYf2ShAHA==}
     engines: {node: '>=18', pnpm: '8'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
