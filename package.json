@@ -25,7 +25,7 @@
     "@tanstack/react-query": "5.17.1",
     "@upstash/redis": "1.27.1",
     "axios": "1.6.4",
-    "framer-motion": "10.17.0",
+    "framer-motion": "10.17.4",
     "leaflet": "1.9.4",
     "leaflet-extra-markers": "1.2.2",
     "leaflet-polylinedecorator": "1.6.0",
