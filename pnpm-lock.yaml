@@ -21,14 +21,14 @@ dependencies:
     specifier: 11.11.0
     version: 11.11.0(@emotion/react@11.11.3)(@types/react@18.2.46)(react@18.2.0)
   '@tanstack/react-query':
-    specifier: 5.17.3
-    version: 5.17.3(react@18.2.0)
+    specifier: 5.17.1
+    version: 5.17.1(react@18.2.0)
   '@upstash/redis':
     specifier: 1.27.1
     version: 1.27.1
   axios:
-    specifier: 1.6.4
-    version: 1.6.4
+    specifier: 1.6.5
+    version: 1.6.5
   framer-motion:
     specifier: 10.17.4
     version: 10.17.4(react-dom@18.2.0)(react@18.2.0)
@@ -2504,7 +2504,7 @@ packages:
       '@comunica/core': 1.22.0
       '@types/parse-link-header': 1.0.1
       cross-fetch: 3.1.8
-      follow-redirects: 1.15.3
+      follow-redirects: 1.15.4
       parse-link-header: 1.0.1
     transitivePeerDependencies:
       - debug
@@ -5054,16 +5054,16 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@tanstack/query-core@5.17.3:
-    resolution: {integrity: sha512-QCbOWxifjke/GR1jcDYoaoTZXBTGFivgUMXQ06EvCP7XoEfjzLGMAlPhdHMK+dMR6kQluhzwTQ+CnIGmhrM2JA==}
+  /@tanstack/query-core@5.17.1:
+    resolution: {integrity: sha512-kUXozQmU7NBtzX5dM6qfFNZN+YK/9Ct37hnG/ogdgI4mExIx7VH/qRepsPhKfNrJz2w81/JykmM3Uug6sVpUSw==}
     dev: false
 
-  /@tanstack/react-query@5.17.3(react@18.2.0):
-    resolution: {integrity: sha512-mSRqnP0Rdh9hmJ9mX77xWDiHnu1uGtnNV4w6Crr63+FYUs08iACTv7m3X8Gcl52A6QLBlsLR8zNxTEOTrHejaw==}
+  /@tanstack/react-query@5.17.1(react@18.2.0):
+    resolution: {integrity: sha512-4JYgX0kU+pvwVQi5eRiHGvBK7WnahEl6lmaxd32ZVSKmByAxLgaewoxBR03cdDNse8lUD2zGOe0sx3M/EGRlmA==}
     peerDependencies:
       react: ^18.0.0
     dependencies:
-      '@tanstack/query-core': 5.17.3
+      '@tanstack/query-core': 5.17.1
       react: 18.2.0
     dev: false
 
@@ -6047,8 +6047,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /axios@1.6.4:
-    resolution: {integrity: sha512-heJnIs6N4aa1eSthhN9M5ioILu8Wi8vmQW9iHQ9NUvfkJb0lEEDUiIdQNAuBtfUt3FxReaKdpQA5DbmMOqzF/A==}
+  /axios@1.6.5:
+    resolution: {integrity: sha512-Ii012v05KEVuUoFWmMW/UQv9aRIc3ZwkWDcM+h5Il8izZCtRVpDUfwpoFf7eOtajT3QiGR4yDUx7lPqHJULgbg==}
     dependencies:
       follow-redirects: 1.15.4
       form-data: 4.0.0
@@ -7846,16 +7846,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       tslib: 2.6.2
-    dev: false
-
-  /follow-redirects@1.15.3:
-    resolution: {integrity: sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
     dev: false
 
   /follow-redirects@1.15.4:
