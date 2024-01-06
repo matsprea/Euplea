@@ -24,8 +24,8 @@ dependencies:
     specifier: 5.17.7
     version: 5.17.7(react@18.2.0)
   '@upstash/redis':
-    specifier: 1.27.1
-    version: 1.27.1
+    specifier: 1.28.0
+    version: 1.28.0
   axios:
     specifier: 1.6.5
     version: 1.6.5
@@ -5589,8 +5589,8 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@upstash/redis@1.27.1:
-    resolution: {integrity: sha512-K9UgTBypJ4Dx65s2u5auoyf/5YoCQjaN91QtxlkNg+3g0rqXXy4ELtzACstk1v+bTa547Mm3rzTjotDX/s9+Zg==}
+  /@upstash/redis@1.28.0:
+    resolution: {integrity: sha512-vvFMUHGA5jUAXQHuAzFHNLD2TND/2aaf1BUPYBeg73CkQ9X+jorWVi7VGxZtRXPDEFJR9KvzuwCacbSproOKcw==}
     dependencies:
       crypto-js: 4.2.0
     dev: false
