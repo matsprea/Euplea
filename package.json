@@ -20,7 +20,7 @@
     "@chakra-ui/react": "2.8.2",
     "@comunica/actor-init-sparql": "1.22.3",
     "@derhuerst/query-overpass": "2.0.1",
-    "@emotion/react": "11.11.3",
+    "@emotion/react": "11.11.4",
     "@emotion/styled": "11.11.0",
     "@tanstack/react-query": "5.17.19",
     "@upstash/redis": "1.28.4",
