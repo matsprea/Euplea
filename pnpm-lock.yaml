@@ -2504,7 +2504,7 @@ packages:
       '@comunica/core': 1.22.0
       '@types/parse-link-header': 1.0.1
       cross-fetch: 3.1.8
-      follow-redirects: 1.15.4
+      follow-redirects: 1.15.6
       parse-link-header: 1.0.1
     transitivePeerDependencies:
       - debug
@@ -8013,16 +8013,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       tslib: 2.6.2
-    dev: false
-
-  /follow-redirects@1.15.4:
-    resolution: {integrity: sha512-Cr4D/5wlrb0z9dgERpUL3LrmPKVDsETIJhaCMeDfuFYcqa5bldGV6wBsAN6X/vxlXQtFBMrXdXxdL8CbDTGniw==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
     dev: false
 
   /follow-redirects@1.15.6:
