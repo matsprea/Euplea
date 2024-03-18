@@ -10,7 +10,7 @@ dependencies:
     version: 2.8.2(@emotion/react@11.11.4)(@emotion/styled@11.11.0)(@types/react@18.2.67)(framer-motion@11.0.14)(react-dom@18.2.0)(react@18.2.0)
   '@comunica/actor-init-sparql':
     specifier: 1.22.3
-    version: 1.22.3(@comunica/types@1.22.0)
+    version: 1.22.3(@comunica/types@2.10.0)
   '@derhuerst/query-overpass':
     specifier: 2.0.1
     version: 2.0.1
@@ -74,8 +74,8 @@ dependencies:
 
 devDependencies:
   '@comunica/types':
-    specifier: 1.22.0
-    version: 1.22.0
+    specifier: 2.10.0
+    version: 2.10.0
   '@next/eslint-plugin-next':
     specifier: 14.1.3
     version: 14.1.3
@@ -2537,7 +2537,7 @@ packages:
       '@comunica/core': 1.22.0
     dev: false
 
-  /@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0):
+  /@comunica/actor-init-sparql@1.22.3(@comunica/types@2.10.0):
     resolution: {integrity: sha512-rtD4ssn2JSrHHhpoHfvZoe4RpYkSZVuvWb2gh9Pu/sTo4wyIaCuRBc4Wn8N3ZnA4omBzv6/kM2NUF47eabmoBA==}
     hasBin: true
     dependencies:
@@ -2622,8 +2622,8 @@ packages:
       '@comunica/actor-rdf-resolve-quad-pattern-rdfjs-source': 1.22.0(@comunica/bus-rdf-resolve-quad-pattern@1.22.0)(@comunica/core@1.22.0)
       '@comunica/actor-rdf-serialize-jsonld': 1.22.0(@comunica/actor-abstract-mediatyped@1.22.0)(@comunica/bus-rdf-serialize@1.22.0)(@comunica/core@1.22.0)
       '@comunica/actor-rdf-serialize-n3': 1.22.0(@comunica/bus-rdf-serialize@1.22.0)(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-update-hypermedia-patch-sparql-update': 1.22.2(@comunica/bus-http@1.22.1)(@comunica/bus-rdf-update-hypermedia@1.22.2)(@comunica/core@1.22.0)(@comunica/types@1.22.0)
-      '@comunica/actor-rdf-update-hypermedia-put-ldp': 1.22.2(@comunica/bus-http@1.22.1)(@comunica/bus-rdf-serialize@1.22.0)(@comunica/bus-rdf-update-hypermedia@1.22.2)(@comunica/core@1.22.0)(@comunica/types@1.22.0)
+      '@comunica/actor-rdf-update-hypermedia-patch-sparql-update': 1.22.2(@comunica/bus-http@1.22.1)(@comunica/bus-rdf-update-hypermedia@1.22.2)(@comunica/core@1.22.0)(@comunica/types@2.10.0)
+      '@comunica/actor-rdf-update-hypermedia-put-ldp': 1.22.2(@comunica/bus-http@1.22.1)(@comunica/bus-rdf-serialize@1.22.0)(@comunica/bus-rdf-update-hypermedia@1.22.2)(@comunica/core@1.22.0)(@comunica/types@2.10.0)
       '@comunica/actor-rdf-update-hypermedia-sparql': 1.22.2(@comunica/bus-http@1.22.1)(@comunica/bus-rdf-update-hypermedia@1.22.2)(@comunica/core@1.22.0)
       '@comunica/actor-rdf-update-quads-hypermedia': 1.22.2(@comunica/actor-init-sparql@1.22.3)(@comunica/bus-http-invalidate@1.22.0)(@comunica/bus-rdf-update-quads@1.22.2)(@comunica/core@1.22.0)
       '@comunica/actor-rdf-update-quads-rdfjs-store': 1.22.2(@comunica/bus-rdf-update-quads@1.22.2)(@comunica/core@1.22.0)
@@ -3729,7 +3729,7 @@ packages:
       rdf-string: 1.6.3
     dev: false
 
-  /@comunica/actor-rdf-update-hypermedia-patch-sparql-update@1.22.2(@comunica/bus-http@1.22.1)(@comunica/bus-rdf-update-hypermedia@1.22.2)(@comunica/core@1.22.0)(@comunica/types@1.22.0):
+  /@comunica/actor-rdf-update-hypermedia-patch-sparql-update@1.22.2(@comunica/bus-http@1.22.1)(@comunica/bus-rdf-update-hypermedia@1.22.2)(@comunica/core@1.22.0)(@comunica/types@2.10.0):
     resolution: {integrity: sha512-CqaDel2GTxYcM9CVzMERaGlA6XVWbqjkAfvnufhl9suMiDw8aqnuw91sPMbTlh38MhAaLY6SVwmxqekmdtxOhg==}
     peerDependencies:
       '@comunica/bus-http': ^1.0.0
@@ -3741,14 +3741,14 @@ packages:
       '@comunica/bus-rdf-update-hypermedia': 1.22.2(@comunica/core@1.22.0)
       '@comunica/bus-rdf-update-quads': 1.22.2(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
-      '@comunica/types': 1.22.0
+      '@comunica/types': 2.10.0
       cross-fetch: 3.1.8
       rdf-string-ttl: 1.3.2
     transitivePeerDependencies:
       - encoding
     dev: false
 
-  /@comunica/actor-rdf-update-hypermedia-put-ldp@1.22.2(@comunica/bus-http@1.22.1)(@comunica/bus-rdf-serialize@1.22.0)(@comunica/bus-rdf-update-hypermedia@1.22.2)(@comunica/core@1.22.0)(@comunica/types@1.22.0):
+  /@comunica/actor-rdf-update-hypermedia-put-ldp@1.22.2(@comunica/bus-http@1.22.1)(@comunica/bus-rdf-serialize@1.22.0)(@comunica/bus-rdf-update-hypermedia@1.22.2)(@comunica/core@1.22.0)(@comunica/types@2.10.0):
     resolution: {integrity: sha512-SucEQhDSA5Tul7+RNWKaKuRMiNZS9zzBo92lJH1VSOx9SY9nnOcTVieNJrA8p3ExyYivnLmufe4AAM7M/m/T1g==}
     peerDependencies:
       '@comunica/bus-http': ^1.0.0
@@ -3762,7 +3762,7 @@ packages:
       '@comunica/bus-rdf-update-hypermedia': 1.22.2(@comunica/core@1.22.0)
       '@comunica/bus-rdf-update-quads': 1.22.2(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
-      '@comunica/types': 1.22.0
+      '@comunica/types': 2.10.0
       cross-fetch: 3.1.8
     transitivePeerDependencies:
       - encoding
@@ -4079,7 +4079,7 @@ packages:
       '@comunica/actor-init-sparql': ^1.16.2
       '@comunica/core': ^1.0.0
     dependencies:
-      '@comunica/actor-init-sparql': 1.22.3(@comunica/types@1.22.0)
+      '@comunica/actor-init-sparql': 1.22.3(@comunica/types@2.10.0)
       '@comunica/core': 1.22.0
       '@comunica/types': 1.22.0
       '@rdfjs/types': 1.1.0
@@ -4329,6 +4329,15 @@ packages:
       asynciterator: 3.8.1
       immutable: 3.8.2
       sparqlalgebrajs: 3.0.3
+    dev: false
+
+  /@comunica/types@2.10.0:
+    resolution: {integrity: sha512-1UjPGbZcYrapBjMGUZedrIGcn9rOLpEOlJo1ZkWddFUGTwndVg9d4BZnQw+UnQzXMcLJcdKt94Zns8iEmBqARw==}
+    dependencies:
+      '@rdfjs/types': 1.1.0
+      '@types/yargs': 17.0.31
+      asynciterator: 3.8.1
+      sparqlalgebrajs: 4.3.4
 
   /@comunica/utils-datasource@1.22.2(@comunica/core@1.22.0):
     resolution: {integrity: sha512-f4md6ydlNu/0lCrcts0T+Rqwbyx68IdmCvyd8DChg/hWlVqKbrKW8RKPzYhIN7kyF/+IDqg0a0KVpoaaD1mBYw==}
@@ -8453,6 +8462,7 @@ packages:
   /immutable@3.8.2:
     resolution: {integrity: sha512-15gZoQ38eYjEjxkorfbcgBKBL6R7T459OuK+CpcWt7O3KF4uPCx2tD0uFETlUDIyo+1789crbMhTvQBSR5yBMg==}
     engines: {node: '>=0.10.0'}
+    dev: false
 
   /import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -10461,6 +10471,7 @@ packages:
 
   /rdf-js@4.0.2:
     resolution: {integrity: sha512-ApvlFa/WsQh8LpPK/6hctQwG06Z9ztQQGWVtrcrf9L6+sejHNXLPOqL+w7q3hF+iL0C4sv3AX1PUtGkLNzyZ0Q==}
+    deprecated: Use @types/rdf-js instead. See https://github.com/rdfjs/types?tab=readme-ov-file#what-about-typesrdf-js
     dependencies:
       '@rdfjs/types': 1.1.0
 
@@ -11253,6 +11264,21 @@ packages:
       rdf-data-factory: 1.1.2
       rdf-isomorphic: 1.3.1
       rdf-string: 1.6.3
+      sparqljs: 3.7.1
+    dev: false
+
+  /sparqlalgebrajs@4.3.4:
+    resolution: {integrity: sha512-BUpd79w3SfrfRPyA+gHA23B3masuD2wLK47IOnglyIK6hx4BC+4TWtOmP5D8RTbmbPCuLKYfLGyLDF/RQsKgWg==}
+    hasBin: true
+    dependencies:
+      '@rdfjs/types': 1.1.0
+      '@types/sparqljs': 3.1.8
+      fast-deep-equal: 3.1.3
+      minimist: 1.2.8
+      rdf-data-factory: 1.1.2
+      rdf-isomorphic: 1.3.1
+      rdf-string: 1.6.3
+      rdf-terms: 1.11.0
       sparqljs: 3.7.1
 
   /sparqlee@1.10.0:
