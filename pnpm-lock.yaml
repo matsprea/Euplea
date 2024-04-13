@@ -63,8 +63,8 @@ dependencies:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
   react-hook-form:
-    specifier: 7.51.2
-    version: 7.51.2(react@18.2.0)
+    specifier: 7.51.3
+    version: 7.51.3(react@18.2.0)
   react-icons:
     specifier: 5.0.1
     version: 5.0.1(react@18.2.0)
@@ -5802,12 +5802,12 @@ packages:
       event-target-shim: 5.0.1
     dev: false
 
-  /acorn-import-assertions@1.9.0(acorn@8.11.2):
+  /acorn-import-assertions@1.9.0(acorn@8.11.3):
     resolution: {integrity: sha512-cmMwop9x+8KFhxvKrKfPYmN6/pKTYYHBqLa0DfvVZcKMJWNyWLnaqND7dx/qn66R7ewM1UX5XMaDVP5wlVTaVA==}
     peerDependencies:
       acorn: ^8
     dependencies:
-      acorn: 8.11.2
+      acorn: 8.11.3
     dev: false
 
   /acorn-jsx@5.3.2(acorn@8.11.3):
@@ -5853,7 +5853,6 @@ packages:
     resolution: {integrity: sha512-Y9rRfJG5jcKOE0CLisYbojUjIrIEE7AGMzA/Sm4BslANhbS+cDMpgBdcPT91oJ7OuJ9hYJBx59RjbhxVnrF8Xg==}
     engines: {node: '>=0.4.0'}
     hasBin: true
-    dev: true
 
   /ajv-keywords@3.5.2(ajv@6.12.6):
     resolution: {integrity: sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==}
@@ -10533,8 +10532,8 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.2.78)(react@18.2.0)
     dev: false
 
-  /react-hook-form@7.51.2(react@18.2.0):
-    resolution: {integrity: sha512-y++lwaWjtzDt/XNnyGDQy6goHskFualmDlf+jzEZvjvz6KWDf7EboL7pUvRCzPTJd0EOPpdekYaQLEvvG6m6HA==}
+  /react-hook-form@7.51.3(react@18.2.0):
+    resolution: {integrity: sha512-cvJ/wbHdhYx8aviSWh28w9ImjmVsb5Y05n1+FW786vEZQJV5STNM0pW6ujS+oiBecb0ARBxJFyAnXj9+GHXACQ==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
@@ -12032,8 +12031,8 @@ packages:
       '@webassemblyjs/ast': 1.11.6
       '@webassemblyjs/wasm-edit': 1.11.6
       '@webassemblyjs/wasm-parser': 1.11.6
-      acorn: 8.11.2
-      acorn-import-assertions: 1.9.0(acorn@8.11.2)
+      acorn: 8.11.3
+      acorn-import-assertions: 1.9.0(acorn@8.11.3)
       browserslist: 4.22.1
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.15.0
