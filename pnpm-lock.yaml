@@ -79,8 +79,8 @@ importers:
         specifier: 1.22.0
         version: 1.22.0
       '@next/eslint-plugin-next':
-        specifier: 14.2.3
-        version: 14.2.3
+        specifier: 14.2.2
+        version: 14.2.2
       '@testing-library/jest-dom':
         specifier: 6.4.2
         version: 6.4.2(@jest/globals@29.7.0)(@types/jest@29.5.12)(jest@29.7.0(@types/node@20.12.7)(babel-plugin-macros@3.1.0))
@@ -2249,9 +2249,6 @@ packages:
 
   '@next/eslint-plugin-next@14.2.2':
     resolution: {integrity: sha512-q+Ec2648JtBpKiu/FSJm8HAsFXlNvioHeBCbTP12T1SGcHYwhqHULSfQgFkPgHDu3kzNp2Kem4J54bK4rPQ5SQ==}
-
-  '@next/eslint-plugin-next@14.2.3':
-    resolution: {integrity: sha512-L3oDricIIjgj1AVnRdRor21gI7mShlSwU/1ZGHmqM3LzHhXXhdkrfeNY5zif25Bi5Dd7fiJHsbhoZCHfXYvlAw==}
 
   '@next/swc-darwin-arm64@14.2.2':
     resolution: {integrity: sha512-3iPgMhzbalizGwHNFUcGnDhFPSgVBHQ8aqSTAMxB5BvJG0oYrDf1WOJZlbXBgunOEj/8KMVbejEur/FpvFsgFQ==}
@@ -9256,10 +9253,6 @@ snapshots:
   '@next/env@14.2.2': {}
 
   '@next/eslint-plugin-next@14.2.2':
-    dependencies:
-      glob: 10.3.10
-
-  '@next/eslint-plugin-next@14.2.3':
     dependencies:
       glob: 10.3.10
 

@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@comunica/types": "1.22.0",
-    "@next/eslint-plugin-next": "14.2.3",
+    "@next/eslint-plugin-next": "14.2.2",
     "@testing-library/jest-dom": "6.4.2",
     "@testing-library/react": "15.0.2",
     "@testing-library/user-event": "14.5.2",
@@ -78,5 +78,5 @@
   "engines": {
     "node": "^18 || ^20"
   },
-  "packageManager": "pnpm@9.0.4"
+  "packageManager": "pnpm@9.0.6"
 }
