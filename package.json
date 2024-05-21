@@ -24,7 +24,7 @@
     "@emotion/styled": "11.11.5",
     "@tanstack/react-query": "5.37.1",
     "@upstash/redis": "1.31.1",
-    "axios": "1.6.8",
+    "axios": "1.7.2",
     "framer-motion": "11.2.5",
     "leaflet": "1.9.4",
     "leaflet-extra-markers": "1.2.2",
