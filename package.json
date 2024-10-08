@@ -41,7 +41,7 @@
     "react-leaflet": "4.2.1"
   },
   "devDependencies": {
-    "@comunica/types": "1.22.0",
+    "@comunica/types": "3.3.0",
     "@next/eslint-plugin-next": "14.2.5",
     "@testing-library/jest-dom": "6.4.8",
     "@testing-library/react": "16.0.0",
