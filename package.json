@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@chakra-ui/react": "3.24.2",
-    "@comunica/actor-init-sparql": "1.22.3",
+    "@comunica/actor-init-sparql": "3.1.0",
     "@derhuerst/query-overpass": "2.0.1",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
