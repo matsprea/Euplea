@@ -22,7 +22,7 @@
     "@derhuerst/query-overpass": "2.0.1",
     "@emotion/react": "11.13.0",
     "@emotion/styled": "11.13.0",
-    "@tanstack/react-query": "5.51.23",
+    "@tanstack/react-query": "5.84.2",
     "@upstash/redis": "1.34.0",
     "axios": "1.7.4",
     "framer-motion": "11.3.28",
