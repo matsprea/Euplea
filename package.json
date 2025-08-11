@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@chakra-ui/react": "2.8.2",
+    "@chakra-ui/react": "3.24.2",
     "@comunica/actor-init-sparql": "1.22.3",
     "@derhuerst/query-overpass": "2.0.1",
     "@emotion/react": "11.14.0",
