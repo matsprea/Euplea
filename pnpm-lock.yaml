@@ -13,7 +13,7 @@ importers:
         version: 2.8.2(@emotion/react@11.13.0(@types/react@18.3.23)(react@18.3.1))(@emotion/styled@11.13.0(@emotion/react@11.13.0(@types/react@18.3.23)(react@18.3.1))(@types/react@18.3.23)(react@18.3.1))(@types/react@18.3.23)(framer-motion@11.18.2(@emotion/is-prop-valid@1.3.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@comunica/actor-init-sparql':
         specifier: 1.22.3
-        version: 1.22.3(@comunica/types@1.22.0)
+        version: 1.22.3(@comunica/types@4.2.0)
       '@derhuerst/query-overpass':
         specifier: 2.0.1
         version: 2.0.1
@@ -76,8 +76,8 @@ importers:
         version: 4.2.1(leaflet@1.9.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
       '@comunica/types':
-        specifier: 1.22.0
-        version: 1.22.0
+        specifier: 4.2.0
+        version: 4.2.0
       '@next/eslint-plugin-next':
         specifier: 14.2.31
         version: 14.2.31
@@ -2047,6 +2047,9 @@ packages:
   '@comunica/types@1.22.0':
     resolution: {integrity: sha512-ZQ8p+ZvMAKmdq6Hz2QwqIQ2JScwRMotiWz0iSw2zYHsYQOhVmLg7HSMzMHpWNEA5UWzO/A5A+Co/ONXMhlnx3g==}
 
+  '@comunica/types@4.2.0':
+    resolution: {integrity: sha512-3Vf3FOUB/i7tdlghovHsgjoZbdqIgB0m01UGwpxCBHI/swbxcqhQzmKFjU9T3gNxurmsdqafF8Unoh9ZCwNuRw==}
+
   '@comunica/utils-datasource@1.22.2':
     resolution: {integrity: sha512-f4md6ydlNu/0lCrcts0T+Rqwbyx68IdmCvyd8DChg/hWlVqKbrKW8RKPzYhIN7kyF/+IDqg0a0KVpoaaD1mBYw==}
     peerDependencies:
@@ -2997,6 +3000,9 @@ packages:
 
   asynciterator@3.8.1:
     resolution: {integrity: sha512-SmdG0FUY3pYGOZZGdYq8Qb/DCRDXBFZUk08V1/4lbBXdAQvcC3Kxzz9FUDPBTik7VAVltt4cZirAPtJv3gOpEw==}
+
+  asynciterator@3.9.0:
+    resolution: {integrity: sha512-bwLLTAnoE6Ap6XdjK/j8vDk2Vi9p3ojk0PFwM0SwktAG1k8pfRJF9ng+mmkaRFKdZCQQlOxcWnvOmX2NQ1HV0g==}
 
   asyncjoin@1.1.2:
     resolution: {integrity: sha512-zi6B+C3GgEu8qrmFn3gDd58cbGNaNFW3s8DJmCxUOjQwqWZcQO6dEoZBWl56+QGQyX0da0FRX1fsAyYB9LmwJA==}
@@ -5806,6 +5812,10 @@ packages:
     resolution: {integrity: sha512-XFNhsO55bprayrM35h/jY0kzzuGc3oZ1On3kc+s7Un0BFQBXa046aLcMZFp4MYSvn7GtMe9eZ08ONFnBH5kEsQ==}
     hasBin: true
 
+  sparqlalgebrajs@4.3.8:
+    resolution: {integrity: sha512-Xo1/5icRtVk2N38BrY9NXN8N/ZPjULlns7sDHv0nlcGOsOediBLWVy8LmV+Q90RHvb3atZZbrFy3VqrM4iXciA==}
+    hasBin: true
+
   sparqlee@1.10.0:
     resolution: {integrity: sha512-rKuyXIIyEsRsACZC86yrN0m/rUhKZQl6HfqeIqAC+5WXE08PB/tGQ9RPxiwo+P6u6QEk2Sd/h6Yq1pnT0607JA==}
     deprecated: Sparqlee has been moved to @comunica/expression-evaluator
@@ -8002,7 +8012,7 @@ snapshots:
       '@comunica/context-entries': 1.22.0
       '@comunica/core': 1.22.0
 
-  '@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0)':
+  '@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0)':
     dependencies:
       '@comunica/actor-abstract-bindings-hash': 1.22.0(@comunica/bus-query-operation@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-abstract-mediatyped': 1.22.0(@comunica/core@1.22.0)
@@ -8060,12 +8070,12 @@ snapshots:
       '@comunica/actor-rdf-join-nestedloop': 1.22.0(@comunica/bus-rdf-join@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-join-symmetrichash': 1.22.0(@comunica/bus-rdf-join@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-metadata-all': 1.22.0(@comunica/bus-rdf-metadata@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-metadata-extract-allow-http-methods': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-metadata-extract-hydra-controls': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-metadata-extract-hydra-count': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-metadata-extract-patch-sparql-update': 1.22.2(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-metadata-extract-put-accepted': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-metadata-extract-sparql-service': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-metadata-extract-allow-http-methods': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-metadata-extract-hydra-controls': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-metadata-extract-hydra-count': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-metadata-extract-patch-sparql-update': 1.22.2(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-metadata-extract-put-accepted': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-metadata-extract-sparql-service': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-metadata-primary-topic': 1.22.0(@comunica/bus-rdf-metadata@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-parse-html': 1.22.0(@comunica/bus-rdf-parse@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-parse-html-microdata': 1.22.0(@comunica/bus-rdf-parse-html@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
@@ -8077,18 +8087,18 @@ snapshots:
       '@comunica/actor-rdf-parse-xml-rdfa': 1.22.0(@comunica/bus-rdf-parse@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-resolve-hypermedia-links-next': 1.22.0(@comunica/bus-rdf-resolve-hypermedia-links@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-resolve-hypermedia-links-queue-fifo': 1.22.0(@comunica/bus-rdf-resolve-hypermedia-links-queue@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia-links@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-resolve-hypermedia-none': 1.22.0(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-resolve-hypermedia-qpf': 1.22.2(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-metadata@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-resolve-hypermedia-sparql': 1.22.1(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-resolve-hypermedia-none': 1.22.0(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-resolve-hypermedia-qpf': 1.22.2(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-metadata@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-resolve-hypermedia-sparql': 1.22.1(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-resolve-quad-pattern-federated': 1.22.0(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-resolve-quad-pattern-hypermedia': 1.22.2(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-http-invalidate@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-dereference@1.22.2(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia-links-queue@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia-links@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-resolve-quad-pattern-hypermedia': 1.22.2(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-http-invalidate@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-dereference@1.22.2(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia-links-queue@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia-links@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-resolve-quad-pattern-rdfjs-source': 1.22.0(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-serialize-jsonld': 1.22.0(@comunica/actor-abstract-mediatyped@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-serialize@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-serialize-n3': 1.22.0(@comunica/bus-rdf-serialize@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-update-hypermedia-patch-sparql-update': 1.22.2(@comunica/bus-http@1.22.1(@comunica/core@1.22.0))(@comunica/bus-rdf-update-hypermedia@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)(@comunica/types@1.22.0)
-      '@comunica/actor-rdf-update-hypermedia-put-ldp': 1.22.2(@comunica/bus-http@1.22.1(@comunica/core@1.22.0))(@comunica/bus-rdf-serialize@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-update-hypermedia@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)(@comunica/types@1.22.0)
+      '@comunica/actor-rdf-update-hypermedia-patch-sparql-update': 1.22.2(@comunica/bus-http@1.22.1(@comunica/core@1.22.0))(@comunica/bus-rdf-update-hypermedia@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)(@comunica/types@4.2.0)
+      '@comunica/actor-rdf-update-hypermedia-put-ldp': 1.22.2(@comunica/bus-http@1.22.1(@comunica/core@1.22.0))(@comunica/bus-rdf-serialize@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-update-hypermedia@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)(@comunica/types@4.2.0)
       '@comunica/actor-rdf-update-hypermedia-sparql': 1.22.2(@comunica/bus-http@1.22.1(@comunica/core@1.22.0))(@comunica/bus-rdf-update-hypermedia@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/actor-rdf-update-quads-hypermedia': 1.22.2(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/bus-http-invalidate@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-update-quads@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-update-quads-hypermedia': 1.22.2(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/bus-http-invalidate@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-update-quads@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-update-quads-rdfjs-store': 1.22.2(@comunica/bus-rdf-update-quads@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-sparql-parse-algebra': 1.22.0(@comunica/bus-sparql-parse@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-sparql-parse-graphql': 1.22.0(@comunica/bus-sparql-parse@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
@@ -8112,10 +8122,10 @@ snapshots:
       '@comunica/bus-rdf-dereference-paged': 1.22.0(@comunica/core@1.22.0)
       '@comunica/bus-rdf-join': 1.22.0(@comunica/core@1.22.0)
       '@comunica/bus-rdf-metadata': 1.22.0(@comunica/core@1.22.0)
-      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)
       '@comunica/bus-rdf-parse': 1.22.0(@comunica/core@1.22.0)
       '@comunica/bus-rdf-parse-html': 1.22.0(@comunica/core@1.22.0)
-      '@comunica/bus-rdf-resolve-hypermedia': 1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-resolve-hypermedia': 1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/bus-rdf-resolve-hypermedia-links': 1.22.0(@comunica/core@1.22.0)
       '@comunica/bus-rdf-resolve-hypermedia-links-queue': 1.22.0(@comunica/core@1.22.0)
       '@comunica/bus-rdf-resolve-quad-pattern': 1.22.0(@comunica/core@1.22.0)
@@ -8583,37 +8593,37 @@ snapshots:
       '@comunica/core': 1.22.0
       '@rdfjs/types': 1.1.0
 
-  '@comunica/actor-rdf-metadata-extract-allow-http-methods@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-metadata-extract-allow-http-methods@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
-      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
 
-  '@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
-      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
       '@rdfjs/types': 1.1.0
       '@types/uritemplate': 0.3.6
       uritemplate: 0.3.4
 
-  '@comunica/actor-rdf-metadata-extract-hydra-count@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-metadata-extract-hydra-count@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
-      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
 
-  '@comunica/actor-rdf-metadata-extract-patch-sparql-update@1.22.2(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-metadata-extract-patch-sparql-update@1.22.2(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
-      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
 
-  '@comunica/actor-rdf-metadata-extract-put-accepted@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-metadata-extract-put-accepted@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
-      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
 
-  '@comunica/actor-rdf-metadata-extract-sparql-service@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-metadata-extract-sparql-service@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
-      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
       relative-to-absolute-iri: 1.0.7
 
@@ -8694,23 +8704,23 @@ snapshots:
       '@comunica/bus-rdf-resolve-hypermedia-links-queue': 1.22.0(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
 
-  '@comunica/actor-rdf-resolve-hypermedia-none@1.22.0(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-resolve-hypermedia-none@1.22.0(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
       '@comunica/actor-rdf-resolve-quad-pattern-rdfjs-source': 1.22.0(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/bus-rdf-resolve-hypermedia': 1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-resolve-hypermedia': 1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
       '@rdfjs/types': 1.1.0
       rdf-store-stream: 1.3.1
     transitivePeerDependencies:
       - '@comunica/bus-rdf-resolve-quad-pattern'
 
-  '@comunica/actor-rdf-resolve-hypermedia-qpf@1.22.2(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-metadata@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-resolve-hypermedia-qpf@1.22.2(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-metadata@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
-      '@comunica/actor-rdf-metadata-extract-hydra-controls': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-metadata-extract-hydra-controls': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/bus-rdf-dereference': 1.22.2(@comunica/core@1.22.0)
       '@comunica/bus-rdf-metadata': 1.22.0(@comunica/core@1.22.0)
-      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/bus-rdf-resolve-hypermedia': 1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-resolve-hypermedia': 1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/bus-rdf-resolve-quad-pattern': 1.22.0(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
       '@rdfjs/types': 1.1.0
@@ -8719,10 +8729,10 @@ snapshots:
       rdf-string: 1.6.3
       rdf-terms: 1.11.0
 
-  '@comunica/actor-rdf-resolve-hypermedia-sparql@1.22.1(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-resolve-hypermedia-sparql@1.22.1(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
       '@comunica/bus-query-operation': 1.22.0(@comunica/core@1.22.0)
-      '@comunica/bus-rdf-resolve-hypermedia': 1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-resolve-hypermedia': 1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/bus-rdf-resolve-quad-pattern': 1.22.0(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
       '@comunica/types': 1.22.0
@@ -8748,15 +8758,15 @@ snapshots:
       rdf-terms: 1.11.0
       sparqlalgebrajs: 3.0.3
 
-  '@comunica/actor-rdf-resolve-quad-pattern-hypermedia@1.22.2(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-http-invalidate@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-dereference@1.22.2(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia-links-queue@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia-links@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-resolve-quad-pattern-hypermedia@1.22.2(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-http-invalidate@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-dereference@1.22.2(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia-links-queue@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia-links@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-quad-pattern@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
-      '@comunica/actor-rdf-metadata-extract-hydra-controls': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-metadata-extract-hydra-controls': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/actor-rdf-resolve-hypermedia-links-queue-fifo': 1.22.0(@comunica/bus-rdf-resolve-hypermedia-links-queue@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-resolve-hypermedia-links@1.22.0(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/bus-http-invalidate': 1.22.0(@comunica/core@1.22.0)
       '@comunica/bus-rdf-dereference': 1.22.2(@comunica/core@1.22.0)
       '@comunica/bus-rdf-metadata': 1.22.0(@comunica/core@1.22.0)
-      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)
-      '@comunica/bus-rdf-resolve-hypermedia': 1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-resolve-hypermedia': 1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/bus-rdf-resolve-hypermedia-links': 1.22.0(@comunica/core@1.22.0)
       '@comunica/bus-rdf-resolve-hypermedia-links-queue': 1.22.0(@comunica/core@1.22.0)
       '@comunica/bus-rdf-resolve-quad-pattern': 1.22.0(@comunica/core@1.22.0)
@@ -8800,26 +8810,26 @@ snapshots:
       n3: 1.17.2
       rdf-string: 1.6.3
 
-  '@comunica/actor-rdf-update-hypermedia-patch-sparql-update@1.22.2(@comunica/bus-http@1.22.1(@comunica/core@1.22.0))(@comunica/bus-rdf-update-hypermedia@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)(@comunica/types@1.22.0)':
+  '@comunica/actor-rdf-update-hypermedia-patch-sparql-update@1.22.2(@comunica/bus-http@1.22.1(@comunica/core@1.22.0))(@comunica/bus-rdf-update-hypermedia@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)(@comunica/types@4.2.0)':
     dependencies:
       '@comunica/bus-http': 1.22.1(@comunica/core@1.22.0)
       '@comunica/bus-rdf-update-hypermedia': 1.22.2(@comunica/core@1.22.0)
       '@comunica/bus-rdf-update-quads': 1.22.2(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
-      '@comunica/types': 1.22.0
+      '@comunica/types': 4.2.0
       cross-fetch: 3.1.8
       rdf-string-ttl: 1.3.2
     transitivePeerDependencies:
       - encoding
 
-  '@comunica/actor-rdf-update-hypermedia-put-ldp@1.22.2(@comunica/bus-http@1.22.1(@comunica/core@1.22.0))(@comunica/bus-rdf-serialize@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-update-hypermedia@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)(@comunica/types@1.22.0)':
+  '@comunica/actor-rdf-update-hypermedia-put-ldp@1.22.2(@comunica/bus-http@1.22.1(@comunica/core@1.22.0))(@comunica/bus-rdf-serialize@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-update-hypermedia@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)(@comunica/types@4.2.0)':
     dependencies:
       '@comunica/bus-http': 1.22.1(@comunica/core@1.22.0)
       '@comunica/bus-rdf-serialize': 1.22.0(@comunica/core@1.22.0)
       '@comunica/bus-rdf-update-hypermedia': 1.22.2(@comunica/core@1.22.0)
       '@comunica/bus-rdf-update-quads': 1.22.2(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
-      '@comunica/types': 1.22.0
+      '@comunica/types': 4.2.0
       cross-fetch: 3.1.8
     transitivePeerDependencies:
       - encoding
@@ -8836,12 +8846,12 @@ snapshots:
       - encoding
       - supports-color
 
-  '@comunica/actor-rdf-update-quads-hypermedia@1.22.2(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/bus-http-invalidate@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-update-quads@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/actor-rdf-update-quads-hypermedia@1.22.2(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/bus-http-invalidate@1.22.0(@comunica/core@1.22.0))(@comunica/bus-rdf-update-quads@1.22.2(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
       '@comunica/bus-http-invalidate': 1.22.0(@comunica/core@1.22.0)
       '@comunica/bus-rdf-dereference': 1.22.2(@comunica/core@1.22.0)
       '@comunica/bus-rdf-metadata': 1.22.0(@comunica/core@1.22.0)
-      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/bus-rdf-metadata-extract': 1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)
       '@comunica/bus-rdf-update-hypermedia': 1.22.2(@comunica/core@1.22.0)
       '@comunica/bus-rdf-update-quads': 1.22.2(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
@@ -9014,9 +9024,9 @@ snapshots:
       '@rdfjs/types': 1.1.0
       asynciterator: 3.8.1
 
-  '@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0)':
     dependencies:
-      '@comunica/actor-init-sparql': 1.22.3(@comunica/types@1.22.0)
+      '@comunica/actor-init-sparql': 1.22.3(@comunica/types@4.2.0)
       '@comunica/core': 1.22.0
       '@comunica/types': 1.22.0
       '@rdfjs/types': 1.1.0
@@ -9051,9 +9061,9 @@ snapshots:
     dependencies:
       '@comunica/core': 1.22.0
 
-  '@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
+  '@comunica/bus-rdf-resolve-hypermedia@1.22.0(@comunica/actor-rdf-metadata-extract-hydra-controls@1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)':
     dependencies:
-      '@comunica/actor-rdf-metadata-extract-hydra-controls': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@1.22.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
+      '@comunica/actor-rdf-metadata-extract-hydra-controls': 1.22.0(@comunica/bus-rdf-metadata-extract@1.22.0(@comunica/actor-init-sparql@1.22.3(@comunica/types@4.2.0))(@comunica/core@1.22.0))(@comunica/core@1.22.0)
       '@comunica/bus-rdf-resolve-quad-pattern': 1.22.0(@comunica/core@1.22.0)
       '@comunica/core': 1.22.0
       '@rdfjs/types': 1.1.0
@@ -9166,6 +9176,14 @@ snapshots:
       asynciterator: 3.8.1
       immutable: 3.8.2
       sparqlalgebrajs: 3.0.3
+
+  '@comunica/types@4.2.0':
+    dependencies:
+      '@rdfjs/types': 1.1.0
+      '@types/yargs': 17.0.33
+      asynciterator: 3.9.0
+      lru-cache: 10.1.0
+      sparqlalgebrajs: 4.3.8
 
   '@comunica/utils-datasource@1.22.2(@comunica/core@1.22.0)':
     dependencies:
@@ -10349,6 +10367,8 @@ snapshots:
   async@3.2.5: {}
 
   asynciterator@3.8.1: {}
+
+  asynciterator@3.9.0: {}
 
   asyncjoin@1.1.2:
     dependencies:
@@ -13833,6 +13853,18 @@ snapshots:
       rdf-data-factory: 1.1.2
       rdf-isomorphic: 1.3.1
       rdf-string: 1.6.3
+      sparqljs: 3.7.1
+
+  sparqlalgebrajs@4.3.8:
+    dependencies:
+      '@rdfjs/types': 1.1.0
+      '@types/sparqljs': 3.1.8
+      fast-deep-equal: 3.1.3
+      minimist: 1.2.8
+      rdf-data-factory: 1.1.2
+      rdf-isomorphic: 1.3.1
+      rdf-string: 1.6.3
+      rdf-terms: 1.11.0
       sparqljs: 3.7.1
 
   sparqlee@1.10.0:
